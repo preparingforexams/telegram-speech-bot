@@ -19,8 +19,6 @@ class GcpTextToSpeech(TextToSpeech):
         client = self._get_client()
         synth_input = texttospeech.SynthesisInput(text=text)
         voice = texttospeech.VoiceSelectionParams(
-            language_code="de-DE",
-            ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL,
             name="de-DE-Neural2-F",
         )
         audio_config = texttospeech.AudioConfig(
