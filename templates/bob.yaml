@@ -22,7 +22,7 @@ spec:
         app: bob
     spec:
       volumes:
-        - name: serviceAccount
+        - name: secrets
           secret:
             secretName: secrets
       containers:
