@@ -1,3 +1,5 @@
+import random
+
 from google.cloud import texttospeech
 
 from bob.application.ports import TextToSpeech
@@ -20,7 +22,7 @@ class GcpTextToSpeech(TextToSpeech):
         synth_input = texttospeech.SynthesisInput(text=text)
         voice = texttospeech.VoiceSelectionParams(
             language_code="de-DE",
-            name="de-DE-Neural2-F",
+            name=random.choice(["de-DE-Neural2-F", "de-DE-Neural2-D"]),
         )
         audio_config = texttospeech.AudioConfig(
             audio_encoding=texttospeech.AudioEncoding.OGG_OPUS
