@@ -32,6 +32,11 @@ spec:
             - mountPath: /secret/sa.json
               name: secrets
               subPath: SERVICE_ACCOUNT_JSON
+          envFrom:
+            - configMapRef:
+                name: config
+            - secretRef:
+                name: secrets
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /secrets/sa.json
