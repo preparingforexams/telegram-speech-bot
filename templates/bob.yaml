@@ -21,9 +21,20 @@ spec:
       labels:
         app: bob
     spec:
+      volumes:
+        - name: serviceAccount
+          secret:
+            secretName: secrets
       containers:
         - name: app
           image: {{ .Values.image.app }}
+          volumeMounts:
+            - mountPath: /secret/sa.json
+              name: secrets
+              subPath: SERVICE_ACCOUNT_JSON
+          env:
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /secrets/sa.json
           resources:
             requests:
               cpu: 10m
