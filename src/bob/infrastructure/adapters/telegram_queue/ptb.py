@@ -3,7 +3,7 @@ from typing import AsyncIterable
 import telegram
 
 from bob.application.ports import TelegramQueue
-from bob.application.ports.telegram_queue import Update
+from bob.application.ports.telegram_queue import Update, Message
 from bob.config import TelegramConfig
 
 
@@ -13,9 +13,15 @@ class PtbTelegramQueue(TelegramQueue):
 
     @staticmethod
     def _convert_update(native: telegram.Update) -> Update:
-        return Update(
-            id=native.update_id,
-        )
+        if native_message := native.message:
+            message = Message(
+                id=native_message.message_id,
+                text=native_message.text,
+            )
+        else:
+            message = None
+
+        return Update(id=native.update_id, message=message)
 
     async def subscribe(self) -> AsyncIterable[Update]:
         async with telegram.Bot(self._token) as bot:

@@ -1,1 +1,1 @@
-from .handle_update import HandleTextMessage
+from .handle_text_message import HandleTextMessage
