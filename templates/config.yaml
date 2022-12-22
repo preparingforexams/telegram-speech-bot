@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: config
 data:
-  TELEGRAM_CHAT_ID: "133399998"
+  TELEGRAM_CHAT_ID: "-1001348149915"
