@@ -29,3 +29,7 @@ class HandleTextMessage:
             chat_id=message.chat_id,
             voice=voice,
         )
+        await self.telegram_uploader.delete_message(
+            chat_id=message.chat_id,
+            message_id=message.id,
+        )

@@ -5,7 +5,7 @@ import logging
 from typing import Callable, Awaitable, TypeVar
 
 import telegram
-from telegram.error import RetryAfter
+from telegram.error import RetryAfter, TelegramError
 
 from bob.application.ports import TelegramUploader
 from bob.config import TelegramConfig
@@ -45,7 +45,7 @@ class PtbTelegramUploader(TelegramUploader):
                 )
             )
 
-    async def send_voice_message(self, chat_id: int, voice: bytes):
+    async def send_voice_message(self, chat_id: int, voice: bytes) -> None:
         async with telegram.Bot(token=self.config.token) as bot:
             await _auto_retry(
                 lambda: bot.send_voice(
@@ -53,3 +53,15 @@ class PtbTelegramUploader(TelegramUploader):
                     voice=voice,
                 )
             )
+
+    async def delete_message(self, chat_id: int, message_id: int) -> None:
+        try:
+            async with telegram.Bot(token=self.config.token) as bot:
+                await _auto_retry(
+                    lambda: bot.delete_message(
+                        chat_id=chat_id,
+                        message_id=message_id,
+                    )
+                )
+        except TelegramError as e:
+            _LOG.error("Could not delete message", exc_info=e)
