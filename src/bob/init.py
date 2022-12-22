@@ -1,14 +1,14 @@
 import logging
-from pathlib import Path
 
 import sentry_sdk
 from injector import Injector, Module, provider
 
-from bob.application import Application, repos, ports
+from bob.application import Application, ports
 from bob.config import load_env, Config, SentryConfig
 from bob.infrastructure.adapters import (
     telegram_uploader,
     telegram_queue,
+    text_to_speech,
 )
 
 _LOG = logging.getLogger(__name__)
@@ -36,6 +36,10 @@ def _setup_sentry(config: SentryConfig):
 class PortsModule(Module):
     def __init__(self, config: Config):
         self.config = config
+
+    @provider
+    def provide_text_to_speech(self) -> ports.TextToSpeech:
+        return text_to_speech.GcpTextToSpeech()
 
     @provider
     def provide_telegram_queue(self) -> ports.TelegramQueue:

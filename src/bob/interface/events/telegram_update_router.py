@@ -20,7 +20,7 @@ class TelegramUpdateRouter:
         signal.signal(signal.SIGTERM, self._on_signal)
 
         async for update in self.app.ports.telegram_queue.subscribe():
-            _LOG.info(f"Received update {update}")
+            _LOG.info(f"Received update {update.id}")
 
             if message := update.message:
                 if message.text:
