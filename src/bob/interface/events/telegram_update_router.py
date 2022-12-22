@@ -23,10 +23,12 @@ class TelegramUpdateRouter:
             _LOG.info(f"Received update {update.id}")
 
             if message := update.message:
-                if message.text:
+                if message.text and message.sender_name and message.chat_id:
                     text_message = TextMessage(
+                        chat_id=message.chat_id,
                         id=message.id,
                         text=message.text,
+                        sender_name=message.sender_name,
                     )
                     await self.app.handle_text_message(text_message)
 

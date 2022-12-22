@@ -6,6 +6,8 @@ from typing import AsyncIterable
 @dataclass(frozen=True)
 class Message:
     id: int
+    chat_id: int | None
+    sender_name: str | None
     text: str | None
 
 

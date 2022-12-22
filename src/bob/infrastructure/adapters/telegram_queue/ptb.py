@@ -14,9 +14,16 @@ class PtbTelegramQueue(TelegramQueue):
     @staticmethod
     def _convert_update(native: telegram.Update) -> Update:
         if native_message := native.message:
+            if user := native_message.from_user:
+                sender_name = user.first_name
+            else:
+                sender_name = None
+
             message = Message(
+                chat_id=native_message.chat.id,
                 id=native_message.message_id,
                 text=native_message.text,
+                sender_name=sender_name,
             )
         else:
             message = None

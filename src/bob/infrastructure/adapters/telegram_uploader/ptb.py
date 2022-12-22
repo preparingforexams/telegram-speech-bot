@@ -44,3 +44,12 @@ class PtbTelegramUploader(TelegramUploader):
                     **TIMEOUTS,
                 )
             )
+
+    async def send_voice_message(self, chat_id: int, voice: bytes):
+        async with telegram.Bot(token=self.config.token) as bot:
+            await _auto_retry(
+                lambda: bot.send_voice(
+                    chat_id=chat_id,
+                    voice=voice,
+                )
+            )
