@@ -4,6 +4,7 @@ import sentry_sdk
 from injector import Injector, Module, provider
 
 from bob.application import Application, ports
+from bob.application.app_config import AppConfig
 from bob.config import load_env, Config, SentryConfig
 from bob.infrastructure.adapters import (
     telegram_uploader,
@@ -50,6 +51,18 @@ class PortsModule(Module):
         return telegram_uploader.PtbTelegramUploader(self.config.telegram)
 
 
+class AppConfigModule(Module):
+    def __init__(self, config: Config):
+        self.config = config
+
+    @provider
+    def provide_app_config(self) -> AppConfig:
+        config = self.config
+        return AppConfig(
+            enabled_chat_id=config.telegram.target_chat,
+        )
+
+
 def initialize() -> Application:
     _setup_logging()
 
@@ -58,6 +71,7 @@ def initialize() -> Application:
 
     injector = Injector(
         modules=[
+            AppConfigModule(config),
             PortsModule(config),
         ]
     )
