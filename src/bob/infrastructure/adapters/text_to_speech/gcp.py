@@ -4,7 +4,7 @@ from bob.application.ports import TextToSpeech
 
 
 class GcpTextToSpeech(TextToSpeech):
-    def __init__(self):
+    def __init__(self) -> None:
         self._client: texttospeech.TextToSpeechAsyncClient | None = None
 
     def _get_client(self) -> texttospeech.TextToSpeechAsyncClient:

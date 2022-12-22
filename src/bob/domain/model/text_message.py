@@ -7,3 +7,4 @@ class TextMessage:
     id: int
     text: str
     sender_name: str
+    replied_to: int | None

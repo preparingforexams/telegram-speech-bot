@@ -15,15 +15,21 @@ class PtbTelegramQueue(TelegramQueue):
     def _convert_update(native: telegram.Update) -> Update:
         if native_message := native.message:
             if user := native_message.from_user:
-                sender_name = user.first_name
+                if user.id == 1365395775:
+                    sender_name = "Katharine"
+                else:
+                    sender_name = user.first_name
             else:
                 sender_name = None
+
+            reply_to_message = native_message.reply_to_message
 
             message = Message(
                 chat_id=native_message.chat.id,
                 id=native_message.message_id,
                 text=native_message.text,
                 sender_name=sender_name,
+                replied_to_id=reply_to_message.message_id if reply_to_message else None,
             )
         else:
             message = None

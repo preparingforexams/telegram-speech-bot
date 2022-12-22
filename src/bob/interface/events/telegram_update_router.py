@@ -29,6 +29,7 @@ class TelegramUpdateRouter:
                         id=message.id,
                         text=message.text,
                         sender_name=message.sender_name,
+                        replied_to=message.replied_to_id,
                     )
                     await self.app.handle_text_message(text_message)
 

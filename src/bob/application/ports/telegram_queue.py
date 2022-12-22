@@ -9,6 +9,7 @@ class Message:
     chat_id: int | None
     sender_name: str | None
     text: str | None
+    replied_to_id: int | None
 
 
 @dataclass(frozen=True)

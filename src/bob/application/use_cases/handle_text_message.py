@@ -28,6 +28,8 @@ class HandleTextMessage:
         await self.telegram_uploader.send_voice_message(
             chat_id=message.chat_id,
             voice=voice,
+            caption=f"(Original von {message.sender_name}",
+            reply_to_message_id=message.replied_to,
         )
         await self.telegram_uploader.delete_message(
             chat_id=message.chat_id,
