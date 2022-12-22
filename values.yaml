@@ -1,0 +1,8 @@
+image:
+  app: ghcr.io/preparingforexams/bob:${GITHUB_SHA}
+google:
+  serviceAccountJsonB64: ${SERVICE_ACCOUNT_JSON_B64}
+sentry:
+  dsn: ${SENTRY_DSN}
+telegram:
+  apiKey: ${TELEGRAM_TOKEN}
