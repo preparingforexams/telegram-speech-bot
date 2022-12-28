@@ -75,18 +75,9 @@ class PortsModule(Module):
             return [text_to_speech.StubTextToSpeech()]
 
         return [
+            text_to_speech.AzureTextToSpeech(self.config.azure_tts),
             text_to_speech.GcpTextToSpeech(),
         ]
-
-    @provider
-    def provide_text_to_speech(
-        self,
-        candidates: list[ports.TextToSpeech],
-    ) -> ports.TextToSpeech:
-        if not candidates:
-            raise ValueError("No TTS adapter bound")
-
-        return candidates[0]
 
     @provider
     def provide_telegram_queue(self) -> ports.TelegramQueue:

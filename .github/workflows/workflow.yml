@@ -57,6 +57,7 @@ jobs:
       - name: Substitute environment variables in values.yaml
         run: "envsubst < values.yaml > values_sub.yaml && mv values_sub.yaml values.yaml"
         env:
+          AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
           SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           SERVICE_ACCOUNT_JSON_B64: ${{ secrets.SERVICE_ACCOUNT_JSON_B64 }}
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}

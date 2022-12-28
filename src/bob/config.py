@@ -99,9 +99,23 @@ class SentryConfig:
 
 
 @dataclass
+class AzureTtsConfig:
+    region: str | None
+    key: str | None
+
+    @classmethod
+    def from_env(cls, env: Env) -> AzureTtsConfig:
+        return cls(
+            region=env.get_string("AZURE_SPEECH_REGION", required=False),
+            key=env.get_string("AZURE_SPEECH_KEY", required=False),
+        )
+
+
+@dataclass
 class Config:
     use_stub_tts: bool
     use_stub_language_detector: bool
+    azure_tts: AzureTtsConfig
     gcp_project: str | None
     sentry: SentryConfig
     telegram: TelegramConfig
@@ -114,6 +128,7 @@ class Config:
                 "LANGUAGE_DETECTOR_USE_STUB", "true"
             )
             == "true",
+            azure_tts=AzureTtsConfig.from_env(env),
             gcp_project=env.get_string("GOOGLE_CLOUD_PROJECT", required=False),
             sentry=SentryConfig.from_env(env),
             telegram=TelegramConfig.from_env(env),

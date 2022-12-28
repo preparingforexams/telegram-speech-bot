@@ -68,6 +68,22 @@ tests = ["attrs[tests-no-zope]", "zope.interface"]
 tests-no-zope = ["cloudpickle", "cloudpickle", "hypothesis", "hypothesis", "mypy (>=0.971,<0.990)", "mypy (>=0.971,<0.990)", "pympler", "pympler", "pytest (>=4.3.0)", "pytest (>=4.3.0)", "pytest-mypy-plugins", "pytest-mypy-plugins", "pytest-xdist[psutil]", "pytest-xdist[psutil]"]
 
 [[package]]
+name = "azure-cognitiveservices-speech"
+version = "1.24.2"
+description = "\"Microsoft Cognitive Services Speech SDK\""
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "azure_cognitiveservices_speech-1.24.2-py3-none-macosx_10_14_x86_64.whl", hash = "sha256:55ed649573e8ded59bf8d02f9d472fa6aafd9c83d377e6a2582322b69745df46"},
+    {file = "azure_cognitiveservices_speech-1.24.2-py3-none-macosx_11_0_arm64.whl", hash = "sha256:facbe02ae35d0e5a42dd7f615fb16287fd54c56dc76385f792a3865a1458be76"},
+    {file = "azure_cognitiveservices_speech-1.24.2-py3-none-manylinux1_x86_64.whl", hash = "sha256:711bd2345d7ccc877c6a4081dc540238fce287822e512c1d655a6bcd2fc9f703"},
+    {file = "azure_cognitiveservices_speech-1.24.2-py3-none-manylinux2014_aarch64.whl", hash = "sha256:8880beb954fa7c6bc590659dc21c6d0d8b1f12116480979ee954be95cf585a2f"},
+    {file = "azure_cognitiveservices_speech-1.24.2-py3-none-win32.whl", hash = "sha256:f75f76c1d213af306b52e61e1d87e569d9f1574654ec871479b08133278887cf"},
+    {file = "azure_cognitiveservices_speech-1.24.2-py3-none-win_amd64.whl", hash = "sha256:b322dca2bb5e6b08082abd1ac553123432822595dd73c8ed1eaaec9d483639bd"},
+]
+
+[[package]]
 name = "black"
 version = "22.12.0"
 description = "The uncompromising code formatter."
@@ -1236,4 +1252,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.11"
-content-hash = "bfb22d4f6db998a7830c4c9284bb36a259c9b070039b898a8fbd8a4f412ae4e3"
+content-hash = "541cc487be5a7244bebd70a0cfe5f4f0e5259d5984fdbd7be0d93be9aa650bac"
