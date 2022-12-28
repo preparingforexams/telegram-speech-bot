@@ -2,6 +2,8 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y libssl-dev libasound2 && apt-get clean
+
 RUN pip install poetry==1.3.1 --no-cache
 RUN poetry config virtualenvs.create false
 
