@@ -4,5 +4,6 @@ metadata:
   name: config
 data:
   GOOGLE_CLOUD_PROJECT: prep-telegram-bots
+  LANGUAGE_DETECTOR_USE_STUB: "false"
   TELEGRAM_TARGET_CHAT_ID: "-1001348149915"
   TTS_USE_STUB: "false"

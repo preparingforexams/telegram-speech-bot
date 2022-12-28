@@ -4,8 +4,16 @@ from bob.application.ports import TextToSpeech
 
 
 class StubTextToSpeech(TextToSpeech):
-    async def get_supported_languages(self) -> set[Language]:
-        return {Language.get("de_DE")}
+    async def get_supported_voices(
+        self,
+        language: Language,
+    ) -> list[TextToSpeech.Voice]:
+        return [TextToSpeech.Voice("stub-voice", [Language.get("de_DE")])]
 
-    async def convert_to_speech(self, text: str, language: Language) -> bytes:
+    async def convert_to_speech(
+        self,
+        text: str,
+        language: Language,
+        voice: TextToSpeech.Voice,
+    ) -> bytes:
         return bytes(0)

@@ -99,6 +99,13 @@ class PortsModule(Module):
     @provider
     def provide_language_detector(self) -> ports.LanguageDetector:
         config = self.config
+
+        if config.use_stub_language_detector:
+            return language_detector.StubLanguageDetector()
+
+        if config.gcp_project is None:
+            raise ValueError("GCP project not configured")
+
         return language_detector.GoogleCloudTranslationLanguageDetector(
             config.gcp_project,
         )

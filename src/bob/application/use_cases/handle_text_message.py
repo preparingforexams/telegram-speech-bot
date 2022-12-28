@@ -1,4 +1,5 @@
 import logging
+import random
 from dataclasses import dataclass
 
 import langcodes
@@ -27,25 +28,49 @@ class HandleTextMessage:
             return
 
         language = await self.language_detector.detect_language(message.text)
-        supported_languages = await self.text_to_speech.get_supported_languages()
+
+        supported_voices = await self.text_to_speech.get_supported_voices(language)
+
+        if not supported_voices:
+            _LOG.warning(
+                "Unsupported message language %s (%s)",
+                language,
+                language.language_name(),
+            )
+            return
+
+        _LOG.debug(
+            "Found %d supported voices for language %s (%s)",
+            len(supported_voices),
+            language,
+            language.language_name(),
+        )
+
+        voice = random.choice(supported_voices)
+
         supported_language_tag = langcodes.closest_supported_match(
             language,
-            [lang.to_tag() for lang in supported_languages],
+            [lang.to_tag() for lang in voice.supported_languages],
         )
 
         if not supported_language_tag:
-            _LOG.error("Unsupported message language: %s", language)
-            supported_language = langcodes.Language.get("de_DE")
-        else:
-            supported_language = langcodes.Language.get(supported_language_tag)
+            _LOG.error(
+                "Got voice %s for language %s that doesn't support it.",
+                voice.name,
+                language,
+            )
+            return
 
-        voice = await self.text_to_speech.convert_to_speech(
+        supported_language = langcodes.Language.get(supported_language_tag)
+
+        speech = await self.text_to_speech.convert_to_speech(
             message.text,
             supported_language,
+            voice,
         )
         await self.telegram_uploader.send_voice_message(
             chat_id=message.chat_id,
-            voice=voice,
+            voice=speech,
             caption=f"(Original von {message.sender_name})",
             reply_to_message_id=message.replied_to,
         )
