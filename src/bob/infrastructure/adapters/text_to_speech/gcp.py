@@ -1,7 +1,7 @@
 import logging
 import random
 
-from cachetools import cached
+from asyncache import cached
 from google.cloud import texttospeech
 from langcodes import Language
 

@@ -1,5 +1,6 @@
 import logging
 
+from asyncache import cached
 from google.cloud.translate_v3 import TranslationServiceAsyncClient
 from langcodes import Language
 
@@ -7,8 +8,6 @@ from bob.application.exceptions.language import LanguageException
 from bob.application.ports import LanguageDetector
 
 _LOG = logging.getLogger(__name__)
-
-from cachetools import cached
 
 
 class GoogleCloudTranslationLanguageDetector(LanguageDetector):
