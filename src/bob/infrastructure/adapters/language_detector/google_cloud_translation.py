@@ -12,7 +12,7 @@ _LOG = logging.getLogger(__name__)
 
 class GoogleCloudTranslationLanguageDetector(LanguageDetector):
     def __init__(self, project_id: str):
-        self._parent = f"projects/{project_id}/locations/europe-west3"
+        self._parent = f"projects/{project_id}/locations/global"
 
     @property
     @cached({})
