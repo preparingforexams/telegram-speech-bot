@@ -1,6 +1,7 @@
 import logging
 from dataclasses import dataclass
 
+import langcodes
 from injector import inject
 
 from bob.application import ports
@@ -14,6 +15,7 @@ _LOG = logging.getLogger(__name__)
 @dataclass
 class HandleTextMessage:
     app_config: AppConfig
+    language_detector: ports.LanguageDetector
     telegram_uploader: ports.TelegramUploader
     text_to_speech: ports.TextToSpeech
 
@@ -24,7 +26,23 @@ class HandleTextMessage:
             _LOG.debug("Dropping message because it's not an allowed chat")
             return
 
-        voice = await self.text_to_speech.convert_to_speech(message.text)
+        language = await self.language_detector.detect_language(message.text)
+        supported_languages = await self.text_to_speech.get_supported_languages()
+        supported_language_tag = langcodes.closest_supported_match(
+            language,
+            [lang.to_tag() for lang in supported_languages],
+        )
+
+        if not supported_language_tag:
+            _LOG.error("Unsupported message language: %s", language)
+            supported_language = langcodes.Language.get("de_DE")
+        else:
+            supported_language = langcodes.Language.get(supported_language_tag)
+
+        voice = await self.text_to_speech.convert_to_speech(
+            message.text,
+            supported_language,
+        )
         await self.telegram_uploader.send_voice_message(
             chat_id=message.chat_id,
             voice=voice,

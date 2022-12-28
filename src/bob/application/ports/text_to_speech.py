@@ -9,5 +9,5 @@ class TextToSpeech(abc.ABC):
         pass
 
     @abc.abstractmethod
-    async def convert_to_speech(self, text: str) -> bytes:
+    async def convert_to_speech(self, text: str, language: Language) -> bytes:
         pass

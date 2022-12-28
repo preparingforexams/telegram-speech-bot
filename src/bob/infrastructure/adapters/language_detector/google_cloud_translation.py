@@ -8,12 +8,12 @@ from bob.application.ports import LanguageDetector
 
 _LOG = logging.getLogger(__name__)
 
-from cachetools import cachedmethod
+from cachetools import cached
 
 
 class GoogleCloudTranslationLanguageDetector(LanguageDetector):
     @property
-    @cachedmethod
+    @cached({})
     def _client(self) -> TranslationServiceAsyncClient:
         return TranslationServiceAsyncClient()
 
