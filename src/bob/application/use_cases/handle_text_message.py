@@ -34,7 +34,14 @@ class HandleTextMessage:
 
         supported_voices: list[ports.TextToSpeech.Voice] = []
         for tts in self.tts:
-            supported_voices.extend(await tts.get_supported_voices(language))
+            voices = await tts.get_supported_voices(language)
+            _LOG.debug(
+                "%d supported voices for language %s from %s",
+                len(voices),
+                language,
+                tts,
+            )
+            supported_voices.extend(voices)
 
         if not supported_voices:
             _LOG.warning(
