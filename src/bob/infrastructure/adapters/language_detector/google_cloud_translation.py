@@ -31,7 +31,7 @@ class GoogleCloudTranslationLanguageDetector(LanguageDetector):
             _LOG.error("The Google docs fucking lied!")
 
         language = languages[0]
-        if language == "und":
+        if language.language_code == "und":
             _LOG.warning("No language detected")
             return None
 
