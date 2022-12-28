@@ -25,7 +25,7 @@ class AzureTextToSpeech(TextToSpeech):
         synth = speechsdk.SpeechSynthesizer(
             speech_config=self.config,
         )
-        voices_future = synth.get_voices_async(language.to_tag())
+        voices_future = synth.get_voices_async()
         loop = asyncio.get_running_loop()
         voices: speechsdk.SynthesisVoicesResult = await loop.run_in_executor(
             None,
@@ -38,6 +38,7 @@ class AzureTextToSpeech(TextToSpeech):
                 supported_languages=[Language.get(voice.locale)],
             )
             for voice in voices.voices
+            if language.distance(Language.get(voice.locale)) < 10
         ]
 
     async def convert_to_speech(
