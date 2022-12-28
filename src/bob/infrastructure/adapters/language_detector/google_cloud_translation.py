@@ -13,7 +13,7 @@ from cachetools import cached
 
 class GoogleCloudTranslationLanguageDetector(LanguageDetector):
     def __init__(self, project_id: str):
-        self._parent = f"projects/{project_id}/locations/global"
+        self._parent = f"projects/{project_id}/locations/europe-west3"
 
     @property
     @cached({})
