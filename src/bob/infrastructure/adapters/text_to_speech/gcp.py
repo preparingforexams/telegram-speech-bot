@@ -3,8 +3,9 @@ import random
 
 from asyncache import cached
 from google.cloud import texttospeech
-from langcodes import Language
+from langcodes import Language, closest_supported_match
 
+from bob.application.exceptions.language import LanguageException
 from bob.application.ports import TextToSpeech
 
 _LOG = logging.getLogger(__name__)
@@ -56,8 +57,15 @@ class GcpTextToSpeech(TextToSpeech):
 
         voices = await self._get_voices_for_language(language)
         voice = random.choice(voices)
+
+        language_code = closest_supported_match(language, voice.language_codes)
+        if language_code is None:
+            raise LanguageException(
+                f"Voice {voice.name} doesn't support anything like {language}"
+            )
+
         voice_params = texttospeech.VoiceSelectionParams(
-            language_code=language.to_tag(),
+            language_code=language_code,
             name=voice.name,
         )
         audio_config = texttospeech.AudioConfig(
