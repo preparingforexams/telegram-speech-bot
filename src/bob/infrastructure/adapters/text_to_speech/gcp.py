@@ -20,7 +20,14 @@ class GcpTextToSpeech(TextToSpeech):
         language: Language,
     ) -> list[TextToSpeech.Voice]:
         response = await self._client.list_voices(language_code=language.to_tag())
-        return [voice for voice in response.voices if "Neural2" in voice.name]
+        return [
+            TextToSpeech.Voice(
+                name=voice.name,
+                supported_languages=[Language.get(c) for c in voice.language_codes],
+            )
+            for voice in response.voices
+            if "Neural2" in voice.name
+        ]
 
     async def convert_to_speech(
         self,
