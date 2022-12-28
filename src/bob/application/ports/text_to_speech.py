@@ -13,6 +13,13 @@ class TextToSpeech(abc.ABC):
         name: str
         supported_languages: list[Language]
 
+        async def convert_to_speech(
+            self,
+            text: str,
+            language: Language,
+        ) -> bytes:
+            return await self.tts.convert_to_speech(text, language, self)
+
     @abc.abstractmethod
     async def get_supported_voices(self, language: Language) -> list[Voice]:
         pass

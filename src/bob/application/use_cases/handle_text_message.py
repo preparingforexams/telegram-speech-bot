@@ -18,7 +18,7 @@ class HandleTextMessage:
     app_config: AppConfig
     language_detector: ports.LanguageDetector
     telegram_uploader: ports.TelegramUploader
-    text_to_speech: ports.TextToSpeech
+    tts: list[ports.TextToSpeech]
 
     async def __call__(self, message: TextMessage) -> None:
         _LOG.info("Handling text message %d", message.id)
@@ -32,7 +32,9 @@ class HandleTextMessage:
 
         language = await self.language_detector.detect_language(message.text)
 
-        supported_voices = await self.text_to_speech.get_supported_voices(language)
+        supported_voices: list[ports.TextToSpeech.Voice] = []
+        for tts in self.tts:
+            supported_voices.extend(await tts.get_supported_voices(language))
 
         if not supported_voices:
             _LOG.warning(
@@ -49,7 +51,7 @@ class HandleTextMessage:
             language.language_name(),
         )
 
-        voice = random.choice(supported_voices)
+        voice: ports.TextToSpeech.Voice = random.choice(supported_voices)
 
         _LOG.debug("Selected voice %s", voice)
 
@@ -68,10 +70,9 @@ class HandleTextMessage:
 
         supported_language = langcodes.Language.get(supported_language_tag)
 
-        speech = await self.text_to_speech.convert_to_speech(
+        speech = await voice.convert_to_speech(
             message.text,
             supported_language,
-            voice,
         )
         await self.telegram_uploader.send_voice_message(
             chat_id=message.chat_id,
