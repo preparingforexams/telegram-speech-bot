@@ -110,6 +110,7 @@ click = ">=8.0.0"
 mypy-extensions = ">=0.4.3"
 pathspec = ">=0.9.0"
 platformdirs = ">=2"
+tomli = {version = ">=1.1.0", markers = "python_full_version < \"3.11.0a7\""}
 
 [package.extras]
 colorama = ["colorama (>=0.4.3)"]
@@ -202,6 +203,21 @@ wrapt = ">=1.10,<2"
 dev = ["PyTest", "PyTest (<5)", "PyTest-Cov", "PyTest-Cov (<2.6)", "bump2version (<1)", "configparser (<5)", "importlib-metadata (<3)", "importlib-resources (<4)", "sphinx (<2)", "sphinxcontrib-websupport (<2)", "tox", "zipp (<2)"]
 
 [[package]]
+name = "exceptiongroup"
+version = "1.1.0"
+description = "Backport of PEP 654 (exception groups)"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "exceptiongroup-1.1.0-py3-none-any.whl", hash = "sha256:327cbda3da756e2de031a3107b81ab7b3770a602c4d16ca618298c526f4bec1e"},
+    {file = "exceptiongroup-1.1.0.tar.gz", hash = "sha256:bcb67d800a4497e1b404c2dd44fca47d3b7a5e5433dbab67f96c1a685cdfdf23"},
+]
+
+[package.extras]
+test = ["pytest (>=6)"]
+
+[[package]]
 name = "google-api-core"
 version = "2.11.0"
 description = "Google API client core library"
@@ -216,14 +232,8 @@ files = [
 [package.dependencies]
 google-auth = ">=2.14.1,<3.0dev"
 googleapis-common-protos = ">=1.56.2,<2.0dev"
-grpcio = [
-    {version = ">=1.33.2,<2.0dev", optional = true, markers = "extra == \"grpc\""},
-    {version = ">=1.49.1,<2.0dev", optional = true, markers = "python_version >= \"3.11\""},
-]
-grpcio-status = [
-    {version = ">=1.33.2,<2.0dev", optional = true, markers = "extra == \"grpc\""},
-    {version = ">=1.49.1,<2.0dev", optional = true, markers = "python_version >= \"3.11\""},
-]
+grpcio = {version = ">=1.33.2,<2.0dev", optional = true, markers = "extra == \"grpc\""}
+grpcio-status = {version = ">=1.33.2,<2.0dev", optional = true, markers = "extra == \"grpc\""}
 protobuf = ">=3.19.5,<3.20.0 || >3.20.0,<3.20.1 || >3.20.1,<4.21.0 || >4.21.0,<4.21.1 || >4.21.1,<4.21.2 || >4.21.2,<4.21.3 || >4.21.3,<4.21.4 || >4.21.4,<4.21.5 || >4.21.5,<5.0.0dev"
 requests = ">=2.18.0,<3.0.0dev"
 
@@ -663,6 +673,7 @@ files = [
 
 [package.dependencies]
 mypy-extensions = ">=0.4.3"
+tomli = {version = ">=1.1.0", markers = "python_version < \"3.11\""}
 typing-extensions = ">=3.10"
 
 [package.extras]
@@ -744,19 +755,19 @@ pytzdata = ">=2020.1"
 
 [[package]]
 name = "platformdirs"
-version = "2.6.0"
+version = "2.6.2"
 description = "A small Python package for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "platformdirs-2.6.0-py3-none-any.whl", hash = "sha256:1a89a12377800c81983db6be069ec068eee989748799b946cce2a6e80dcc54ca"},
-    {file = "platformdirs-2.6.0.tar.gz", hash = "sha256:b46ffafa316e6b83b47489d240ce17173f123a9b9c83282141c3daf26ad9ac2e"},
+    {file = "platformdirs-2.6.2-py3-none-any.whl", hash = "sha256:83c8f6d04389165de7c9b6f0c682439697887bca0aa2f1c87ef1826be3584490"},
+    {file = "platformdirs-2.6.2.tar.gz", hash = "sha256:e1fea1fe471b9ff8332e229df3cb7de4f53eeea4998d3b6bfff542115e998bd2"},
 ]
 
 [package.extras]
-docs = ["furo (>=2022.9.29)", "proselint (>=0.13)", "sphinx (>=5.3)", "sphinx-autodoc-typehints (>=1.19.4)"]
-test = ["appdirs (==1.4.4)", "pytest (>=7.2)", "pytest-cov (>=4)", "pytest-mock (>=3.10)"]
+docs = ["furo (>=2022.12.7)", "proselint (>=0.13)", "sphinx (>=5.3)", "sphinx-autodoc-typehints (>=1.19.5)"]
+test = ["appdirs (==1.4.4)", "covdefaults (>=2.2.2)", "pytest (>=7.2)", "pytest-cov (>=4)", "pytest-mock (>=3.10)"]
 
 [[package]]
 name = "pluggy"
@@ -880,9 +891,11 @@ files = [
 [package.dependencies]
 attrs = ">=19.2.0"
 colorama = {version = "*", markers = "sys_platform == \"win32\""}
+exceptiongroup = {version = ">=1.0.0rc8", markers = "python_version < \"3.11\""}
 iniconfig = "*"
 packaging = "*"
 pluggy = ">=0.12,<2.0"
+tomli = {version = ">=1.0.0", markers = "python_version < \"3.11\""}
 
 [package.extras]
 testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "pygments (>=2.7.2)", "requests", "xmlschema"]
@@ -1084,6 +1097,18 @@ files = [
 ]
 
 [[package]]
+name = "tomli"
+version = "2.0.1"
+description = "A lil' TOML parser"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
+    {file = "tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
+]
+
+[[package]]
 name = "types-aiofiles"
 version = "22.1.0.4"
 description = "Typing stubs for aiofiles"
@@ -1251,5 +1276,5 @@ files = [
 
 [metadata]
 lock-version = "2.0"
-python-versions = "~3.11"
-content-hash = "541cc487be5a7244bebd70a0cfe5f4f0e5259d5984fdbd7be0d93be9aa650bac"
+python-versions = "~3.10"
+content-hash = "61db47041c3b43e07395304e9037d764c7af85e3b4f32d9d7134dd0d48c4e088"
