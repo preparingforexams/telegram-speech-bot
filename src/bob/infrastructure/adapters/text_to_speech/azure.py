@@ -48,10 +48,9 @@ class AzureTextToSpeech(TextToSpeech):
     ) -> bytes:
         speech_config = self.config
         speech_config.speech_synthesis_voice_name = voice.name
-        audio_config = speechsdk.audio.AudioOutputConfig()
         synth = speechsdk.SpeechSynthesizer(
             speech_config=self.config,
-            audio_config=audio_config,
+            audio_config=None,
         )
         future = synth.speak_text_async(text)
         loop = asyncio.get_running_loop()
