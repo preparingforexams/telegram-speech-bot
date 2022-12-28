@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import abc
 from dataclasses import dataclass
 
@@ -7,6 +9,7 @@ from langcodes import Language
 class TextToSpeech(abc.ABC):
     @dataclass
     class Voice:
+        tts: TextToSpeech
         name: str
         supported_languages: list[Language]
 

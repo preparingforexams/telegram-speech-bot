@@ -8,7 +8,7 @@ class StubTextToSpeech(TextToSpeech):
         self,
         language: Language,
     ) -> list[TextToSpeech.Voice]:
-        return [TextToSpeech.Voice("stub-voice", [Language.get("de_DE")])]
+        return [TextToSpeech.Voice(self, "stub-voice", [Language.get("de_DE")])]
 
     async def convert_to_speech(
         self,

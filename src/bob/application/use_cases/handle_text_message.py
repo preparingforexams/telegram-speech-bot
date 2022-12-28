@@ -51,6 +51,8 @@ class HandleTextMessage:
 
         voice = random.choice(supported_voices)
 
+        _LOG.debug("Selected voice %s", voice)
+
         supported_language_tag = langcodes.closest_supported_match(
             language,
             [lang.to_tag() for lang in voice.supported_languages],

@@ -22,6 +22,7 @@ class GcpTextToSpeech(TextToSpeech):
         response = await self._client.list_voices(language_code=language.to_tag())
         return [
             TextToSpeech.Voice(
+                tts=self,
                 name=voice.name,
                 supported_languages=[Language.get(c) for c in voice.language_codes],
             )
