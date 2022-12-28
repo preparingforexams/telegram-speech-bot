@@ -4,7 +4,7 @@ on: [ push ]
 jobs:
   lint:
     runs-on: ubuntu-latest
-    container: python:3.11-slim
+    container: python:3.10-slim
     steps:
       - name: Install Poetry
         run: pip install poetry==1.3.1
@@ -17,7 +17,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    container: python:3.11-slim
+    container: python:3.10-slim
     steps:
       - name: Install Poetry
         run: pip install poetry==1.3.1
