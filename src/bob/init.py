@@ -53,7 +53,10 @@ class PortsModule(Module):
 
     @provider
     def provide_language_detector(self) -> ports.LanguageDetector:
-        return language_detector.GoogleCloudTranslationLanguageDetector()
+        config = self.config
+        return language_detector.GoogleCloudTranslationLanguageDetector(
+            config.gcp_project,
+        )
 
 
 class AppConfigModule(Module):

@@ -100,12 +100,14 @@ class SentryConfig:
 
 @dataclass
 class Config:
+    gcp_project: str
     sentry: SentryConfig
     telegram: TelegramConfig
 
     @classmethod
     def from_env(cls, env: Env) -> Config:
         return cls(
+            gcp_project=env.get_string("GOOGLE_CLOUD_PROJECT") or "",
             sentry=SentryConfig.from_env(env),
             telegram=TelegramConfig.from_env(env),
         )

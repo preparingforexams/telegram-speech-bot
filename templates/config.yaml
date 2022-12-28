@@ -3,4 +3,5 @@ kind: ConfigMap
 metadata:
   name: config
 data:
+  GOOGLE_CLOUD_PROJECT: prep-telegram-bots
   TELEGRAM_TARGET_CHAT_ID: "-1001348149915"

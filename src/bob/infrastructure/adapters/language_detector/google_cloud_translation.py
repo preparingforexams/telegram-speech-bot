@@ -12,6 +12,9 @@ from cachetools import cached
 
 
 class GoogleCloudTranslationLanguageDetector(LanguageDetector):
+    def __init__(self, project_id: str):
+        self._parent = f"projects/{project_id}/locations/global"
+
     @property
     @cached({})
     def _client(self) -> TranslationServiceAsyncClient:
@@ -20,6 +23,7 @@ class GoogleCloudTranslationLanguageDetector(LanguageDetector):
     async def detect_language(self, text: str) -> Language:
         response = await self._client.detect_language(
             content=text,
+            parent=self._parent,
             mime_type="text/plain",
         )
 
