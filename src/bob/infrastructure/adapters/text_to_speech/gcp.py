@@ -40,7 +40,7 @@ class GcpTextToSpeech(TextToSpeech):
                 result.append(voice)
 
         if not result:
-            raise ValueError(f"Unsupported language: {language}")
+            raise ValueError(f"Unsupported language: {language.language_name()}")
 
         _LOG.debug(
             "Found %d voices for language %s: %s",

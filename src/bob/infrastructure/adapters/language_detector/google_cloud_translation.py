@@ -35,10 +35,12 @@ class GoogleCloudTranslationLanguageDetector(LanguageDetector):
             _LOG.error("The Google docs fucking lied!")
 
         language = languages[0]
+        result = Language.get(language.language_code)
         _LOG.info(
-            "Detected language %s with confidence %f",
+            "Detected language %s (%s) with confidence %f",
             language.language_code,
+            result.language_name(),
             language.confidence,
         )
 
-        return Language.get(language.language_code)
+        return result
