@@ -42,7 +42,7 @@ class GcpTextToSpeech(TextToSpeech):
         if not result:
             raise ValueError(f"Unsupported language: {language}")
 
-        _LOG.info(
+        _LOG.debug(
             "Found %d voices for language %s: %s",
             len(result),
             language,
@@ -57,6 +57,8 @@ class GcpTextToSpeech(TextToSpeech):
 
         voices = await self._get_voices_for_language(language)
         voice = random.choice(voices)
+
+        _LOG.info("Selected voice %s for language %s", voice.name, language)
 
         language_code = closest_supported_match(language, voice.language_codes)
         if language_code is None:
