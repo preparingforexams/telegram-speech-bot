@@ -30,7 +30,12 @@ class HandleTextMessage:
             _LOG.debug("Dropping message because it's not an allowed chat")
             return
 
+        make_it_weird = False
         language = await self.language_detector.detect_language(message.text)
+        if not language:
+            _LOG.info("Selecting default due to unknown language")
+            language = langcodes.Language.get("de_CH")
+            make_it_weird = True
 
         supported_voices: list[ports.TextToSpeech.Voice] = []
         for tts in self.tts:
@@ -58,7 +63,16 @@ class HandleTextMessage:
             language.language_name(),
         )
 
-        voice: ports.TextToSpeech.Voice = random.choice(supported_voices)
+        voice: ports.TextToSpeech.Voice
+        if make_it_weird:
+            voice = min(
+                supported_voices,
+                key=lambda v: language.distance(  # type: ignore
+                    v.supported_languages[0]
+                ),
+            )
+        else:
+            voice = random.choice(supported_voices)
 
         _LOG.debug("Selected voice %s", voice)
 

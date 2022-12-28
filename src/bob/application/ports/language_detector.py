@@ -5,7 +5,7 @@ from langcodes import Language
 
 class LanguageDetector(abc.ABC):
     @abc.abstractmethod
-    async def detect_language(self, text: str) -> Language:
+    async def detect_language(self, text: str) -> Language | None:
         """
         Args:
             text: a text input
@@ -14,7 +14,6 @@ class LanguageDetector(abc.ABC):
             the most probable language of the text
 
         Raises:
-            LanguageException: if no language could be detected
             IoException: if any IO error occurred
 
         """
