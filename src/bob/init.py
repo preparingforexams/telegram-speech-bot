@@ -10,6 +10,7 @@ from bob.infrastructure.adapters import (
     telegram_uploader,
     telegram_queue,
     text_to_speech,
+    language_detector,
 )
 
 _LOG = logging.getLogger(__name__)
@@ -49,6 +50,10 @@ class PortsModule(Module):
     @provider
     def provide_telegram_uploader(self) -> ports.TelegramUploader:
         return telegram_uploader.PtbTelegramUploader(self.config.telegram)
+
+    @provider
+    def provide_language_detector(self) -> ports.LanguageDetector:
+        return language_detector.GoogleCloudTranslationLanguageDetector()
 
 
 class AppConfigModule(Module):
