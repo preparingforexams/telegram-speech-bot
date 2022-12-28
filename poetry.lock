@@ -954,6 +954,18 @@ files = [
 ]
 
 [[package]]
+name = "types-cachetools"
+version = "5.2.1"
+description = "Typing stubs for cachetools"
+category = "dev"
+optional = false
+python-versions = "*"
+files = [
+    {file = "types-cachetools-5.2.1.tar.gz", hash = "sha256:069cfc825697cd51445c1feabbe4edc1fae2b2315870e7a9a179a7c4a5851bee"},
+    {file = "types_cachetools-5.2.1-py3-none-any.whl", hash = "sha256:b496b7e364ba050c4eaadcc6582f2c9fbb04f8ee7141eb3b311a8589dbd4506a"},
+]
+
+[[package]]
 name = "types-deprecated"
 version = "1.2.9"
 description = "Typing stubs for Deprecated"
@@ -1098,4 +1110,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.11"
-content-hash = "97ad7a8fb52bd09e4f297a7214e4bfb965f51b3aca6810e67bb30c1af4c7c7e4"
+content-hash = "0584f74b9999ab33b9ef0f2fd46707c73481efe8fc785ef320fdc61b1c3f651a"

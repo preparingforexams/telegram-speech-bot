@@ -1,24 +1,31 @@
 import random
 
+from cachetools import cachedmethod
 from google.cloud import texttospeech
+from langcodes import Language
 
 from bob.application.ports import TextToSpeech
 
 
 class GcpTextToSpeech(TextToSpeech):
-    def __init__(self) -> None:
-        self._client: texttospeech.TextToSpeechAsyncClient | None = None
+    @property
+    @cachedmethod
+    def _client(self) -> texttospeech.TextToSpeechAsyncClient:
+        return texttospeech.TextToSpeechAsyncClient()
 
-    def _get_client(self) -> texttospeech.TextToSpeechAsyncClient:
+    @cachedmethod
+    async def get_supported_languages(self) -> set[Language]:
         client = self._client
-        if client is not None:
-            return client
-
-        self._client = (client := texttospeech.TextToSpeechAsyncClient())
-        return client
+        voices = await client.list_voices()
+        return {
+            Language.get(code)
+            for voice in voices.voices
+            for code in voice.language_codes
+            if "Neural2" in voice.name
+        }
 
     async def convert_to_speech(self, text: str) -> bytes:
-        client = self._get_client()
+        client = self._client
         synth_input = texttospeech.SynthesisInput(text=text)
         voice = texttospeech.VoiceSelectionParams(
             language_code="de-DE",
