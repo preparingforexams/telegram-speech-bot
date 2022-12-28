@@ -100,6 +100,7 @@ class SentryConfig:
 
 @dataclass
 class Config:
+    use_stub_tts: bool
     gcp_project: str
     sentry: SentryConfig
     telegram: TelegramConfig
@@ -107,6 +108,7 @@ class Config:
     @classmethod
     def from_env(cls, env: Env) -> Config:
         return cls(
+            use_stub_tts=env.get_string("TTS_USE_STUB", "true") != "true",
             gcp_project=env.get_string("GOOGLE_CLOUD_PROJECT") or "",
             sentry=SentryConfig.from_env(env),
             telegram=TelegramConfig.from_env(env),
