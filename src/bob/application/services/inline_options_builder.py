@@ -1,3 +1,5 @@
+from dataclasses import dataclass
+
 from injector import inject
 
 from bob.application import ports
@@ -5,6 +7,7 @@ from bob.domain.model import InlineOption, InlineMessageState, InlineCode
 
 
 @inject
+@dataclass
 class InlineOptionsBuilder:
     def map_to_code(self, voice: ports.TextToSpeech.Voice) -> InlineCode | None:
         name = voice.name
