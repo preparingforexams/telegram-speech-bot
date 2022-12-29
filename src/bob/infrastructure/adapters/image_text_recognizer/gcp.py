@@ -36,5 +36,4 @@ class GoogleImageTextRecognizer(ImageTextRecognizer):
             _LOG.error("Got an error: %s", response.error)
             return None
 
-        _LOG.debug("full_text: %s", response.full_text_annotation)
         return response.full_text_annotation.text or None
