@@ -18,6 +18,7 @@ class HandleImageMessage:
     async def __call__(self, image_message: ImageMessage) -> None:
         _LOG.info("Received image message %s", image_message)
         url = await self.telegram.get_file_url(image_message.file_id)
+        _LOG.debug("Got URL %s", url)
         text = await self.image_text_recognizer.detect_text(url)
 
         if text is None:
