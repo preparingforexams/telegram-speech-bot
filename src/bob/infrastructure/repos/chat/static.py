@@ -5,12 +5,12 @@ from bob.domain.model import Chat
 
 
 class StaticChatRepository(ChatRepository):
-    # de-DE-GiselaNeural is a kid and I should utilize that somehow
+    # Quick reference: de-DE-GiselaNeural is a kid, de-CH-LeniNeural is swiss
     async def get_chats(self) -> Iterable[Chat]:
         return {
             Chat(
                 id=133399998,
-                fixed_voice="de-CH-JanNeural",
+                fixed_voice="de-CH-LeniNeural",
             ),
             Chat(
                 id=-1001348149915,
@@ -18,6 +18,6 @@ class StaticChatRepository(ChatRepository):
             ),
             Chat(
                 id=-1001243399669,
-                fixed_voice="de-DE-GiselaNeural",
+                fixed_voice="de-CH-LeniNeural",
             ),
         }
