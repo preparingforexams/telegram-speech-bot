@@ -60,7 +60,7 @@ class HandleInlineCallback:
 
             await self._send_speech(
                 state,
-                language=Language.get("de_CH"),
+                language=Language.get("nl_NL"),
                 voice_name="nl-NL-MaartenNeural",
             )
             state["was_holland"] = True
