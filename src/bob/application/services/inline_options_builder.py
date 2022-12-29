@@ -30,7 +30,7 @@ class InlineOptionsBuilder:
         if not state["was_swiss"]:
             result.append(
                 InlineOption(
-                    text="Swiss me daddy",
+                    text="🫕🇨🇭",
                     text_message_id=state["message_id"],
                     code=InlineCode.SWISS,
                 )
@@ -39,7 +39,7 @@ class InlineOptionsBuilder:
         if not state["was_child"]:
             result.append(
                 InlineOption(
-                    text="U18",
+                    text="👶🏼",
                     text_message_id=state["message_id"],
                     code=InlineCode.CHILD,
                 )
