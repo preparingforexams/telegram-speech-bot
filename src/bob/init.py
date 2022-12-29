@@ -1,6 +1,5 @@
 import logging
 from dataclasses import dataclass
-from typing import Type, TypeVar
 
 import sentry_sdk
 from injector import Injector, Module, provider, multiprovider
@@ -12,6 +11,7 @@ from bob.infrastructure.adapters import (
     telegram_queue,
     text_to_speech,
     language_detector,
+    image_text_recognizer,
 )
 from bob.infrastructure.repos import chat, state
 
@@ -42,32 +42,16 @@ class _TtsContainer:
     tts: ports.TextToSpeech
 
 
-class _GcpTts(_TtsContainer):
-    pass
-
-
-class _AzureTts(_TtsContainer):
-    pass
-
-
-T = TypeVar("T")
-
-
-def _try_get(injector: Injector, t: Type[T]) -> T | None:
-    try:
-        return injector.get(t)
-    except Exception as e:
-        _LOG.warning("Could not get implementation for type %s", t, exc_info=e)
-        return None
-
-
 class PortsModule(Module):
     def __init__(self, config: Config):
         self.config = config
 
-    # @provider
-    # def provide_gcp_text_to_speech(self) -> _GcpTts:
-    #     return _GcpTts(text_to_speech.GcpTextToSpeech())
+    @provider
+    def provide_image_text_recognizer(self) -> ports.ImageTextRecognizer:
+        if self.config.use_stub_image_recognizer:
+            return image_text_recognizer.StubImageTextRecognizer()
+
+        return image_text_recognizer.GoogleImageTextRecognizer()
 
     @multiprovider
     def provide_text_to_speech_list(self) -> list[ports.TextToSpeech]:

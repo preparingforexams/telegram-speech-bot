@@ -114,6 +114,7 @@ class AzureTtsConfig:
 @dataclass
 class Config:
     use_stub_tts: bool
+    use_stub_image_recognizer: bool
     use_stub_language_detector: bool
     azure_tts: AzureTtsConfig
     gcp_project: str | None
@@ -125,6 +126,7 @@ class Config:
     def from_env(cls, env: Env) -> Config:
         return cls(
             use_stub_tts=env.get_string("TTS_USE_STUB", "true") == "true",
+            use_stub_image_recognizer=("OCR_USE_STUB", "true") == "true",
             use_stub_language_detector=env.get_string(
                 "LANGUAGE_DETECTOR_USE_STUB", "true"
             )

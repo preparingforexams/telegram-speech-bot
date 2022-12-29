@@ -339,6 +339,23 @@ proto-plus = ">=1.22.0,<2.0.0dev"
 protobuf = ">=3.19.5,<3.20.0 || >3.20.0,<3.20.1 || >3.20.1,<4.21.0 || >4.21.0,<4.21.1 || >4.21.1,<4.21.2 || >4.21.2,<4.21.3 || >4.21.3,<4.21.4 || >4.21.4,<4.21.5 || >4.21.5,<5.0.0dev"
 
 [[package]]
+name = "google-cloud-vision"
+version = "3.2.0"
+description = "Google Cloud Vision API client library"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "google-cloud-vision-3.2.0.tar.gz", hash = "sha256:499431931e7b718fbcab8320f3cd234fc4e561c7f02f3e0a1291e2c8e6f65237"},
+    {file = "google_cloud_vision-3.2.0-py2.py3-none-any.whl", hash = "sha256:b4babb4fb038cf22f544b761d353f96e30914a68da765315728ac0327060448d"},
+]
+
+[package.dependencies]
+google-api-core = {version = ">=1.34.0,<2.0.0 || >=2.11.0,<3.0.0dev", extras = ["grpc"]}
+proto-plus = ">=1.22.0,<2.0.0dev"
+protobuf = ">=3.19.5,<3.20.0 || >3.20.0,<3.20.1 || >3.20.1,<4.21.0 || >4.21.0,<4.21.1 || >4.21.1,<4.21.2 || >4.21.2,<4.21.3 || >4.21.3,<4.21.4 || >4.21.4,<4.21.5 || >4.21.5,<5.0.0dev"
+
+[[package]]
 name = "googleapis-common-protos"
 version = "1.57.0"
 description = "Common protobufs used in Google APIs"
@@ -1295,4 +1312,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.10"
-content-hash = "471458b82679dae18fdd23923f02a277c52d5bd683266953ef79ce565857ff87"
+content-hash = "dd62a8495f329d74fdd3b9405c8d6f43a9c19742c933d93aef9fbbdb3dab3dae"
