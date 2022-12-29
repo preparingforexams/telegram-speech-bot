@@ -32,3 +32,6 @@ class TextToSpeech(abc.ABC):
         voice: Voice,
     ) -> bytes:
         pass
+
+    def __repr__(self):
+        return type(self).__name__
