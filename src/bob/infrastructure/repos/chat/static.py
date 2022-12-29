@@ -5,12 +5,11 @@ from bob.domain.model import Chat
 
 
 class StaticChatRepository(ChatRepository):
-    # Quick reference: de-DE-GiselaNeural is a kid, de-CH-LeniNeural is swiss
     async def get_chats(self) -> Iterable[Chat]:
         return {
             Chat(
                 id=133399998,
-                enable_inline_options=True,
+                enable_ocr=True,
             ),
             Chat(
                 id=-1001348149915,
