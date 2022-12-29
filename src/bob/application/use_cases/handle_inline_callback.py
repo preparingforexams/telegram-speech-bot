@@ -13,13 +13,16 @@ _LOG = logging.getLogger(__name__)
 @inject
 @dataclass
 class HandleInlineCallback:
+    chat_repo: repos.ChatRepository
     state_repo: repos.StateRepository
     telegram: ports.TelegramUploader
     tts: list[ports.TextToSpeech]
 
     async def __call__(self, callback: InlineCallback) -> None:
         key = f"{callback.chat_id}-{callback.text_message_id}"
-        state: InlineMessageState | None = await self.state_repo.get_value(key)  # type: ignore
+        state: InlineMessageState | None = await self.state_repo.get_value(
+            key
+        )  # type: ignore
 
         if state is None:
             _LOG.warning("No state for callback query %s", callback)
@@ -70,11 +73,25 @@ class HandleInlineCallback:
         language: Language,
         voice_name: str,
     ) -> None:
+        chat = await self.chat_repo.get_chat(state["chat_id"])
+
+        if chat is None:
+            _LOG.warning("Received callback query for disabled chat")
+            return
+
         voice = await self._find_voice(language, voice_name)
         speech = await voice.convert_to_speech(state["text"], language)
 
-        # TODO: caption, replyto
+        if chat.delete_text_message:
+            caption = f"(Original von {state['sender_name']})"
+            reply_id = state["replied_to"]
+        else:
+            caption = None
+            reply_id = state["message_id"]
+
         await self.telegram.send_voice_message(
             chat_id=state["chat_id"],
             voice=speech,
+            caption=caption,
+            reply_to_message_id=reply_id,
         )

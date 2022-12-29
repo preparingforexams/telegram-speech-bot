@@ -144,6 +144,7 @@ class HandleTextMessage:
             chat_id=message.chat_id,
             message_id=message.id,
             text=message.text,
+            sender_name=message.sender_name,
             replied_to=message.replied_to,
             was_child=False,
             was_swiss=False,
