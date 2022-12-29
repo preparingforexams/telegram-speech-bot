@@ -10,11 +10,12 @@ class InlineCode(str, Enum):
 @dataclass(frozen=True)
 class InlineOption:
     text: str
+    text_message_id: int
     code: InlineCode
 
 
 @dataclass(frozen=True)
 class InlineCallback:
     chat_id: int
-    message_id: int
+    text_message_id: int
     code: InlineCode

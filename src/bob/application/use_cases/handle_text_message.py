@@ -113,10 +113,12 @@ class HandleTextMessage:
             inline_options = [
                 InlineOption(
                     text="Swiss me daddy",
+                    text_message_id=message.id,
                     code=InlineCode.SWISS,
                 ),
                 InlineOption(
                     text="U18",
+                    text_message_id=message.id,
                     code=InlineCode.CHILD,
                 ),
             ]

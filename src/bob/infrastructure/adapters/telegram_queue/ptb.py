@@ -44,10 +44,11 @@ class PtbTelegramQueue(TelegramQueue):
             if not callback_message:
                 _LOG.warning("Did not receive message for callback query")
             else:
+                text_message_id, code = native_callback.data.split("::", maxsplit=1)
                 callback = InlineCallback(
                     chat_id=callback_message.chat.id,
-                    message_id=callback_message.message_id,
-                    code=InlineCode(native_callback.data),
+                    text_message_id=int(text_message_id),
+                    code=InlineCode(code),
                 )
 
             await native_callback.answer()

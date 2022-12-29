@@ -75,7 +75,7 @@ class PtbTelegramUploader(TelegramUploader):
     def _build_button(option: InlineOption) -> telegram.InlineKeyboardButton:
         return telegram.InlineKeyboardButton(
             text=option.text,
-            callback_data=option.code.value,
+            callback_data=f"{option.text_message_id}::{option.code.value}",
         )
 
     def _build_keyboard(
