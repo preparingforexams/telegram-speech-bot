@@ -9,6 +9,7 @@ from telegram.error import RetryAfter, TelegramError
 
 from bob.application.ports import TelegramUploader
 from bob.config import TelegramConfig
+from bob.domain.model import InlineOption
 
 _LOG = logging.getLogger(__name__)
 TIMEOUTS = dict(read_timeout=180, write_timeout=180, connect_timeout=180)
@@ -39,7 +40,10 @@ class PtbTelegramUploader(TelegramUploader):
         voice: bytes,
         caption: str | None = None,
         reply_to_message_id: int | None = None,
+        inline_options: list[InlineOption] | None = None,
     ) -> None:
+        if inline_options:
+            keyboard = self._build_keyboard(inline_options)
         async with telegram.Bot(token=self.config.token) as bot:
             await _auto_retry(
                 lambda: bot.send_voice(
@@ -48,6 +52,7 @@ class PtbTelegramUploader(TelegramUploader):
                     caption=caption,
                     reply_to_message_id=reply_to_message_id,
                     allow_sending_without_reply=True,
+                    reply_markup=keyboard,
                 )
             )
 
@@ -62,3 +67,20 @@ class PtbTelegramUploader(TelegramUploader):
                 )
         except TelegramError as e:
             _LOG.error("Could not delete message", exc_info=e)
+
+    @staticmethod
+    def _build_button(option: InlineOption) -> telegram.InlineKeyboardButton:
+        return telegram.InlineKeyboardButton(
+            text=option.text,
+            callback_data=option.code.value,
+        )
+
+    def _build_keyboard(
+        self,
+        inline_options: list[InlineOption],
+    ) -> telegram.InlineKeyboardMarkup:
+        return telegram.InlineKeyboardMarkup(
+            [
+                [self._build_button(option) for option in inline_options],
+            ],
+        )

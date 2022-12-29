@@ -1,5 +1,7 @@
 import abc
 
+from bob.domain.model import InlineOption
+
 
 class TelegramUploader(abc.ABC):
     @abc.abstractmethod
@@ -9,6 +11,7 @@ class TelegramUploader(abc.ABC):
         voice: bytes,
         caption: str | None = None,
         reply_to_message_id: int | None = None,
+        inline_options: list[InlineOption] | None = None,
     ) -> None:
         pass
 

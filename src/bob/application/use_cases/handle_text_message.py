@@ -6,7 +6,7 @@ import langcodes
 from injector import inject
 
 from bob.application import ports, repos
-from bob.domain.model import TextMessage
+from bob.domain.model import TextMessage, InlineOption, InlineCode, InlineMessageState
 
 _LOG = logging.getLogger(__name__)
 
@@ -16,6 +16,7 @@ _LOG = logging.getLogger(__name__)
 class HandleTextMessage:
     chat_repo: repos.ChatRepository
     language_detector: ports.LanguageDetector
+    state_repo: repos.StateRepository
     telegram_uploader: ports.TelegramUploader
     tts: list[ports.TextToSpeech]
 
@@ -107,11 +108,27 @@ class HandleTextMessage:
             caption = None
             reply_to = message.id
 
+        if chat.enable_inline_options:
+            await self._save_state(message)
+            inline_options = [
+                InlineOption(
+                    text="Swiss me daddy",
+                    code=InlineCode.SWISS,
+                ),
+                InlineOption(
+                    text="U18",
+                    code=InlineCode.CHILD,
+                ),
+            ]
+        else:
+            inline_options = None
+
         await self.telegram_uploader.send_voice_message(
             chat_id=message.chat_id,
             voice=speech,
             caption=caption,
             reply_to_message_id=reply_to,
+            inline_options=inline_options,
         )
 
         if chat.delete_text_message:
@@ -119,3 +136,17 @@ class HandleTextMessage:
                 chat_id=message.chat_id,
                 message_id=message.id,
             )
+
+    async def _save_state(self, message: TextMessage) -> None:
+        state = InlineMessageState(
+            chat_id=message.chat_id,
+            message_id=message.id,
+            text=message.text,
+            replied_to=message.replied_to,
+            was_child=False,
+            was_swiss=False,
+        )
+        await self.state_repo.set_value(
+            f"{message.chat_id}-{message.id}",
+            state,  # type: ignore
+        )

@@ -1,7 +1,7 @@
 import abc
 from typing import TypeAlias
 
-Primitive: TypeAlias = str | int | float
+Primitive: TypeAlias = str | int | float | bool | None
 
 
 class StateRepository(abc.ABC):
