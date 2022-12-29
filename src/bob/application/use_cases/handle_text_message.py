@@ -92,6 +92,11 @@ class HandleTextMessage:
             message.text,
             supported_language,
         )
+
+        if not speech:
+            _LOG.info("No speech synthesized, skipping message.")
+            return
+
         await self.telegram_uploader.send_voice_message(
             chat_id=message.chat_id,
             voice=speech,
