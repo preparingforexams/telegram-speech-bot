@@ -37,7 +37,7 @@ class AzureTextToSpeech(TextToSpeech):
         return [
             TextToSpeech.Voice(
                 tts=self,
-                name=voice.name,
+                name=voice.short_name,
                 supported_languages=[Language.get(voice.locale)],
             )
             for voice in voices.voices
