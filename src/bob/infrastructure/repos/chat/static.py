@@ -5,6 +5,7 @@ from bob.domain.model import Chat
 
 
 class StaticChatRepository(ChatRepository):
+    # GiselaNeural is a kid and I should utilize that somehow
     async def get_chats(self) -> Iterable[Chat]:
         return {
             Chat(

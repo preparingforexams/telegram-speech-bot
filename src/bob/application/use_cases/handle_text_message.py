@@ -52,10 +52,11 @@ class HandleTextMessage:
             return
 
         _LOG.debug(
-            "Found %d supported voices for language %s (%s)",
+            "Found %d supported voices for language %s (%s): %s",
             len(supported_voices),
             language,
             language.language_name(),
+            [v.name for v in supported_voices],
         )
 
         voice: ports.TextToSpeech.Voice
