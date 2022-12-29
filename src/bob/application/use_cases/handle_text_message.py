@@ -109,7 +109,7 @@ class HandleTextMessage:
             reply_to = message.id
 
         if chat.enable_inline_options:
-            await self._save_state(message)
+            await self._save_state(message, voice)
             inline_options = [
                 InlineOption(
                     text="Swiss me daddy",
@@ -139,16 +139,21 @@ class HandleTextMessage:
                 message_id=message.id,
             )
 
-    async def _save_state(self, message: TextMessage) -> None:
+    async def _save_state(
+        self,
+        message: TextMessage,
+        voice: ports.TextToSpeech.Voice,
+    ) -> None:
         state = InlineMessageState(
             chat_id=message.chat_id,
             message_id=message.id,
             text=message.text,
             sender_name=message.sender_name,
             replied_to=message.replied_to,
-            was_child=False,
-            was_swiss=False,
+            was_child=voice.name == "de-DE-GiselaNeural",
+            was_swiss=voice.name == "de-CH-LeniNeural",
         )
+
         await self.state_repo.set_value(
             f"{message.chat_id}-{message.id}",
             state,  # type: ignore
