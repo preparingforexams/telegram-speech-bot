@@ -15,5 +15,5 @@ class StaticChatRepository(ChatRepository):
             ),
             Chat(
                 id=-1001243399669,
-            )
+            ),
         }
