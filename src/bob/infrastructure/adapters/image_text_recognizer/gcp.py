@@ -31,4 +31,4 @@ class GoogleImageTextRecognizer(ImageTextRecognizer):
             ],
         )
         response = await client.batch_annotate_images(requests=[request])
-        return response.responses[0].full_text_annotation.text
+        return response.responses[0].full_text_annotation.text or None
