@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+from io import BytesIO
 from typing import Callable, Awaitable, TypeVar
 
 import telegram
@@ -107,13 +108,15 @@ class PtbTelegramUploader(TelegramUploader):
             ],
         )
 
-    async def get_file_url(
+    async def get_file(
         self,
         file_id: str,
-    ) -> str:
+    ) -> bytes:
         try:
             async with telegram.Bot(token=self.config.token) as bot:
                 file: telegram.File = await _auto_retry(lambda: bot.get_file(file_id))
-                return file.file_path
+                buffer = BytesIO()
+                await file.download_to_memory(buffer)
+                return buffer.getvalue()
         except TelegramError as e:
             raise IoException(f"Could not get URL for file {file_id}") from e

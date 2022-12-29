@@ -29,8 +29,8 @@ class TelegramUploader(abc.ABC):
         pass
 
     @abc.abstractmethod
-    async def get_file_url(
+    async def get_file(
         self,
         file_id: str,
-    ) -> str:
+    ) -> bytes:
         pass

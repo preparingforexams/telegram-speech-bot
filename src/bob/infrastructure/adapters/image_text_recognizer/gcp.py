@@ -18,12 +18,12 @@ class GoogleImageTextRecognizer(ImageTextRecognizer):
     async def _get_client(self) -> ImageAnnotatorAsyncClient:
         return ImageAnnotatorAsyncClient()
 
-    async def detect_text(self, image_url: str) -> str | None:
+    async def detect_text(self, image: bytes) -> str | None:
         client = await self._get_client()
-        image = Image()
-        image.source.image_uri = image_url
         request = AnnotateImageRequest(
-            image=image,
+            image=Image(
+                content=image,
+            ),
             features=[
                 Feature(
                     type=Feature.Type.TEXT_DETECTION,
