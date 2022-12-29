@@ -1,7 +1,12 @@
 import logging
 
 from asyncache import cached
-from google.cloud.vision import ImageAnnotatorAsyncClient, Image, ImageSource
+from google.cloud.vision import (
+    ImageAnnotatorAsyncClient,
+    Image,
+    AnnotateImageRequest,
+    Feature,
+)
 
 from bob.application.ports import ImageTextRecognizer
 
@@ -17,5 +22,13 @@ class GoogleImageTextRecognizer(ImageTextRecognizer):
         client = await self._get_client()
         image = Image()
         image.source.image_uri = image_url
-        response = await client.text_detection(image=image)  # type: ignore
-        return response.full_text_annotation.text
+        request = AnnotateImageRequest(
+            image=image,
+            features=[
+                Feature(
+                    type=Feature.Type.TEXT_DETECTION,
+                ),
+            ],
+        )
+        response = await client.batch_annotate_images(requests=[request])
+        return response.responses[0].full_text_annotation.text
