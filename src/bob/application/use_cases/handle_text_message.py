@@ -30,7 +30,7 @@ class HandleTextMessage:
         language = await self.language_detector.detect_language(message.text)
         if not language:
             _LOG.info("Selecting default due to unknown language")
-            language = langcodes.Language.get("de")
+            language = langcodes.Language.get("de_DE")
 
         supported_voices: list[ports.TextToSpeech.Voice] = []
         for tts in self.tts:
