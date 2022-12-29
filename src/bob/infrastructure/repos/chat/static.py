@@ -10,7 +10,7 @@ class StaticChatRepository(ChatRepository):
         return {
             Chat(
                 id=133399998,
-                fixed_voice="de-AT-JonasNeural",
+                fixed_voice="de-AT-IngridNeural",
             ),
             Chat(
                 id=-1001348149915,
