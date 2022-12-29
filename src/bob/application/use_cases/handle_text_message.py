@@ -97,13 +97,16 @@ class HandleTextMessage:
             _LOG.info("No speech synthesized, skipping message.")
             return
 
+        reply_to = message.replied_to if chat.delete_text_message else message.id
         await self.telegram_uploader.send_voice_message(
             chat_id=message.chat_id,
             voice=speech,
             caption=f"(Original von {message.sender_name})",
-            reply_to_message_id=message.replied_to,
+            reply_to_message_id=reply_to,
         )
-        await self.telegram_uploader.delete_message(
-            chat_id=message.chat_id,
-            message_id=message.id,
-        )
+
+        if chat.delete_text_message:
+            await self.telegram_uploader.delete_message(
+                chat_id=message.chat_id,
+                message_id=message.id,
+            )

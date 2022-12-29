@@ -12,6 +12,7 @@ class StaticChatRepository(ChatRepository):
             ),
             Chat(
                 id=-1001348149915,
+                delete_text_message=True,
             ),
             Chat(
                 id=-1001243399669,
