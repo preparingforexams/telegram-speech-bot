@@ -27,3 +27,10 @@ class TelegramUploader(abc.ABC):
         inline_options: list[InlineOption],
     ) -> None:
         pass
+
+    @abc.abstractmethod
+    async def get_file_url(
+        self,
+        file_id: str,
+    ) -> str:
+        pass

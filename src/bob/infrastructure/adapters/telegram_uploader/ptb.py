@@ -7,6 +7,7 @@ from typing import Callable, Awaitable, TypeVar
 import telegram
 from telegram.error import RetryAfter, TelegramError
 
+from bob.application.exceptions.io import IoException
 from bob.application.ports import TelegramUploader
 from bob.config import TelegramConfig
 from bob.domain.model import InlineOption
@@ -105,3 +106,13 @@ class PtbTelegramUploader(TelegramUploader):
                 [self._build_button(option) for option in inline_options],
             ],
         )
+
+    async def get_file_url(
+        self,
+        file_id: str,
+    ) -> str:
+        try:
+            async with telegram.Bot(token=self.config.token) as bot:
+                return await _auto_retry(lambda: bot.get_file(file_id))
+        except TelegramError as e:
+            raise IoException(f"Could not get URL for file {file_id}") from e
