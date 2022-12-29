@@ -113,6 +113,7 @@ class PtbTelegramUploader(TelegramUploader):
     ) -> str:
         try:
             async with telegram.Bot(token=self.config.token) as bot:
-                return await _auto_retry(lambda: bot.get_file(file_id))
+                file: telegram.File = await _auto_retry(lambda: bot.get_file(file_id))
+                return f"{bot.base_file_url}/{file.file_path}"
         except TelegramError as e:
             raise IoException(f"Could not get URL for file {file_id}") from e

@@ -15,6 +15,7 @@ class GoogleImageTextRecognizer(ImageTextRecognizer):
 
     async def detect_text(self, image_url: str) -> str | None:
         client = await self._get_client()
-        image = Image(source=ImageSource(image_uri=image_url))  # type: ignore
+        image = Image()
+        image.source.image_uri = image_url
         response = await client.text_detection(image=image)  # type: ignore
         return response.full_text_annotation.text
