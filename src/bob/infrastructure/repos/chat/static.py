@@ -18,6 +18,6 @@ class StaticChatRepository(ChatRepository):
             ),
             Chat(
                 id=-1001243399669,
-                fixed_voice="de-CH-LeniNeural",
+                enable_inline_options=True,
             ),
         }
