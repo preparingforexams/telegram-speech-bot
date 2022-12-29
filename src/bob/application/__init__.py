@@ -16,4 +16,5 @@ class Ports:
 class Application:
     ports: Ports
     handle_inline_callback: use_cases.HandleInlineCallback
+    handle_image_message: use_cases.HandleImageMessage
     handle_text_message: use_cases.HandleTextMessage

@@ -4,7 +4,7 @@ from typing import AsyncIterable
 import telegram
 
 from bob.application.ports import TelegramQueue
-from bob.application.ports.telegram_queue import Update, Message
+from bob.application.ports.telegram_queue import Update, Message, Photo, PhotoSize
 from bob.config import TelegramConfig
 from bob.domain.model import InlineCallback, InlineCode
 
@@ -16,27 +16,49 @@ class PtbTelegramQueue(TelegramQueue):
         self._token = config.token
 
     @staticmethod
-    async def _convert_update(native: telegram.Update) -> Update:
-        if native_message := native.message:
-            if user := native_message.from_user:
-                if user.id == 1365395775:
-                    sender_name = "Katharine"
-                else:
-                    sender_name = user.first_name
-            else:
-                sender_name = None
+    def _extract_sender_name(user: telegram.User | None) -> str | None:
+        if not user:
+            return None
 
-            reply_to_message = native_message.reply_to_message
-
-            message = Message(
-                chat_id=native_message.chat.id,
-                id=native_message.message_id,
-                text=native_message.text,
-                sender_name=sender_name,
-                replied_to_id=reply_to_message.message_id if reply_to_message else None,
-            )
+        if user.id == 1365395775:
+            return "Katharine"
         else:
-            message = None
+            return user.first_name
+
+    @staticmethod
+    def _extract_photo(native_message: telegram.Message) -> Photo | None:
+        if native_photo := native_message.photo:
+            return Photo(
+                caption=native_message.caption,
+                sizes=[
+                    PhotoSize(file_id=size.file_id, file_size=size.file_size)
+                    for size in native_photo
+                ],
+            )
+
+        return None
+
+    def _extract_message(
+        self,
+        native_message: telegram.Message | None,
+    ) -> Message | None:
+        if not native_message:
+            return None
+
+        sender_name = self._extract_sender_name(native_message.from_user)
+        reply_to_message = native_message.reply_to_message
+
+        return Message(
+            chat_id=native_message.chat.id,
+            id=native_message.message_id,
+            text=native_message.text,
+            sender_name=sender_name,
+            replied_to_id=reply_to_message.message_id if reply_to_message else None,
+            photo=self._extract_photo(native_message),
+        )
+
+    async def _convert_update(self, native: telegram.Update) -> Update:
+        message = self._extract_message(native.message)
 
         callback: InlineCallback | None = None
         if native_callback := native.callback_query:
