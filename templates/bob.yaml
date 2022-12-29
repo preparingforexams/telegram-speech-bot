@@ -42,7 +42,7 @@ spec:
               value: /secrets/sa.json
           resources:
             requests:
-              cpu: 10m
+              cpu: 50m
               memory: 128Mi
             limits:
               cpu: 200m
