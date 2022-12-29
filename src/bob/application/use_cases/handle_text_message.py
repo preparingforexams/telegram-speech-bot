@@ -5,8 +5,8 @@ from dataclasses import dataclass
 import langcodes
 from injector import inject
 
-from bob.application import ports, repos
-from bob.domain.model import TextMessage, InlineOption, InlineCode, InlineMessageState
+from bob.application import ports, repos, services
+from bob.domain.model import TextMessage, InlineCode, InlineMessageState
 
 _LOG = logging.getLogger(__name__)
 
@@ -15,6 +15,7 @@ _LOG = logging.getLogger(__name__)
 @dataclass
 class HandleTextMessage:
     chat_repo: repos.ChatRepository
+    inline_builder: services.InlineOptionsBuilder
     language_detector: ports.LanguageDetector
     state_repo: repos.StateRepository
     telegram_uploader: ports.TelegramUploader
@@ -109,19 +110,9 @@ class HandleTextMessage:
             reply_to = message.id
 
         if chat.enable_inline_options:
-            await self._save_state(message, voice)
-            inline_options = [
-                InlineOption(
-                    text="Swiss me daddy",
-                    text_message_id=message.id,
-                    code=InlineCode.SWISS,
-                ),
-                InlineOption(
-                    text="U18",
-                    text_message_id=message.id,
-                    code=InlineCode.CHILD,
-                ),
-            ]
+            current_code = self.inline_builder.map_to_code(voice)
+            state = await self._save_state(message, current_code)
+            inline_options = self.inline_builder.build(state)
         else:
             inline_options = None
 
@@ -142,19 +133,21 @@ class HandleTextMessage:
     async def _save_state(
         self,
         message: TextMessage,
-        voice: ports.TextToSpeech.Voice,
-    ) -> None:
+        current_code: InlineCode | None,
+    ) -> InlineMessageState:
         state = InlineMessageState(
             chat_id=message.chat_id,
             message_id=message.id,
             text=message.text,
             sender_name=message.sender_name,
             replied_to=message.replied_to,
-            was_child=voice.name == "de-DE-GiselaNeural",
-            was_swiss=voice.name == "de-CH-LeniNeural",
+            was_child=current_code == InlineCode.CHILD,
+            was_swiss=current_code == InlineCode.SWISS,
         )
 
         await self.state_repo.set_value(
             f"{message.chat_id}-{message.id}",
             state,  # type: ignore
         )
+
+        return state

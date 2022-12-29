@@ -18,4 +18,5 @@ class InlineOption:
 class InlineCallback:
     chat_id: int
     text_message_id: int
+    speech_message_id: int
     code: InlineCode

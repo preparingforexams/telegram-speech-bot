@@ -18,3 +18,12 @@ class TelegramUploader(abc.ABC):
     @abc.abstractmethod
     async def delete_message(self, chat_id: int, message_id: int) -> None:
         pass
+
+    @abc.abstractmethod
+    async def edit_inline_options(
+        self,
+        chat_id: int,
+        message_id: int,
+        inline_options: list[InlineOption],
+    ) -> None:
+        pass

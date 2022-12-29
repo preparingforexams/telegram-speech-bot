@@ -42,10 +42,7 @@ class PtbTelegramUploader(TelegramUploader):
         reply_to_message_id: int | None = None,
         inline_options: list[InlineOption] | None = None,
     ) -> None:
-        if inline_options:
-            keyboard = self._build_keyboard(inline_options)
-        else:
-            keyboard = None
+        keyboard = self._build_keyboard(inline_options)
 
         async with telegram.Bot(token=self.config.token) as bot:
             await _auto_retry(
@@ -71,6 +68,24 @@ class PtbTelegramUploader(TelegramUploader):
         except TelegramError as e:
             _LOG.error("Could not delete message", exc_info=e)
 
+    async def edit_inline_options(
+        self,
+        chat_id: int,
+        message_id: int,
+        inline_options: list[InlineOption],
+    ) -> None:
+        try:
+            async with telegram.Bot(token=self.config.token) as bot:
+                await _auto_retry(
+                    lambda: bot.edit_message_reply_markup(
+                        chat_id=chat_id,
+                        message_id=message_id,
+                        reply_markup=self._build_keyboard(inline_options),
+                    )
+                )
+        except TelegramError as e:
+            _LOG.error("Could not edit message", exc_info=e)
+
     @staticmethod
     def _build_button(option: InlineOption) -> telegram.InlineKeyboardButton:
         return telegram.InlineKeyboardButton(
@@ -80,8 +95,11 @@ class PtbTelegramUploader(TelegramUploader):
 
     def _build_keyboard(
         self,
-        inline_options: list[InlineOption],
-    ) -> telegram.InlineKeyboardMarkup:
+        inline_options: list[InlineOption] | None,
+    ) -> telegram.InlineKeyboardMarkup | None:
+        if not inline_options:
+            return None
+
         return telegram.InlineKeyboardMarkup(
             [
                 [self._build_button(option) for option in inline_options],

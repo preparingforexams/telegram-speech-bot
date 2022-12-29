@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from injector import inject
 from langcodes import Language
 
-from bob.application import repos, ports
+from bob.application import repos, ports, services
 from bob.domain.model import InlineCallback, InlineMessageState, InlineCode
 
 _LOG = logging.getLogger(__name__)
@@ -14,6 +14,7 @@ _LOG = logging.getLogger(__name__)
 @dataclass
 class HandleInlineCallback:
     chat_repo: repos.ChatRepository
+    inline_builder: services.InlineOptionsBuilder
     state_repo: repos.StateRepository
     telegram: ports.TelegramUploader
     tts: list[ports.TextToSpeech]
@@ -54,6 +55,11 @@ class HandleInlineCallback:
             raise ValueError(f"Unknown code: {callback.code}")
 
         await self.state_repo.set_value(key, state)  # type: ignore
+        await self.telegram.edit_inline_options(
+            chat_id=callback.chat_id,
+            message_id=callback.speech_message_id,
+            inline_options=self.inline_builder.build(state),
+        )
 
     async def _find_voice(
         self,

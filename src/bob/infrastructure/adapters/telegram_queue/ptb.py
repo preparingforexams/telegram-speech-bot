@@ -48,6 +48,7 @@ class PtbTelegramQueue(TelegramQueue):
                 callback = InlineCallback(
                     chat_id=callback_message.chat.id,
                     text_message_id=int(text_message_id),
+                    speech_message_id=callback_message.message_id,
                     code=InlineCode(code),
                 )
 
