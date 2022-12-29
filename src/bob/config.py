@@ -117,6 +117,7 @@ class Config:
     use_stub_language_detector: bool
     azure_tts: AzureTtsConfig
     gcp_project: str | None
+    repo_type: str
     sentry: SentryConfig
     telegram: TelegramConfig
 
@@ -130,6 +131,7 @@ class Config:
             == "true",
             azure_tts=AzureTtsConfig.from_env(env),
             gcp_project=env.get_string("GOOGLE_CLOUD_PROJECT", required=False),
+            repo_type=env.get_string("REPO_TYPE", "memory"),  # type: ignore
             sentry=SentryConfig.from_env(env),
             telegram=TelegramConfig.from_env(env),
         )

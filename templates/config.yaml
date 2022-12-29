@@ -6,4 +6,5 @@ data:
   GOOGLE_CLOUD_PROJECT: prep-telegram-bots
   LANGUAGE_DETECTOR_USE_STUB: "false"
   AZURE_SPEECH_REGION: westeurope
+  REPO_TYPE: firestore
   TTS_USE_STUB: "false"

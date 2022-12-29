@@ -286,6 +286,24 @@ google-auth = ">=1.25.0,<3.0dev"
 grpc = ["grpcio (>=1.38.0,<2.0dev)"]
 
 [[package]]
+name = "google-cloud-firestore"
+version = "2.7.3"
+description = "Google Cloud Firestore API client library"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "google-cloud-firestore-2.7.3.tar.gz", hash = "sha256:ac7d9a22cb795c712af77157c657c3ade44e2169ccf299aad9438e83d4f69235"},
+    {file = "google_cloud_firestore-2.7.3-py2.py3-none-any.whl", hash = "sha256:a5038f4d95e6ce324e7354f4222ea7ebb6dddad3eac710829fe859f59f98cc2b"},
+]
+
+[package.dependencies]
+google-api-core = {version = ">=1.34.0,<2.0.0 || >=2.11.0,<3.0.0dev", extras = ["grpc"]}
+google-cloud-core = ">=1.4.1,<3.0.0dev"
+proto-plus = ">=1.22.0,<2.0.0dev"
+protobuf = ">=3.19.5,<3.20.0 || >3.20.0,<3.20.1 || >3.20.1,<4.21.0 || >4.21.0,<4.21.1 || >4.21.1,<4.21.2 || >4.21.2,<4.21.3 || >4.21.3,<4.21.4 || >4.21.4,<4.21.5 || >4.21.5,<5.0.0dev"
+
+[[package]]
 name = "google-cloud-texttospeech"
 version = "2.13.0"
 description = "Google Cloud Texttospeech API client library"
@@ -1277,4 +1295,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.10"
-content-hash = "61db47041c3b43e07395304e9037d764c7af85e3b4f32d9d7134dd0d48c4e088"
+content-hash = "471458b82679dae18fdd23923f02a277c52d5bd683266953ef79ce565857ff87"

@@ -13,7 +13,7 @@ from bob.infrastructure.adapters import (
     text_to_speech,
     language_detector,
 )
-from bob.infrastructure.repos import chat
+from bob.infrastructure.repos import chat, state
 
 _LOG = logging.getLogger(__name__)
 
@@ -109,6 +109,18 @@ class ReposModule(Module):
     @provider
     def provide_chat_repo(self) -> repos.ChatRepository:
         return chat.StaticChatRepository()
+
+    @provider
+    def provide_state_repo(self) -> repos.StateRepository:
+        repo_type = self.config.repo_type
+
+        if repo_type == "memory":
+            return state.MemoryStateRepository()
+
+        if repo_type == "firestore":
+            return state.FirestoreStateRepository()
+
+        raise ValueError(f"Unknown repo type: {repo_type}")
 
 
 def initialize() -> Application:
