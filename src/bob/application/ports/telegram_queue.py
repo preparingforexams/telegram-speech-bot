@@ -2,6 +2,8 @@ import abc
 from dataclasses import dataclass
 from typing import AsyncIterable
 
+from bob.domain.model import InlineCallback
+
 
 @dataclass(frozen=True)
 class Message:
@@ -16,6 +18,7 @@ class Message:
 class Update:
     id: int
     message: Message | None
+    callback_query: InlineCallback | None
 
 
 class TelegramQueue(abc.ABC):

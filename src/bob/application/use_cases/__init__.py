@@ -1,1 +1,2 @@
+from .handle_inline_callback import HandleInlineCallback
 from .handle_text_message import HandleTextMessage

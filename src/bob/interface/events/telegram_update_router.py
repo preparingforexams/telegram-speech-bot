@@ -33,6 +33,9 @@ class TelegramUpdateRouter:
                     )
                     await self.app.handle_text_message(text_message)
 
+            if callback := update.callback_query:
+                await self.app.handle_inline_callback(callback)
+
             if self._should_kill:
                 _LOG.warning("Shutting down because of signal")
                 break

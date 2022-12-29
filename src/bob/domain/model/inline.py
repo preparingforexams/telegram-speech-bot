@@ -7,7 +7,13 @@ class InlineCode(str, Enum):
     SWISS = "ch"
 
 
-@dataclass
+@dataclass(frozen=True)
 class InlineOption:
     text: str
+    code: InlineCode
+
+
+@dataclass(frozen=True)
+class InlineCallback:
+    chat_id: int
     code: InlineCode

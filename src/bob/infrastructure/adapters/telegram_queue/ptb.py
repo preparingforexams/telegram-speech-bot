@@ -1,3 +1,4 @@
+import logging
 from typing import AsyncIterable
 
 import telegram
@@ -5,6 +6,9 @@ import telegram
 from bob.application.ports import TelegramQueue
 from bob.application.ports.telegram_queue import Update, Message
 from bob.config import TelegramConfig
+from bob.domain.model import InlineCallback, InlineCode
+
+_LOG = logging.getLogger(__name__)
 
 
 class PtbTelegramQueue(TelegramQueue):
@@ -34,7 +38,24 @@ class PtbTelegramQueue(TelegramQueue):
         else:
             message = None
 
-        return Update(id=native.update_id, message=message)
+        callback: InlineCallback | None = None
+        if native_callback := native.callback_query:
+            callback_message = native_callback.message
+            if not callback_message:
+                _LOG.warning("Did not receive message for callback query")
+            else:
+                callback = InlineCallback(
+                    chat_id=callback_message.chat.id,
+                    code=InlineCode(native_callback.data),
+                )
+
+            native_callback.answer()
+
+        return Update(
+            id=native.update_id,
+            message=message,
+            callback_query=callback,
+        )
 
     async def subscribe(self) -> AsyncIterable[Update]:
         async with telegram.Bot(self._token) as bot:
