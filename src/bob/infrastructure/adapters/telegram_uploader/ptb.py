@@ -33,18 +33,6 @@ class PtbTelegramUploader(TelegramUploader):
     def __init__(self, config: TelegramConfig):
         self.config = config
 
-    async def send_text_message(self, text: str):
-        async with telegram.Bot(token=self.config.token) as bot:
-            await _auto_retry(
-                lambda: bot.send_message(
-                    chat_id=self.config.target_chat,
-                    disable_notification=True,
-                    disable_web_page_preview=True,
-                    text=text,
-                    **TIMEOUTS,
-                )
-            )
-
     async def send_voice_message(
         self,
         chat_id: int,

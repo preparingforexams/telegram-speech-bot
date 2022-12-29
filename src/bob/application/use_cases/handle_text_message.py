@@ -5,8 +5,7 @@ from dataclasses import dataclass
 import langcodes
 from injector import inject
 
-from bob.application import ports
-from bob.application.app_config import AppConfig
+from bob.application import ports, repos
 from bob.domain.model import TextMessage
 
 _LOG = logging.getLogger(__name__)
@@ -15,7 +14,7 @@ _LOG = logging.getLogger(__name__)
 @inject
 @dataclass
 class HandleTextMessage:
-    app_config: AppConfig
+    chat_repo: repos.ChatRepository
     language_detector: ports.LanguageDetector
     telegram_uploader: ports.TelegramUploader
     tts: list[ports.TextToSpeech]
@@ -23,10 +22,8 @@ class HandleTextMessage:
     async def __call__(self, message: TextMessage) -> None:
         _LOG.info("Handling text message %d", message.id)
 
-        if (
-            message.chat_id != self.app_config.enabled_chat_id
-            and message.chat_id != 133399998
-        ):
+        chat = await self.chat_repo.get_chat(message.chat_id)
+        if chat is None:
             _LOG.debug("Dropping message because it's not an allowed chat")
             return
 

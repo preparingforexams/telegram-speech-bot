@@ -6,5 +6,4 @@ data:
   GOOGLE_CLOUD_PROJECT: prep-telegram-bots
   LANGUAGE_DETECTOR_USE_STUB: "false"
   AZURE_SPEECH_REGION: westeurope
-  TELEGRAM_TARGET_CHAT_ID: "-1001348149915"
   TTS_USE_STUB: "false"

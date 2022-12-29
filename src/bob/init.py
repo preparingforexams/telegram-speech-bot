@@ -5,8 +5,7 @@ from typing import Type, TypeVar
 import sentry_sdk
 from injector import Injector, Module, provider, multiprovider
 
-from bob.application import Application, ports
-from bob.application.app_config import AppConfig
+from bob.application import Application, ports, repos
 from bob.config import load_env, Config, SentryConfig
 from bob.infrastructure.adapters import (
     telegram_uploader,
@@ -14,6 +13,7 @@ from bob.infrastructure.adapters import (
     text_to_speech,
     language_detector,
 )
+from bob.infrastructure.repos import chat
 
 _LOG = logging.getLogger(__name__)
 
@@ -102,16 +102,13 @@ class PortsModule(Module):
         )
 
 
-class AppConfigModule(Module):
+class ReposModule(Module):
     def __init__(self, config: Config):
         self.config = config
 
     @provider
-    def provide_app_config(self) -> AppConfig:
-        config = self.config
-        return AppConfig(
-            enabled_chat_id=config.telegram.target_chat,
-        )
+    def provide_chat_repo(self) -> repos.ChatRepository:
+        return chat.StaticChatRepository()
 
 
 def initialize() -> Application:
@@ -122,8 +119,8 @@ def initialize() -> Application:
 
     injector = Injector(
         modules=[
-            AppConfigModule(config),
             PortsModule(config),
+            ReposModule(config),
         ],
     )
     return injector.get(Application)

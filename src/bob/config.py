@@ -137,15 +137,10 @@ class Config:
 
 @dataclass
 class TelegramConfig:
-    target_chat: int
     token: str
 
     @classmethod
     def from_env(cls, env: Env) -> TelegramConfig:
         return cls(
-            target_chat=env.get_int(
-                "TELEGRAM_TARGET_CHAT_ID",
-                default=133399998,
-            ),  # type: ignore
             token=env.get_string("TELEGRAM_TOKEN"),  # type: ignore
         )
