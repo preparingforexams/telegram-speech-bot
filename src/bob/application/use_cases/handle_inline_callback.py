@@ -15,4 +15,11 @@ class HandleInlineCallback:
     state_repo: repos.StateRepository
 
     async def __call__(self, callback: InlineCallback) -> None:
-        _LOG.info("Received callback with code %s", callback.code)
+        state = await self.state_repo.get_value(
+            f"{callback.chat_id}-{callback.message_id}"
+        )
+        if state is None:
+            _LOG.warning("No state for callback query %s", callback)
+            return
+
+        _LOG.info("Found state %s", state)

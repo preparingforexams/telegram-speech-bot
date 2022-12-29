@@ -44,6 +44,9 @@ class PtbTelegramUploader(TelegramUploader):
     ) -> None:
         if inline_options:
             keyboard = self._build_keyboard(inline_options)
+        else:
+            keyboard = None
+
         async with telegram.Bot(token=self.config.token) as bot:
             await _auto_retry(
                 lambda: bot.send_voice(

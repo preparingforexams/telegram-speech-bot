@@ -16,7 +16,7 @@ class PtbTelegramQueue(TelegramQueue):
         self._token = config.token
 
     @staticmethod
-    def _convert_update(native: telegram.Update) -> Update:
+    async def _convert_update(native: telegram.Update) -> Update:
         if native_message := native.message:
             if user := native_message.from_user:
                 if user.id == 1365395775:
@@ -46,10 +46,11 @@ class PtbTelegramQueue(TelegramQueue):
             else:
                 callback = InlineCallback(
                     chat_id=callback_message.chat.id,
+                    message_id=callback_message.message_id,
                     code=InlineCode(native_callback.data),
                 )
 
-            native_callback.answer()
+            await native_callback.answer()
 
         return Update(
             id=native.update_id,
@@ -70,7 +71,7 @@ class PtbTelegramQueue(TelegramQueue):
 
                 for native_update in native_updates:
                     update_id = native_update.update_id
-                    update = self._convert_update(native_update)
+                    update = await self._convert_update(native_update)
                     if update is None:
                         continue
 

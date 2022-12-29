@@ -16,4 +16,5 @@ class InlineOption:
 @dataclass(frozen=True)
 class InlineCallback:
     chat_id: int
+    message_id: int
     code: InlineCode
