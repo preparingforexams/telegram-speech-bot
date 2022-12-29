@@ -16,5 +16,8 @@ class StaticChatRepository(ChatRepository):
                 id=-1001348149915,
                 delete_text_message=True,
             ),
-            Chat(id=-1001243399669, fixed_voice="de-DE-GiselaNeural"),
+            Chat(
+                id=-1001243399669,
+                fixed_voice="de-DE-GiselaNeural",
+            ),
         }
