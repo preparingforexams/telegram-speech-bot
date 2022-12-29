@@ -33,5 +33,9 @@ class GoogleImageTextRecognizer(ImageTextRecognizer):
         responses = await client.batch_annotate_images(requests=[request])
         _LOG.debug("Got responses %s", responses)
         response = responses.responses[0]
+        if response.error:
+            _LOG.error("Got an error: %s", response.error)
+            return None
+
         _LOG.debug("full_text: %s", response.full_text_annotation)
-        return response.responses[0].full_text_annotation.text or None
+        return response.full_text_annotation.text or None
