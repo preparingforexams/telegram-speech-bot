@@ -9,3 +9,4 @@ class InlineMessageState(TypedDict):
     sender_name: str
     was_swiss: bool
     was_child: bool
+    was_holland: bool

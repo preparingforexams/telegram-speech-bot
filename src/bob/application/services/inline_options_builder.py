@@ -17,6 +17,9 @@ class InlineOptionsBuilder:
         if name == "de-CH-LeniNeural":
             return InlineCode.SWISS
 
+        if name == "nl-NL-MaartenNeural":
+            return InlineCode.HOLLAND
+
         return None
 
     def build(
@@ -24,7 +27,7 @@ class InlineOptionsBuilder:
         state: InlineMessageState,
     ) -> list[InlineOption]:
         result: list[InlineOption] = []
-        if state["was_swiss"]:
+        if not state["was_swiss"]:
             result.append(
                 InlineOption(
                     text="Swiss me daddy",
@@ -33,12 +36,21 @@ class InlineOptionsBuilder:
                 )
             )
 
-        if state["was_child"]:
+        if not state["was_child"]:
             result.append(
                 InlineOption(
                     text="U18",
                     text_message_id=state["message_id"],
                     code=InlineCode.CHILD,
+                )
+            )
+
+        if not state["was_holland"]:
+            result.append(
+                InlineOption(
+                    text="🧀",
+                    text_message_id=state["message_id"],
+                    code=InlineCode.HOLLAND,
                 )
             )
 

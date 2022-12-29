@@ -29,6 +29,8 @@ class HandleInlineCallback:
             _LOG.warning("No state for callback query %s", callback)
             return
 
+        state.setdefault("was_holland", False)
+
         if callback.code == InlineCode.CHILD:
             if state["was_child"]:
                 _LOG.debug("Not sending child message because it was already sent")
@@ -51,6 +53,18 @@ class HandleInlineCallback:
                 voice_name="de-CH-LeniNeural",
             )
             state["was_swiss"] = True
+        elif callback.code == InlineCode.HOLLAND:
+            if state["was_holland"]:
+                _LOG.debug("Not sending holland message because it was already sent")
+                return
+
+            await self._send_speech(
+                state,
+                language=Language.get("de_CH"),
+                voice_name="nl-NL-MaartenNeural",
+            )
+            state["was_holland"] = True
+
         else:
             raise ValueError(f"Unknown code: {callback.code}")
 

@@ -143,6 +143,7 @@ class HandleTextMessage:
             replied_to=message.replied_to,
             was_child=current_code == InlineCode.CHILD,
             was_swiss=current_code == InlineCode.SWISS,
+            was_holland=current_code == InlineCode.HOLLAND,
         )
 
         await self.state_repo.set_value(

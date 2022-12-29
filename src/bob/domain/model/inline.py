@@ -5,6 +5,7 @@ from enum import Enum
 class InlineCode(str, Enum):
     CHILD = "u18"
     SWISS = "ch"
+    HOLLAND = "nl"
 
 
 @dataclass(frozen=True)
