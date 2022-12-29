@@ -5,7 +5,7 @@ from bob.domain.model import Chat
 
 
 class StaticChatRepository(ChatRepository):
-    # GiselaNeural is a kid and I should utilize that somehow
+    # de-DE-GiselaNeural is a kid and I should utilize that somehow
     async def get_chats(self) -> Iterable[Chat]:
         return {
             Chat(
@@ -16,7 +16,5 @@ class StaticChatRepository(ChatRepository):
                 id=-1001348149915,
                 delete_text_message=True,
             ),
-            Chat(
-                id=-1001243399669,
-            ),
+            Chat(id=-1001243399669, fixed_voice="de-DE-GiselaNeural"),
         }
