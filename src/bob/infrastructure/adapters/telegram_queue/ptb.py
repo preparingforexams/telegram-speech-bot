@@ -91,8 +91,8 @@ class PtbTelegramQueue(TelegramQueue):
                     native_updates: tuple[telegram.Update] = await bot.get_updates(
                         offset=None if update_id is None else update_id + 1,
                     )
-                except telegram.error.TimedOut as e:
-                    _LOG.warning("Received timeout from Telegram", exc_info=e)
+                except (telegram.error.NetworkError, telegram.error.TimedOut) as e:
+                    _LOG.warning("Server/connectivity error from Telegram", exc_info=e)
                     continue
                 except telegram.error.RetryAfter as e:
                     _LOG.warning("Am sending too many requests to telegram")
