@@ -96,15 +96,13 @@ class ReposModule(Module):
 
     @provider
     def provide_state_repo(self) -> repos.StateRepository:
-        repo_type = self.config.repo_type
-
-        if repo_type == "memory":
-            return state.MemoryStateRepository()
-
-        if repo_type == "firestore":
-            return state.FirestoreStateRepository()
-
-        raise ValueError(f"Unknown repo type: {repo_type}")
+        match self.config.repo_type:
+            case "memory":
+                return state.MemoryStateRepository()
+            case "firestore":
+                return state.FirestoreStateRepository()
+            case repo_type:
+                raise ValueError(f"Unknown repo type: {repo_type}")
 
 
 def initialize() -> Application:
