@@ -1,3 +1,4 @@
+import asyncio
 import logging
 from typing import AsyncIterable
 
@@ -90,7 +91,12 @@ class PtbTelegramQueue(TelegramQueue):
                     native_updates: tuple[telegram.Update] = await bot.get_updates(
                         offset=None if update_id is None else update_id + 1,
                     )
-                except telegram.error.TimedOut:
+                except telegram.error.TimedOut as e:
+                    _LOG.warning("Received timeout from Telegram", exc_info=e)
+                    continue
+                except telegram.error.RetryAfter as e:
+                    _LOG.warning("Am sending too many requests to telegram")
+                    await asyncio.sleep(e.retry_after)
                     continue
 
                 for native_update in native_updates:
