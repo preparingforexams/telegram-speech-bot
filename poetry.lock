@@ -945,14 +945,14 @@ cli = ["click (>=5.0)"]
 
 [[package]]
 name = "python-telegram-bot-raw"
-version = "20.0b0"
+version = "20.0"
 description = "We have made you a wrapper you can't refuse"
 category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "python-telegram-bot-raw-20.0b0.tar.gz", hash = "sha256:51018ba24bccd823210757be96995d5869d2ff7209b470328c34b537cc15bd91"},
-    {file = "python_telegram_bot_raw-20.0b0-py3-none-any.whl", hash = "sha256:3340d5f4a8ed6726d55f1ac30604848db221362f782b96a715f7e712a0847120"},
+    {file = "python-telegram-bot-raw-20.0.tar.gz", hash = "sha256:4a9cfefb49090df05d229159f8484ab3061413e58b5dd88a40a6007bb34ca4a7"},
+    {file = "python_telegram_bot_raw-20.0-py3-none-any.whl", hash = "sha256:60e3485785b996aee5e602c8b9f276a18460ec6ab8c5d69ad12d3c7d9648d952"},
 ]
 
 [package.dependencies]
@@ -1290,4 +1290,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.10"
-content-hash = "dd62a8495f329d74fdd3b9405c8d6f43a9c19742c933d93aef9fbbdb3dab3dae"
+content-hash = "497175f814cffb95cd1c8882ef877a8796d004b8ec3fd5744429e619edbb757a"
