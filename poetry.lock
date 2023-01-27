@@ -69,18 +69,18 @@ tests-no-zope = ["cloudpickle", "cloudpickle", "hypothesis", "hypothesis", "mypy
 
 [[package]]
 name = "azure-cognitiveservices-speech"
-version = "1.24.2"
+version = "1.25.0"
 description = "\"Microsoft Cognitive Services Speech SDK\""
 category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "azure_cognitiveservices_speech-1.24.2-py3-none-macosx_10_14_x86_64.whl", hash = "sha256:55ed649573e8ded59bf8d02f9d472fa6aafd9c83d377e6a2582322b69745df46"},
-    {file = "azure_cognitiveservices_speech-1.24.2-py3-none-macosx_11_0_arm64.whl", hash = "sha256:facbe02ae35d0e5a42dd7f615fb16287fd54c56dc76385f792a3865a1458be76"},
-    {file = "azure_cognitiveservices_speech-1.24.2-py3-none-manylinux1_x86_64.whl", hash = "sha256:711bd2345d7ccc877c6a4081dc540238fce287822e512c1d655a6bcd2fc9f703"},
-    {file = "azure_cognitiveservices_speech-1.24.2-py3-none-manylinux2014_aarch64.whl", hash = "sha256:8880beb954fa7c6bc590659dc21c6d0d8b1f12116480979ee954be95cf585a2f"},
-    {file = "azure_cognitiveservices_speech-1.24.2-py3-none-win32.whl", hash = "sha256:f75f76c1d213af306b52e61e1d87e569d9f1574654ec871479b08133278887cf"},
-    {file = "azure_cognitiveservices_speech-1.24.2-py3-none-win_amd64.whl", hash = "sha256:b322dca2bb5e6b08082abd1ac553123432822595dd73c8ed1eaaec9d483639bd"},
+    {file = "azure_cognitiveservices_speech-1.25.0-py3-none-macosx_10_14_x86_64.whl", hash = "sha256:85ca804381f06835592c5f1f84c656ac314d53d1a6ddf4e503f373a79a255180"},
+    {file = "azure_cognitiveservices_speech-1.25.0-py3-none-macosx_11_0_arm64.whl", hash = "sha256:26737679eba5bbbec2ec0e9b663411581e458d396598d64df41b87f2bc415947"},
+    {file = "azure_cognitiveservices_speech-1.25.0-py3-none-manylinux1_x86_64.whl", hash = "sha256:f5b80c48b5fd0b46ba9ca4f09249861992152c154813770da1829fcd464ee4cd"},
+    {file = "azure_cognitiveservices_speech-1.25.0-py3-none-manylinux2014_aarch64.whl", hash = "sha256:75f72d8982783d24d59939edd982deed2babfc049a9ac0d65ded35ad937d4add"},
+    {file = "azure_cognitiveservices_speech-1.25.0-py3-none-win32.whl", hash = "sha256:1be79a0711379644307e0b6f365820ebd0a5e554300d9ff8d243f712922ff5be"},
+    {file = "azure_cognitiveservices_speech-1.25.0-py3-none-win_amd64.whl", hash = "sha256:db9fcb26d2e878ca96d2c7a92ad70b78f2b03cb7e507402f2af78ee077e3b2fe"},
 ]
 
 [[package]]
@@ -120,14 +120,14 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "cachetools"
-version = "5.2.1"
+version = "5.3.0"
 description = "Extensible memoizing collections and decorators"
 category = "main"
 optional = false
 python-versions = "~=3.7"
 files = [
-    {file = "cachetools-5.2.1-py3-none-any.whl", hash = "sha256:8462eebf3a6c15d25430a8c27c56ac61340b2ecf60c9ce57afc2b97e450e47da"},
-    {file = "cachetools-5.2.1.tar.gz", hash = "sha256:5991bc0e08a1319bb618d3195ca5b6bc76646a49c21d55962977197b301cc1fe"},
+    {file = "cachetools-5.3.0-py3-none-any.whl", hash = "sha256:429e1a1e845c008ea6c85aa35d4b98b65d6a9763eeef3e37e92728a12d1de9d4"},
+    {file = "cachetools-5.3.0.tar.gz", hash = "sha256:13dfddc7b8df938c21a940dfa6557ce6e94a2f1cdfa58eb90c805721d58f2c14"},
 ]
 
 [[package]]
@@ -371,14 +371,14 @@ grpc = ["grpcio (>=1.38.0,<2.0dev)"]
 
 [[package]]
 name = "google-cloud-firestore"
-version = "2.9.0"
+version = "2.9.1"
 description = "Google Cloud Firestore API client library"
 category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "google-cloud-firestore-2.9.0.tar.gz", hash = "sha256:804813614b1a69cf5d248c4264953f6b18f088daadb544222fa52c921ce3b098"},
-    {file = "google_cloud_firestore-2.9.0-py2.py3-none-any.whl", hash = "sha256:ef5970425e6579ea6f5b87f68db1058c8407d89e4f6d476b634b4bbb73bdd5df"},
+    {file = "google-cloud-firestore-2.9.1.tar.gz", hash = "sha256:5b1522b9f8bead704fb9205c0bf2ada74b4491c680e39ee8d167b1c1e4bd30c2"},
+    {file = "google_cloud_firestore-2.9.1-py2.py3-none-any.whl", hash = "sha256:21fe2d602cfc682e3974f32c0a79904528e2568da9244f4096f7c0d46c506eca"},
 ]
 
 [package.dependencies]
@@ -389,14 +389,14 @@ protobuf = ">=3.19.5,<3.20.0 || >3.20.0,<3.20.1 || >3.20.1,<4.21.0 || >4.21.0,<4
 
 [[package]]
 name = "google-cloud-texttospeech"
-version = "2.14.0"
+version = "2.14.1"
 description = "Google Cloud Texttospeech API client library"
 category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "google-cloud-texttospeech-2.14.0.tar.gz", hash = "sha256:ab8383dfbaf266a838d0bf3d04d65d2c235e0b540fc15854693e12e6d3bcf099"},
-    {file = "google_cloud_texttospeech-2.14.0-py2.py3-none-any.whl", hash = "sha256:6f76114970a2094d246f681e20a0307970941e74a3f9c3980e54b00ad9807a88"},
+    {file = "google-cloud-texttospeech-2.14.1.tar.gz", hash = "sha256:dd716f2a768ad67502cfd99b9925c51ffd6e16be93b410abeeffdaac190bfe81"},
+    {file = "google_cloud_texttospeech-2.14.1-py2.py3-none-any.whl", hash = "sha256:883fe35e3c823ff77cc633b30ab9a93d3b5eb38ebce7eaeef6f87e8d03210e54"},
 ]
 
 [package.dependencies]
@@ -406,14 +406,14 @@ protobuf = ">=3.19.5,<3.20.0 || >3.20.0,<3.20.1 || >3.20.1,<4.21.0 || >4.21.0,<4
 
 [[package]]
 name = "google-cloud-translate"
-version = "3.10.0"
+version = "3.10.1"
 description = "Google Cloud Translate API client library"
 category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "google-cloud-translate-3.10.0.tar.gz", hash = "sha256:49d840b24b1a946ba0d1e5bdad59401a91062148eb78a905223deff71e781ba2"},
-    {file = "google_cloud_translate-3.10.0-py2.py3-none-any.whl", hash = "sha256:6b202b29132f84b13f5ca05f6c995e8fa132abd9e769df26ffa7fdfe1109a764"},
+    {file = "google-cloud-translate-3.10.1.tar.gz", hash = "sha256:fbed64f258497c9edefe82bffc8c98c7d5bf45a7106bfd51c1dae1caf0985843"},
+    {file = "google_cloud_translate-3.10.1-py2.py3-none-any.whl", hash = "sha256:8cf75d6070fe2a95b7a51bfc2e9522e19748b13025a3fa7c670f096db7d78159"},
 ]
 
 [package.dependencies]
@@ -424,14 +424,14 @@ protobuf = ">=3.19.5,<3.20.0 || >3.20.0,<3.20.1 || >3.20.1,<4.21.0 || >4.21.0,<4
 
 [[package]]
 name = "google-cloud-vision"
-version = "3.3.0"
+version = "3.3.1"
 description = "Google Cloud Vision API client library"
 category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "google-cloud-vision-3.3.0.tar.gz", hash = "sha256:463eb247ff15eb9c0e20b55294b122ebe21180d937b7fb7b82b55a1dcf2c4496"},
-    {file = "google_cloud_vision-3.3.0-py2.py3-none-any.whl", hash = "sha256:70aae8a356ed8f6e523108d8c2a487d702987e6459b8ce76412dbfd171918bf9"},
+    {file = "google-cloud-vision-3.3.1.tar.gz", hash = "sha256:1bbbf4f42035a49d8e48bee007362f7d11ab8cf8d0125c67c9e52f3f6be91494"},
+    {file = "google_cloud_vision-3.3.1-py2.py3-none-any.whl", hash = "sha256:b306ee151570c7200f8ec2727d83279c447e27b4497ada3b59eaf37c2aa1d493"},
 ]
 
 [package.dependencies]
@@ -827,14 +827,14 @@ files = [
 
 [[package]]
 name = "pathspec"
-version = "0.10.3"
+version = "0.11.0"
 description = "Utility library for gitignore style pattern matching of file paths."
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "pathspec-0.10.3-py3-none-any.whl", hash = "sha256:3c95343af8b756205e2aba76e843ba9520a24dd84f68c22b9f93251507509dd6"},
-    {file = "pathspec-0.10.3.tar.gz", hash = "sha256:56200de4077d9d0791465aa9095a01d421861e405b5096955051deefd697d6f6"},
+    {file = "pathspec-0.11.0-py3-none-any.whl", hash = "sha256:3a66eb970cbac598f9e5ccb5b2cf58930cd8e3ed86d393d541eaf2d8b1705229"},
+    {file = "pathspec-0.11.0.tar.gz", hash = "sha256:64d338d4e0914e91c1792321e6907b5a593f1ab1851de7fc269557a21b30ebbc"},
 ]
 
 [[package]]
@@ -1014,14 +1014,14 @@ six = ">=1.5"
 
 [[package]]
 name = "python-dotenv"
-version = "0.21.0"
+version = "0.21.1"
 description = "Read key-value pairs from a .env file and set them as environment variables"
 category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "python-dotenv-0.21.0.tar.gz", hash = "sha256:b77d08274639e3d34145dfa6c7008e66df0f04b7be7a75fd0d5292c191d79045"},
-    {file = "python_dotenv-0.21.0-py3-none-any.whl", hash = "sha256:1684eb44636dd462b66c3ee016599815514527ad99965de77f43e0944634a7e5"},
+    {file = "python-dotenv-0.21.1.tar.gz", hash = "sha256:1c93de8f636cde3ce377292818d0e440b6e45a82f215c3744979151fa8151c49"},
+    {file = "python_dotenv-0.21.1-py3-none-any.whl", hash = "sha256:41e12e0318bebc859fcc4d97d4db8d20ad21721a6aa5047dd59f090391cb549a"},
 ]
 
 [package.extras]
