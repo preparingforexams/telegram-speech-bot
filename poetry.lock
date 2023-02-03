@@ -1169,14 +1169,14 @@ tornado = ["tornado (>=5)"]
 
 [[package]]
 name = "setuptools"
-version = "66.1.1"
+version = "67.1.0"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
 category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "setuptools-66.1.1-py3-none-any.whl", hash = "sha256:6f590d76b713d5de4e49fe4fbca24474469f53c83632d5d0fd056f7ff7e8112b"},
-    {file = "setuptools-66.1.1.tar.gz", hash = "sha256:ac4008d396bc9cd983ea483cb7139c0240a07bbc74ffb6232fceffedc6cf03a8"},
+    {file = "setuptools-67.1.0-py3-none-any.whl", hash = "sha256:a7687c12b444eaac951ea87a9627c4f904ac757e7abdc5aac32833234af90378"},
+    {file = "setuptools-67.1.0.tar.gz", hash = "sha256:e261cdf010c11a41cb5cb5f1bf3338a7433832029f559a6a7614bd42a967c300"},
 ]
 
 [package.extras]
@@ -1234,14 +1234,14 @@ files = [
 
 [[package]]
 name = "types-cachetools"
-version = "5.2.1"
+version = "5.3.0.0"
 description = "Typing stubs for cachetools"
 category = "dev"
 optional = false
 python-versions = "*"
 files = [
-    {file = "types-cachetools-5.2.1.tar.gz", hash = "sha256:069cfc825697cd51445c1feabbe4edc1fae2b2315870e7a9a179a7c4a5851bee"},
-    {file = "types_cachetools-5.2.1-py3-none-any.whl", hash = "sha256:b496b7e364ba050c4eaadcc6582f2c9fbb04f8ee7141eb3b311a8589dbd4506a"},
+    {file = "types-cachetools-5.3.0.0.tar.gz", hash = "sha256:ed00554a55a66ae62a50f8c55f71b68d76c8f375d7b9c07480f629564b5c7fac"},
+    {file = "types_cachetools-5.3.0.0-py3-none-any.whl", hash = "sha256:cd20f3835b7bc008522e42c685ae02d708a34042f83a2638c0ab741b2b6c454f"},
 ]
 
 [[package]]
