@@ -6,7 +6,7 @@ authors = ["OpenAlcoholics <team@openalcoholics.group>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-aiofiles = "^22.1.0"
+aiofiles = "^23.0.0"
 azure-cognitiveservices-speech = "^1.24.2"
 asyncache = "0.3.1"
 cachetools = "^5.2.0"
