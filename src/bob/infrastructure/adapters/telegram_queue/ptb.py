@@ -67,14 +67,16 @@ class PtbTelegramQueue(TelegramQueue):
             callback_message = native_callback.message
             if not callback_message:
                 _LOG.warning("Did not receive message for callback query")
-            else:
-                text_message_id, code = native_callback.data.split("::", maxsplit=1)
+            elif data := native_callback.data:
+                text_message_id, code = data.split("::", maxsplit=1)
                 callback = InlineCallback(
                     chat_id=callback_message.chat.id,
                     text_message_id=int(text_message_id),
                     speech_message_id=callback_message.message_id,
                     code=InlineCode(code),
                 )
+            else:
+                _LOG.error("Received callback query with no data: %s", callback_message)
 
             try:
                 await native_callback.answer()
