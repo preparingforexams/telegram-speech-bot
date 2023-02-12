@@ -1,6 +1,7 @@
 import logging
 import random
 from dataclasses import dataclass
+from typing import Mapping, cast
 
 import langcodes
 from injector import inject
@@ -147,7 +148,7 @@ class InitialMessageSender:
 
         await self.state_repo.set_value(
             f"{message.chat_id}-{message.id}",
-            state,  # type: ignore
+            cast(Mapping[str, str | int | bool | None], state),
         )
 
         return state

@@ -1,8 +1,8 @@
 import abc
-from typing import TypeAlias
+from typing import TypeAlias, Sequence, Mapping
 
 Primitive: TypeAlias = (
-    str | int | float | bool | None | list["Primitive"] | dict[str, "Primitive"]
+    str | int | float | bool | None | Sequence["Primitive"] | Mapping[str, "Primitive"]
 )
 
 
@@ -12,5 +12,5 @@ class StateRepository(abc.ABC):
         pass
 
     @abc.abstractmethod
-    async def set_value(self, key: str, value: dict[str, Primitive]) -> None:
+    async def set_value(self, key: str, value: Mapping[str, Primitive]) -> None:
         pass

@@ -1,4 +1,5 @@
 import functools
+from typing import Mapping, cast
 
 from google.cloud.firestore import AsyncClient, AsyncCollectionReference
 
@@ -15,9 +16,9 @@ class FirestoreStateRepository(StateRepository):
         client = await self._client
         return client.collection("bob-state")
 
-    async def set_value(self, key: str, value: dict[str, Primitive]) -> None:
+    async def set_value(self, key: str, value: Mapping[str, Primitive]) -> None:
         collection = await self._collection()
-        await collection.document(key).set(value)
+        await collection.document(key).set(cast(dict[str, Primitive], value))
 
     async def get_value(self, key: str) -> dict[str, Primitive] | None:
         collection = await self._collection()
