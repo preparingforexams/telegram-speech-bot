@@ -17,7 +17,7 @@ class FirestoreStateRepository(StateRepository):
         if client:
             return client
 
-        with self._lock:
+        async with self._lock:
             client = AsyncClient()
             self._client = client
 
