@@ -1,3 +1,4 @@
+import functools
 import logging
 
 from asyncache import cached
@@ -13,8 +14,7 @@ class GoogleCloudTranslationLanguageDetector(LanguageDetector):
     def __init__(self, project_id: str):
         self._parent = f"projects/{project_id}/locations/global"
 
-    @property
-    @cached({})
+    @functools.cached_property
     def _client(self) -> TranslationServiceAsyncClient:
         return TranslationServiceAsyncClient()
 

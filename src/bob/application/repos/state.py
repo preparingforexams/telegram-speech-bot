@@ -1,7 +1,9 @@
 import abc
 from typing import TypeAlias
 
-Primitive: TypeAlias = str | int | float | bool | None
+Primitive: TypeAlias = (
+    str | int | float | bool | None | list["Primitive"] | dict[str, "Primitive"]
+)
 
 
 class StateRepository(abc.ABC):

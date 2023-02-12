@@ -18,21 +18,20 @@ from bob.infrastructure.repos import chat, state
 _LOG = logging.getLogger(__name__)
 
 
-def _setup_logging():
+def _setup_logging() -> None:
     logging.basicConfig()
 
     logging.root.level = logging.WARNING
     logging.getLogger(__package__).level = logging.DEBUG
 
 
-def _setup_sentry(config: SentryConfig):
-    dsn = config.dsn
-    if not dsn:
-        _LOG.warning("Sentry DSN not found")
+def _setup_sentry(config: SentryConfig | None) -> None:
+    if not config:
+        _LOG.warning("Sentry not configured")
         return
 
     sentry_sdk.init(
-        dsn=dsn,
+        dsn=config.dsn,
         release=config.release,
     )
 
@@ -65,11 +64,21 @@ class PortsModule(Module):
 
     @provider
     def provide_telegram_queue(self) -> ports.TelegramQueue:
-        return telegram_queue.PtbTelegramQueue(self.config.telegram)
+        config = self.config.telegram
+
+        if not config:
+            raise ValueError("Missing telegram config")
+
+        return telegram_queue.PtbTelegramQueue(config)
 
     @provider
     def provide_telegram_uploader(self) -> ports.TelegramUploader:
-        return telegram_uploader.PtbTelegramUploader(self.config.telegram)
+        config = self.config.telegram
+
+        if not config:
+            raise ValueError("Missing telegram config")
+
+        return telegram_uploader.PtbTelegramUploader(config)
 
     @provider
     def provide_language_detector(self) -> ports.LanguageDetector:

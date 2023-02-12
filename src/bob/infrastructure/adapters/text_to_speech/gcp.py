@@ -1,7 +1,6 @@
+import functools
 import logging
 
-from asyncache import cached
-from cachetools import LRUCache
 from google.cloud import texttospeech
 from langcodes import Language
 
@@ -11,12 +10,11 @@ _LOG = logging.getLogger(__name__)
 
 
 class GcpTextToSpeech(TextToSpeech):
-    @property
-    @cached({})
+    @functools.cached_property
     def _client(self) -> texttospeech.TextToSpeechAsyncClient:
         return texttospeech.TextToSpeechAsyncClient()
 
-    @cached(LRUCache(32))
+    @functools.lru_cache(32, True)
     async def get_supported_voices(
         self,
         language: Language,

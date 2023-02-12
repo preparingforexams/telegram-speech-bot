@@ -1,6 +1,6 @@
+import functools
 import logging
 
-from asyncache import cached
 from google.cloud.vision import (
     ImageAnnotatorAsyncClient,
     Image,
@@ -14,7 +14,7 @@ _LOG = logging.getLogger(__name__)
 
 
 class GoogleImageTextRecognizer(ImageTextRecognizer):
-    @cached({})
+    @functools.cache
     async def _get_client(self) -> ImageAnnotatorAsyncClient:
         return ImageAnnotatorAsyncClient()
 

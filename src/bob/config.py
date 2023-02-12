@@ -1,82 +1,133 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Dict, Tuple, Optional, Union
+from typing import cast, Iterable, overload
 
 from dotenv import dotenv_values
 
 
 class Env:
-    def __init__(self, values: Dict[str, str]):
+    def __init__(self, values: dict[str, str]):
         self._values = values
+
+    @overload
+    def get_string(
+        self,
+        key: str,
+        default: str,
+    ) -> str:
+        pass
+
+    @overload
+    def get_string(
+        self,
+        key: str,
+        default: None = None,
+    ) -> str | None:
+        pass
 
     def get_string(
         self,
         key: str,
-        default: Optional[str] = None,
-        required: bool = True,
-    ) -> Optional[str]:
-        value = self._values.get(key, default)
-        if required:
-            if value is None:
-                raise ValueError(f"Value for {key} is missing")
-            if not value.strip():
-                raise ValueError(f"Value for {key} is blank")
+        default: str | None = None,
+    ) -> str | None:
+        value = self._values.get(key)
+        if value is None or not value.strip():
+            return default
 
         return value
+
+    def get_bool(
+        self,
+        key: str,
+        default: bool,
+    ) -> bool:
+        value = self._values.get(key)
+        if value is None:
+            return default
+
+        stripped = value.strip()
+        if not stripped:
+            return default
+
+        return stripped == "true"
+
+    @overload
+    def get_int(
+        self,
+        key: str,
+        default: int,
+    ) -> int:
+        pass
+
+    @overload
+    def get_int(
+        self,
+        key: str,
+        default: None = None,
+    ) -> int | None:
+        pass
 
     def get_int(
         self,
         key: str,
-        default: Optional[int] = None,
-        required: bool = True,
-    ) -> Optional[int]:
+        default: int | None = None,
+    ) -> int | None:
         value = self._values.get(key)
-        if required and default is None:
-            if value is None:
-                raise ValueError(f"Value for {key} is missing")
-            if not value.strip():
-                raise ValueError(f"Value for {key} is blank")
-        elif value is None or not value.strip() and default is not None:
+        if value is None or not value.strip():
             return default
 
         return int(value)
 
+    @overload
     def get_int_list(
         self,
         key: str,
-        default: Optional[List[int]] = None,
-        required: bool = True,
-    ) -> Optional[List[int]]:
+        default: list[int],
+    ) -> list[int]:
+        pass
+
+    @overload
+    def get_int_list(
+        self,
+        key: str,
+        default: None = None,
+    ) -> list[int] | None:
+        pass
+
+    def get_int_list(
+        self,
+        key: str,
+        default: list[int] | None = None,
+    ) -> list[int] | None:
         values = self._values.get(key)
-        if required and default is None:
-            if values is None:
-                raise ValueError(f"Value for {key} is missing")
-            if not values.strip():
-                raise ValueError(f"Value for {key} is blank")
-        elif values is None or not values.strip() and default is not None:
+
+        if values is None or not values.strip():
             return default
 
         return [int(value) for value in values.split(",")]
 
 
-def _load_env(name: str) -> dict:
+def _remove_none_values(data: dict[str, str | None]) -> dict[str, str]:
+    for key, value in data.items():
+        if value is None:
+            del data[key]
+
+    return cast(dict[str, str], data)
+
+
+def _load_env(name: str | None) -> dict[str, str]:
     if not name:
-        return dotenv_values(".env")
+        return _remove_none_values(dotenv_values(".env"))
     else:
-        return dotenv_values(f".env.{name}")
+        return _remove_none_values(dotenv_values(f".env.{name}"))
 
 
-def load_env(names: Union[str, Tuple[str, ...]]) -> Env:
-    result = {}
+def load_env(names: Iterable[str]) -> Env:
+    result = {**_load_env(None)}
 
-    if isinstance(names, str):
-        result.update(_load_env(names))
-    elif isinstance(names, tuple):
-        for name in names:
-            result.update(_load_env(name))
-    else:
-        raise ValueError(f"Invalid .env names: {names}")
+    for name in names:
+        result.update(_load_env(name))
 
     from os import environ
 
@@ -87,13 +138,18 @@ def load_env(names: Union[str, Tuple[str, ...]]) -> Env:
 
 @dataclass
 class SentryConfig:
-    dsn: str | None
-    release: str | None
+    dsn: str
+    release: str
 
     @classmethod
-    def from_env(cls, env: Env) -> SentryConfig:
+    def from_env(cls, env: Env) -> SentryConfig | None:
+        dsn = env.get_string("SENTRY_DSN")
+
+        if not dsn:
+            return None
+
         return cls(
-            dsn=env.get_string("SENTRY_DSN", required=False),
+            dsn=dsn,
             release=env.get_string("APP_VERSION", default="debug"),
         )
 
@@ -106,8 +162,8 @@ class AzureTtsConfig:
     @classmethod
     def from_env(cls, env: Env) -> AzureTtsConfig:
         return cls(
-            region=env.get_string("AZURE_SPEECH_REGION", required=False),
-            key=env.get_string("AZURE_SPEECH_KEY", required=False),
+            region=env.get_string("AZURE_SPEECH_REGION"),
+            key=env.get_string("AZURE_SPEECH_KEY"),
         )
 
 
@@ -119,21 +175,18 @@ class Config:
     azure_tts: AzureTtsConfig
     gcp_project: str | None
     repo_type: str
-    sentry: SentryConfig
-    telegram: TelegramConfig
+    sentry: SentryConfig | None
+    telegram: TelegramConfig | None
 
     @classmethod
     def from_env(cls, env: Env) -> Config:
         return cls(
-            use_stub_tts=env.get_string("TTS_USE_STUB", "true") == "true",
-            use_stub_image_recognizer=("OCR_USE_STUB", "true") == "true",
-            use_stub_language_detector=env.get_string(
-                "LANGUAGE_DETECTOR_USE_STUB", "true"
-            )
-            == "true",
+            use_stub_tts=env.get_bool("TTS_USE_STUB", True),
+            use_stub_image_recognizer=env.get_bool("OCR_USE_STUB", True),
+            use_stub_language_detector=env.get_bool("LANGUAGE_DETECTOR_USE_STUB", True),
             azure_tts=AzureTtsConfig.from_env(env),
-            gcp_project=env.get_string("GOOGLE_CLOUD_PROJECT", required=False),
-            repo_type=env.get_string("REPO_TYPE", "memory"),  # type: ignore
+            gcp_project=env.get_string("GOOGLE_CLOUD_PROJECT"),
+            repo_type=env.get_string("REPO_TYPE", "memory"),
             sentry=SentryConfig.from_env(env),
             telegram=TelegramConfig.from_env(env),
         )
@@ -144,7 +197,11 @@ class TelegramConfig:
     token: str
 
     @classmethod
-    def from_env(cls, env: Env) -> TelegramConfig:
+    def from_env(cls, env: Env) -> TelegramConfig | None:
+        token = env.get_string("TELEGRAM_TOKEN")
+        if token is None:
+            return None
+
         return cls(
-            token=env.get_string("TELEGRAM_TOKEN"),  # type: ignore
+            token=token,
         )

@@ -34,21 +34,6 @@ test = ["contextlib2", "coverage[toml] (>=4.5)", "hypothesis (>=4.0)", "mock (>=
 trio = ["trio (>=0.16,<0.22)"]
 
 [[package]]
-name = "asyncache"
-version = "0.3.1"
-description = "Helpers to use cachetools with async code."
-category = "main"
-optional = false
-python-versions = ">=3.8,<4.0"
-files = [
-    {file = "asyncache-0.3.1-py3-none-any.whl", hash = "sha256:ef20a1024d265090dd1e0785c961cf98b9c32cc7d9478973dcf25ac1b80011f5"},
-    {file = "asyncache-0.3.1.tar.gz", hash = "sha256:9a1e60a75668e794657489bdea6540ee7e3259c483517b934670db7600bf5035"},
-]
-
-[package.dependencies]
-cachetools = ">=5.2.0,<6.0.0"
-
-[[package]]
 name = "attrs"
 version = "22.2.0"
 description = "Classes Without Boilerplate"
@@ -1386,4 +1371,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.10"
-content-hash = "415777ae3b45e907d881b3be77ac428c2bdd065cda9489b339aa1eca89500eda"
+content-hash = "b8a00b22724f30589c30f36e7af392cc95eeeefd4d8e74f2dcb16aa6609b4e00"

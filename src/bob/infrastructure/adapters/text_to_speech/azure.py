@@ -1,8 +1,7 @@
 import asyncio
+import functools
 
 import azure.cognitiveservices.speech as speechsdk
-from asyncache import cached
-from cachetools import LRUCache
 from langcodes import Language
 
 from bob.application.ports import TextToSpeech
@@ -20,7 +19,7 @@ class AzureTextToSpeech(TextToSpeech):
             speechsdk.SpeechSynthesisOutputFormat.Ogg48Khz16BitMonoOpus,
         )
 
-    @cached(LRUCache(32))
+    @functools.lru_cache(32, True)
     async def get_supported_voices(
         self,
         language: Language,

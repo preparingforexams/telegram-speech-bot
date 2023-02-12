@@ -1,5 +1,6 @@
 import logging
 import signal
+from typing import Any
 
 from bob.application import Application
 from bob.application.ports.telegram_queue import Photo, PhotoSize
@@ -9,11 +10,11 @@ _LOG = logging.getLogger(__name__)
 
 
 class TelegramUpdateRouter:
-    def __init__(self, app: Application):
+    def __init__(self, app: Application) -> None:
         self.app = app
         self._should_kill = False
 
-    def _on_signal(self, sig: int, _):
+    def _on_signal(self, sig: int, _: Any) -> None:
         if sig == signal.SIGTERM:
             self._should_kill = True
 
@@ -27,7 +28,7 @@ class TelegramUpdateRouter:
         )
         return max(valid_sizes, key=lambda size: size.file_size or 0)
 
-    async def run(self):
+    async def run(self) -> None:
         signal.signal(signal.SIGTERM, self._on_signal)
 
         async for update in self.app.ports.telegram_queue.subscribe():
@@ -50,7 +51,7 @@ class TelegramUpdateRouter:
                         id=message.id,
                         sender_name=message.sender_name,
                         replied_to=message.replied_to_id,
-                        caption=message.photo,
+                        caption=message.photo.caption,
                         file_id=size.file_id,
                     )
                     await self.app.handle_image_message(image_message)
