@@ -126,4 +126,4 @@ def initialize() -> Application:
             ReposModule(config),
         ],
     )
-    return injector.get(Application)
+    return Application(injector)
