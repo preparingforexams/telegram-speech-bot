@@ -1,7 +1,6 @@
 import functools
 import logging
 
-from asyncache import cached
 from google.cloud.translate_v3 import TranslationServiceAsyncClient
 from langcodes import Language
 
