@@ -3,6 +3,7 @@ import logging
 from typing import AsyncIterable
 
 import telegram
+from telegram.error import BadRequest
 
 from bob.application.ports import TelegramQueue
 from bob.application.ports.telegram_queue import Update, Message, Photo, PhotoSize
@@ -75,7 +76,10 @@ class PtbTelegramQueue(TelegramQueue):
                     code=InlineCode(code),
                 )
 
-            await native_callback.answer()
+            try:
+                await native_callback.answer()
+            except BadRequest:
+                _LOG.warning("Received bad request response for callback query answer")
 
         return Update(
             id=native.update_id,
