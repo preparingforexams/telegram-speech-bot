@@ -1,4 +1,4 @@
-import functools
+from asyncio.locks import Lock
 from typing import Mapping, cast
 
 from google.cloud.firestore import AsyncClient, AsyncCollectionReference
@@ -8,12 +8,23 @@ from bob.application.repos.state import Primitive
 
 
 class FirestoreStateRepository(StateRepository):
-    @functools.cached_property
-    async def _client(self) -> AsyncClient:
-        return AsyncClient()
+    def __init__(self) -> None:
+        self._lock = Lock()
+        self._client: AsyncClient | None = None
+
+    async def _get_client(self) -> AsyncClient:
+        client = self._client
+        if client:
+            return client
+
+        with self._lock:
+            client = AsyncClient()
+            self._client = client
+
+        return client
 
     async def _collection(self) -> AsyncCollectionReference:
-        client = await self._client
+        client = await self._get_client()
         return client.collection("bob-state")
 
     async def set_value(self, key: str, value: Mapping[str, Primitive]) -> None:
