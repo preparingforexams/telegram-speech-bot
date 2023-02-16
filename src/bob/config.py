@@ -195,6 +195,7 @@ class Config:
 @dataclass
 class TelegramConfig:
     token: str
+    polling_timeout: int
 
     @classmethod
     def from_env(cls, env: Env) -> TelegramConfig | None:
@@ -204,4 +205,5 @@ class TelegramConfig:
 
         return cls(
             token=token,
+            polling_timeout=env.get_int("TELEGRAM_POLLING_TIMEOUT", 10),
         )

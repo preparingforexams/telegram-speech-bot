@@ -2,6 +2,7 @@ import asyncio
 import logging
 from typing import AsyncIterable
 
+import httpx
 import telegram
 from telegram.error import BadRequest
 
@@ -16,6 +17,7 @@ _LOG = logging.getLogger(__name__)
 class PtbTelegramQueue(TelegramQueue):
     def __init__(self, config: TelegramConfig):
         self._token = config.token
+        self._polling_timeout = config.polling_timeout
 
     @staticmethod
     def _extract_sender_name(user: telegram.User | None) -> str | None:
@@ -96,9 +98,10 @@ class PtbTelegramQueue(TelegramQueue):
                 try:
                     native_updates: tuple[telegram.Update] = await bot.get_updates(
                         offset=None if update_id is None else update_id + 1,
+                        timeout=self._polling_timeout,
                     )
                 except (telegram.error.NetworkError, telegram.error.TimedOut) as e:
-                    _LOG.warning("Server/connectivity error from Telegram", exc_info=e)
+                    _LOG.warning("Server/connectivity error from Telegram %s", e)
                     continue
                 except telegram.error.RetryAfter as e:
                     _LOG.warning("Am sending too many requests to telegram")
