@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import sys
 from typing import AsyncIterable
 
 import httpx
@@ -7,7 +8,8 @@ import telegram
 from telegram.error import BadRequest
 
 from bob.application.ports import TelegramQueue
-from bob.application.ports.telegram_queue import Update, Message, Photo, PhotoSize
+from bob.application.ports.telegram_queue import Update, Message, Photo, \
+    PhotoSize
 from bob.config import TelegramConfig
 from bob.domain.model import InlineCallback, InlineCode
 
@@ -101,7 +103,14 @@ class PtbTelegramQueue(TelegramQueue):
                         timeout=self._polling_timeout,
                     )
                 except (telegram.error.NetworkError, telegram.error.TimedOut) as e:
-                    _LOG.warning("Server/connectivity error from Telegram %s", e)
+                    if isinstance(e.__cause__, httpx.LocalProtocolError):
+                        _LOG.error(
+                            "Got a local protocol error, so I'll drop dead.",
+                            exc_info=e,
+                        )
+                        sys.exit(1)
+
+                    _LOG.error("Server/connectivity error from Telegram", exc_info=e)
                     continue
                 except telegram.error.RetryAfter as e:
                     _LOG.warning("Am sending too many requests to telegram")
