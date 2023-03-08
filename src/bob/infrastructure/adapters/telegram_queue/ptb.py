@@ -8,8 +8,7 @@ import telegram
 from telegram.error import BadRequest
 
 from bob.application.ports import TelegramQueue
-from bob.application.ports.telegram_queue import Update, Message, Photo, \
-    PhotoSize
+from bob.application.ports.telegram_queue import Update, Message, Photo, PhotoSize
 from bob.config import TelegramConfig
 from bob.domain.model import InlineCallback, InlineCode
 
