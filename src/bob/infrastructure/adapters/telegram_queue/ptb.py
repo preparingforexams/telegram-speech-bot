@@ -6,6 +6,7 @@ from typing import AsyncIterable
 import httpx
 import telegram
 from telegram.error import BadRequest
+from telegram.request import HTTPXRequest
 
 from bob.application.ports import TelegramQueue
 from bob.application.ports.telegram_queue import Update, Message, Photo, PhotoSize
@@ -93,7 +94,10 @@ class PtbTelegramQueue(TelegramQueue):
         )
 
     async def subscribe(self) -> AsyncIterable[Update]:
-        async with telegram.Bot(self._token) as bot:
+        async with telegram.Bot(
+            self._token,
+            get_updates_request=HTTPXRequest(http_version="1.1"),
+        ) as bot:
             update_id: int | None = None
             while True:
                 try:
