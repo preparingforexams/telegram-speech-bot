@@ -392,14 +392,14 @@ protobuf = ">=3.19.5,<3.20.0 || >3.20.0,<3.20.1 || >3.20.1,<4.21.0 || >4.21.0,<4
 
 [[package]]
 name = "google-cloud-translate"
-version = "3.11.0"
+version = "3.11.1"
 description = "Google Cloud Translate API client library"
 category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "google-cloud-translate-3.11.0.tar.gz", hash = "sha256:a61c0c3aee9812774b38ebd70e7a18bd285718c311f8efc27d4ca9e7e80c74a3"},
-    {file = "google_cloud_translate-3.11.0-py2.py3-none-any.whl", hash = "sha256:cdc04f6e495145948fe2b5b08315ae99cc902757fd70f4b9870601868da46b3a"},
+    {file = "google-cloud-translate-3.11.1.tar.gz", hash = "sha256:91e40ad0b737e32a61110645114e93ffbadf5d2ffd725c12ade1347eb58efacf"},
+    {file = "google_cloud_translate-3.11.1-py2.py3-none-any.whl", hash = "sha256:363d65d05936635f5c2fc0131b4948601e361caa41bd8b276c6363f17eda208f"},
 ]
 
 [package.dependencies]
