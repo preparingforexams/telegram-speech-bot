@@ -477,6 +477,7 @@ files = [
     {file = "grpcio-1.54.2-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:4864f99aac207e3e45c5e26c6cbb0ad82917869abc2f156283be86c05286485c"},
     {file = "grpcio-1.54.2-cp39-cp39-win32.whl", hash = "sha256:b38b3de8cff5bc70f8f9c615f51b48eff7313fc9aca354f09f81b73036e7ddfa"},
     {file = "grpcio-1.54.2-cp39-cp39-win_amd64.whl", hash = "sha256:be48496b0e00460717225e7680de57c38be1d8629dc09dadcd1b3389d70d942b"},
+    {file = "grpcio-1.54.2.tar.gz", hash = "sha256:50a9f075eeda5097aa9a182bb3877fe1272875e45370368ac0ee16ab9e22d019"},
 ]
 
 [package.extras]
@@ -490,6 +491,7 @@ category = "main"
 optional = false
 python-versions = ">=3.6"
 files = [
+    {file = "grpcio-status-1.54.2.tar.gz", hash = "sha256:3255cbec5b7c706caa3d4dd584606c080e6415e15631bb2f6215e2b70055836d"},
     {file = "grpcio_status-1.54.2-py3-none-any.whl", hash = "sha256:2a7cb4838225f1b53bd0448a3008c5b5837941e1f3a0b13fa38768f08a7b68c2"},
 ]
 
