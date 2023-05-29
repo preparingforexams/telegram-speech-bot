@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y libssl-dev libasound2 && apt-get clean
 
-RUN pip install poetry==1.5.0 --no-cache
+RUN pip install poetry==1.5.1 --no-cache
 RUN poetry config virtualenvs.create false
 
 COPY [ "poetry.toml", "poetry.lock", "pyproject.toml", "./" ]
