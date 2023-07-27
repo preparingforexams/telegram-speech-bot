@@ -1,5 +1,5 @@
 import abc
-from typing import TypeAlias, Sequence, Mapping
+from typing import Mapping, Sequence, TypeAlias
 
 Primitive: TypeAlias = (
     str | int | float | bool | None | Sequence["Primitive"] | Mapping[str, "Primitive"]

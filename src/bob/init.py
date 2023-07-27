@@ -2,16 +2,16 @@ import logging
 from dataclasses import dataclass
 
 import sentry_sdk
-from injector import Injector, Module, provider, multiprovider
+from injector import Injector, Module, multiprovider, provider
 
 from bob.application import Application, ports, repos
-from bob.config import load_env, Config, SentryConfig
+from bob.config import Config, SentryConfig, load_env
 from bob.infrastructure.adapters import (
-    telegram_uploader,
-    telegram_queue,
-    text_to_speech,
-    language_detector,
     image_text_recognizer,
+    language_detector,
+    telegram_queue,
+    telegram_uploader,
+    text_to_speech,
 )
 from bob.infrastructure.repos import chat, state
 

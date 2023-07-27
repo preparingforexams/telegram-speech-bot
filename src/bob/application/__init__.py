@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from injector import inject, Injector
+from injector import Injector, inject
 
-from bob.application import use_cases, ports
+from bob.application import ports, use_cases
 
 
 @inject

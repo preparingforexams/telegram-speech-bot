@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 from injector import inject
 
-from bob.application import ports, services, repos
+from bob.application import ports, repos, services
 from bob.domain.model import ImageMessage
 
 _LOG = logging.getLogger(__name__)

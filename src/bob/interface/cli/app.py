@@ -1,6 +1,7 @@
 import asyncio
 
 import click
+
 from bob.application import Application
 from bob.init import initialize
 from bob.interface.events.telegram_update_router import TelegramUpdateRouter

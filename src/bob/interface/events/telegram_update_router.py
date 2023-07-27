@@ -4,7 +4,7 @@ from typing import Any
 
 from bob.application import Application
 from bob.application.ports.telegram_queue import Photo, PhotoSize
-from bob.domain.model import TextMessage, ImageMessage
+from bob.domain.model import ImageMessage, TextMessage
 
 _LOG = logging.getLogger(__name__)
 

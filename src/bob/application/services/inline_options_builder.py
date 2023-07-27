@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from injector import inject
 
 from bob.application import ports
-from bob.domain.model import InlineOption, InlineMessageState, InlineCode
+from bob.domain.model import InlineCode, InlineMessageState, InlineOption
 
 
 @inject

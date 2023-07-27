@@ -4,8 +4,8 @@ from dataclasses import dataclass
 from injector import inject
 from langcodes import Language
 
-from bob.application import repos, ports, services
-from bob.domain.model import InlineCallback, InlineMessageState, InlineCode
+from bob.application import ports, repos, services
+from bob.domain.model import InlineCallback, InlineCode, InlineMessageState
 
 _LOG = logging.getLogger(__name__)
 

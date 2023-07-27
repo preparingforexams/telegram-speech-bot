@@ -2,10 +2,10 @@ import functools
 import logging
 
 from google.cloud.vision import (
-    ImageAnnotatorAsyncClient,
-    Image,
     AnnotateImageRequest,
     Feature,
+    Image,
+    ImageAnnotatorAsyncClient,
 )
 
 from bob.application.ports import ImageTextRecognizer

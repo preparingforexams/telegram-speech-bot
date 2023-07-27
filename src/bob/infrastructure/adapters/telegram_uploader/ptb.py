@@ -3,7 +3,7 @@ from __future__ import annotations
 import asyncio
 import logging
 from io import BytesIO
-from typing import Callable, Awaitable, TypeVar
+from typing import Awaitable, Callable, TypeVar
 
 import telegram
 from telegram.error import RetryAfter, TelegramError

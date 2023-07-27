@@ -6,9 +6,8 @@ from typing import Mapping, cast
 import langcodes
 from injector import inject
 
-from bob.application import repos, services, ports
-from bob.domain.model import InlineCode, InlineMessageState, Chat
-from bob.domain.model import Message
+from bob.application import ports, repos, services
+from bob.domain.model import Chat, InlineCode, InlineMessageState, Message
 
 _LOG = logging.getLogger(__name__)
 
