@@ -6,7 +6,8 @@ from typing import Mapping, cast
 import langcodes
 from injector import inject
 
-from bob.application import ports, repos, services
+from bob.application import ports, repos
+from bob.application.services.inline_options_builder import InlineOptionsBuilder
 from bob.domain.model import Chat, InlineCode, InlineMessageState, Message
 
 _LOG = logging.getLogger(__name__)
@@ -15,7 +16,7 @@ _LOG = logging.getLogger(__name__)
 @inject
 @dataclass
 class InitialMessageSender:
-    inline_builder: services.InlineOptionsBuilder
+    inline_builder: InlineOptionsBuilder
     language_detector: ports.LanguageDetector
     state_repo: repos.StateRepository
     telegram_uploader: ports.TelegramUploader
