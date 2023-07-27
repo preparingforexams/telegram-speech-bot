@@ -1,5 +1,5 @@
 image:
-  app: ghcr.io/preparingforexams/bob:${GITHUB_SHA}
+  app: ${IMAGE_NAME}:${GITHUB_SHA}
 
 azure:
   speechKey: ${AZURE_SPEECH_KEY}
