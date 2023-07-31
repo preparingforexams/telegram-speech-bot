@@ -46,7 +46,6 @@ jobs:
           tags: "ghcr.io/${{ env.GITHUB_REPOSITORY_OWNER_PART_SLUG }}/${{ env.GITHUB_REPOSITORY_NAME_PART_SLUG }}:${{ github.sha }}"
 
   push-container-image:
-    name: App Build and Push
     runs-on: ubuntu-latest
     if: success() && github.ref_name == github.event.repository.default_branch
     needs:
@@ -65,6 +64,8 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
+          build-args: |
+            APP_VERSION=${{ github.sha }}
           tags: "ghcr.io/${{ env.GITHUB_REPOSITORY_OWNER_PART_SLUG }}/${{ env.GITHUB_REPOSITORY_NAME_PART_SLUG }}:${{ github.sha }}"
 
   deploy:
