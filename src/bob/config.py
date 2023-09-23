@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from dataclasses import dataclass
-from typing import Iterable, cast, overload
+from typing import Iterable, Self, cast, overload
 
 from dotenv import dotenv_values
 
@@ -142,7 +140,7 @@ class SentryConfig:
     release: str
 
     @classmethod
-    def from_env(cls, env: Env) -> SentryConfig | None:
+    def from_env(cls, env: Env) -> Self | None:
         dsn = env.get_string("SENTRY_DSN")
 
         if not dsn:
@@ -160,10 +158,27 @@ class AzureTtsConfig:
     key: str | None
 
     @classmethod
-    def from_env(cls, env: Env) -> AzureTtsConfig:
+    def from_env(cls, env: Env) -> Self:
         return cls(
             region=env.get_string("AZURE_SPEECH_REGION"),
             key=env.get_string("AZURE_SPEECH_KEY"),
+        )
+
+
+@dataclass
+class TelegramConfig:
+    token: str
+    polling_timeout: int
+
+    @classmethod
+    def from_env(cls, env: Env) -> Self | None:
+        token = env.get_string("TELEGRAM_TOKEN")
+        if token is None:
+            return None
+
+        return cls(
+            token=token,
+            polling_timeout=env.get_int("TELEGRAM_POLLING_TIMEOUT", 10),
         )
 
 
@@ -179,7 +194,7 @@ class Config:
     telegram: TelegramConfig | None
 
     @classmethod
-    def from_env(cls, env: Env) -> Config:
+    def from_env(cls, env: Env) -> Self:
         return cls(
             use_stub_tts=env.get_bool("TTS_USE_STUB", True),
             use_stub_image_recognizer=env.get_bool("OCR_USE_STUB", True),
@@ -189,21 +204,4 @@ class Config:
             repo_type=env.get_string("REPO_TYPE", "memory"),
             sentry=SentryConfig.from_env(env),
             telegram=TelegramConfig.from_env(env),
-        )
-
-
-@dataclass
-class TelegramConfig:
-    token: str
-    polling_timeout: int
-
-    @classmethod
-    def from_env(cls, env: Env) -> TelegramConfig | None:
-        token = env.get_string("TELEGRAM_TOKEN")
-        if token is None:
-            return None
-
-        return cls(
-            token=token,
-            polling_timeout=env.get_int("TELEGRAM_POLLING_TIMEOUT", 10),
         )
