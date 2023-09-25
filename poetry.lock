@@ -91,6 +91,28 @@ jupyter = ["ipython (>=7.8.0)", "tokenize-rt (>=3.2.0)"]
 uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
+name = "bs-config"
+version = "0.1.0"
+description = "Config"
+optional = false
+python-versions = ">=3.10,<3.12"
+files = [
+    {file = "bs_config-0.1.0-py3-none-any.whl", hash = "sha256:d5f5a255d2dde8f4523b7cc4f94d8283d3e190975b10d4e62f8b523a441252b2"},
+    {file = "bs_config-0.1.0.tar.gz", hash = "sha256:1adb373c00037ce652cbc34af4778a2c875fcd67f484c0e4eb94a39e5a32a808"},
+]
+
+[package.dependencies]
+python-dotenv = {version = ">=1.0.0,<2.0.0", optional = true, markers = "extra == \"dotenv\""}
+
+[package.extras]
+dotenv = ["python-dotenv (>=1.0.0,<2.0.0)"]
+
+[package.source]
+type = "legacy"
+url = "https://pypi.blindfolded.surgery"
+reference = "internal"
+
+[[package]]
 name = "cachetools"
 version = "5.3.1"
 description = "Extensible memoizing collections and decorators"
@@ -1269,4 +1291,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.11"
-content-hash = "45ece6280bb8627bdf0d3bf47b674a9cc629e5f73a1c1ca67f274a0dc1159ff1"
+content-hash = "46da7823a66d96613ca5a73557486999a52768fab89968858133e90b329cc8c0"

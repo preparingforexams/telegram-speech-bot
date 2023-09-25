@@ -2,10 +2,11 @@ import logging
 from dataclasses import dataclass
 
 import sentry_sdk
+from bs_config import Env
 from injector import Injector, Module, multiprovider, provider
 
 from bob.application import Application, ports, repos
-from bob.config import Config, SentryConfig, load_env
+from bob.config import Config, SentryConfig
 from bob.infrastructure.adapters import (
     image_text_recognizer,
     language_detector,
@@ -117,7 +118,7 @@ class ReposModule(Module):
 def initialize() -> Application:
     _setup_logging()
 
-    config = Config.from_env(load_env(""))
+    config = Config.from_env(Env.load(include_default_dotenv=True))
     _setup_sentry(config.sentry)
 
     injector = Injector(
