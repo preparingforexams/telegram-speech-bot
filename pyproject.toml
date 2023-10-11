@@ -2,7 +2,7 @@
 name = "bob"
 description = "Sends voice messages"
 version = "1.0.0"
-authors = ["OpenAlcoholics <team@openalcoholics.group>"]
+authors = ["BlindfoldedSurgery <team@blindfolded.surgery>"]
 license = "MIT"
 
 [[tool.poetry.source]]
