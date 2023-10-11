@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bob"
-description = "Sends voide messages"
+description = "Sends voice messages"
 version = "1.0.0"
 authors = ["OpenAlcoholics <team@openalcoholics.group>"]
 license = "MIT"
@@ -32,7 +32,7 @@ sentry-sdk = "^1.14.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.0.0"
-mypy = "~1.6.0"
+mypy = "~1.6"
 pytest = "^7.1.2"
 ruff = "0.0.292"
 types-aiofiles = "^22.1.0"
