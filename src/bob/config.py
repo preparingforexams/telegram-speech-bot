@@ -30,8 +30,8 @@ class AzureTtsConfig:
     @classmethod
     def from_env(cls, env: Env) -> Self:
         return cls(
-            region=env.get_string("AZURE_SPEECH_REGION"),
-            key=env.get_string("AZURE_SPEECH_KEY"),
+            region=env.get_string("SPEECH_REGION"),
+            key=env.get_string("SPEECH_KEY"),
         )
 
 
@@ -42,13 +42,13 @@ class TelegramConfig:
 
     @classmethod
     def from_env(cls, env: Env) -> Self | None:
-        token = env.get_string("TELEGRAM_TOKEN")
+        token = env.get_string("TOKEN")
         if token is None:
             return None
 
         return cls(
             token=token,
-            polling_timeout=env.get_int("TELEGRAM_POLLING_TIMEOUT", default=10),
+            polling_timeout=env.get_int("POLLING_TIMEOUT", default=10),
         )
 
 
@@ -78,9 +78,9 @@ class Config:
                 "LANGUAGE_DETECTOR_USE_STUB",
                 default=True,
             ),
-            azure_tts=AzureTtsConfig.from_env(env),
+            azure_tts=AzureTtsConfig.from_env(env.scoped("AZURE_")),
             gcp_project=env.get_string("GOOGLE_CLOUD_PROJECT"),
             repo_type=env.get_string("REPO_TYPE", default="memory"),
             sentry=SentryConfig.from_env(env),
-            telegram=TelegramConfig.from_env(env),
+            telegram=TelegramConfig.from_env(env.scoped("TELEGRAM_")),
         )
