@@ -33,17 +33,17 @@ trio = ["trio (>=0.23)"]
 
 [[package]]
 name = "azure-cognitiveservices-speech"
-version = "1.35.0"
+version = "1.36.0"
 description = "Microsoft Cognitive Services Speech SDK for Python"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "azure_cognitiveservices_speech-1.35.0-py3-none-macosx_10_14_x86_64.whl", hash = "sha256:022b9e6f11a9b7e2043f7969e8a91769f4660e936ff7550aa2ff4b3cd0504990"},
-    {file = "azure_cognitiveservices_speech-1.35.0-py3-none-macosx_11_0_arm64.whl", hash = "sha256:283dfd1d393a34f05a8fe3b7ac5f3d22d11585c90f49f0871cf0a713e9338bc4"},
-    {file = "azure_cognitiveservices_speech-1.35.0-py3-none-manylinux1_x86_64.whl", hash = "sha256:57fa21d366b807a4a0d08259537f9999a1b0b9eb326a8abb6450a40262bc399d"},
-    {file = "azure_cognitiveservices_speech-1.35.0-py3-none-manylinux2014_aarch64.whl", hash = "sha256:8c3e7f669c49ca418222dd4ecb085db5f897156db742182d193536f1596a84c0"},
-    {file = "azure_cognitiveservices_speech-1.35.0-py3-none-win32.whl", hash = "sha256:112b401b49cd162dd6d89d535ee4b5435a749ab4daf13e086323c6073366f23d"},
-    {file = "azure_cognitiveservices_speech-1.35.0-py3-none-win_amd64.whl", hash = "sha256:35248f297068348e463d23404241209022a66c92ed5237e56ffd75c5983e30b9"},
+    {file = "azure_cognitiveservices_speech-1.36.0-py3-none-macosx_10_14_x86_64.whl", hash = "sha256:76542b7b0f010d9b2304382b9f146f8e57ba14c6f0c6d90580c81f55c22baf1f"},
+    {file = "azure_cognitiveservices_speech-1.36.0-py3-none-macosx_11_0_arm64.whl", hash = "sha256:81ac075c6f2cb97a35fa88306adbddabfe54a7de2b582f349a484ee2b8bd81e0"},
+    {file = "azure_cognitiveservices_speech-1.36.0-py3-none-manylinux1_x86_64.whl", hash = "sha256:ed1f6ba3dd439d8f7771d4e32a1e2224e1b4103e050f07120eb9d0cfb5aae82e"},
+    {file = "azure_cognitiveservices_speech-1.36.0-py3-none-manylinux2014_aarch64.whl", hash = "sha256:208517147f59fdf3fcce5e62584763d7710d4fbfd3af6d63d1240d3da34ff2c8"},
+    {file = "azure_cognitiveservices_speech-1.36.0-py3-none-win32.whl", hash = "sha256:ee6fbd600e025900591e2a7eca1b2bec287cb7460c8719fd564682b065d12948"},
+    {file = "azure_cognitiveservices_speech-1.36.0-py3-none-win_amd64.whl", hash = "sha256:37b1d977ab961389c89e499d00a7c3ff64ead988e16cee8c563dab3464750871"},
 ]
 
 [[package]]
@@ -359,53 +359,53 @@ protobuf = ">=3.19.5,<3.20.0 || >3.20.0,<3.20.1 || >3.20.1,<4.21.0 || >4.21.0,<4
 
 [[package]]
 name = "google-cloud-texttospeech"
-version = "2.16.2"
+version = "2.16.3"
 description = "Google Cloud Texttospeech API client library"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "google-cloud-texttospeech-2.16.2.tar.gz", hash = "sha256:eaac809d9a7d07c5c9eb58613916542cb2fa52c14f9f31da7ff4989f717f8e0c"},
-    {file = "google_cloud_texttospeech-2.16.2-py2.py3-none-any.whl", hash = "sha256:59de4d6021d39502572e9d6acdf851c2466f9140357dce249641d137bf63f062"},
+    {file = "google-cloud-texttospeech-2.16.3.tar.gz", hash = "sha256:fabc315032d137da0710bb4c268734d336212d8fa8316b23b277dd3a84ce721c"},
+    {file = "google_cloud_texttospeech-2.16.3-py2.py3-none-any.whl", hash = "sha256:5d1e23f9270908a5d7ecf2af04105fbd3a7ddde60fe48506e397bd18c1ece499"},
 ]
 
 [package.dependencies]
 google-api-core = {version = ">=1.34.1,<2.0.dev0 || >=2.11.dev0,<3.0.0dev", extras = ["grpc"]}
-google-auth = ">=2.14.1,<3.0.0dev"
+google-auth = ">=2.14.1,<2.24.0 || >2.24.0,<2.25.0 || >2.25.0,<3.0.0dev"
 proto-plus = ">=1.22.3,<2.0.0dev"
 protobuf = ">=3.19.5,<3.20.0 || >3.20.0,<3.20.1 || >3.20.1,<4.21.0 || >4.21.0,<4.21.1 || >4.21.1,<4.21.2 || >4.21.2,<4.21.3 || >4.21.3,<4.21.4 || >4.21.4,<4.21.5 || >4.21.5,<5.0.0dev"
 
 [[package]]
 name = "google-cloud-translate"
-version = "3.15.2"
+version = "3.15.3"
 description = "Google Cloud Translate API client library"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "google-cloud-translate-3.15.2.tar.gz", hash = "sha256:6d4c2447bc2f88ec5e0d3a6778c3d85fab36da214b9384b10659b29e8db9f594"},
-    {file = "google_cloud_translate-3.15.2-py2.py3-none-any.whl", hash = "sha256:f20d5ea4bbe686e3bfd897f3afb6ddaf91738e86233ab0b8343f43a9cbc5e672"},
+    {file = "google-cloud-translate-3.15.3.tar.gz", hash = "sha256:ed587a1e60cf847c3b1add6b28256e2d1722fa73a4285334f5ec5ca933e616f2"},
+    {file = "google_cloud_translate-3.15.3-py2.py3-none-any.whl", hash = "sha256:2e92cd286fb25d5cf9fc0e8710f524fdf80656b6b64947d244e91696e69346ad"},
 ]
 
 [package.dependencies]
 google-api-core = {version = ">=1.34.1,<2.0.dev0 || >=2.11.dev0,<3.0.0dev", extras = ["grpc"]}
-google-auth = ">=2.14.1,<3.0.0dev"
+google-auth = ">=2.14.1,<2.24.0 || >2.24.0,<2.25.0 || >2.25.0,<3.0.0dev"
 google-cloud-core = ">=1.4.4,<3.0.0dev"
 proto-plus = ">=1.22.3,<2.0.0dev"
 protobuf = ">=3.19.5,<3.20.0 || >3.20.0,<3.20.1 || >3.20.1,<4.21.0 || >4.21.0,<4.21.1 || >4.21.1,<4.21.2 || >4.21.2,<4.21.3 || >4.21.3,<4.21.4 || >4.21.4,<4.21.5 || >4.21.5,<5.0.0dev"
 
 [[package]]
 name = "google-cloud-vision"
-version = "3.7.1"
+version = "3.7.2"
 description = "Google Cloud Vision API client library"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "google-cloud-vision-3.7.1.tar.gz", hash = "sha256:868be6df5bb5491c6f31bedf600af23661c02776ca564c151c42c63e0b3465db"},
-    {file = "google_cloud_vision-3.7.1-py2.py3-none-any.whl", hash = "sha256:55bb95304ccfe6d8b7a7de7fe6cb3f580d87dcbf971bb8225d1beb0e17a2d75c"},
+    {file = "google-cloud-vision-3.7.2.tar.gz", hash = "sha256:044330ad618c810333ff2296cd27ffd145f249638d1b35b270de6b460b00e8d2"},
+    {file = "google_cloud_vision-3.7.2-py2.py3-none-any.whl", hash = "sha256:a313088fcd9c016af0427c2447eea1ad01bc192ca4cc33babaace1be587bbf75"},
 ]
 
 [package.dependencies]
 google-api-core = {version = ">=1.34.1,<2.0.dev0 || >=2.11.dev0,<3.0.0dev", extras = ["grpc"]}
-google-auth = ">=2.14.1,<3.0.0dev"
+google-auth = ">=2.14.1,<2.24.0 || >2.24.0,<2.25.0 || >2.25.0,<3.0.0dev"
 proto-plus = ">=1.22.3,<2.0.0dev"
 protobuf = ">=3.19.5,<3.20.0 || >3.20.0,<3.20.1 || >3.20.1,<4.21.0 || >4.21.0,<4.21.1 || >4.21.1,<4.21.2 || >4.21.2,<4.21.3 || >4.21.3,<4.21.4 || >4.21.4,<4.21.5 || >4.21.5,<5.0.0dev"
 
@@ -1118,13 +1118,13 @@ files = [
 
 [[package]]
 name = "sentry-sdk"
-version = "1.40.6"
+version = "1.41.0"
 description = "Python client for Sentry (https://sentry.io)"
 optional = false
 python-versions = "*"
 files = [
-    {file = "sentry-sdk-1.40.6.tar.gz", hash = "sha256:f143f3fb4bb57c90abef6e2ad06b5f6f02b2ca13e4060ec5c0549c7a9ccce3fa"},
-    {file = "sentry_sdk-1.40.6-py2.py3-none-any.whl", hash = "sha256:becda09660df63e55f307570e9817c664392655a7328bbc414b507e9cb874c67"},
+    {file = "sentry-sdk-1.41.0.tar.gz", hash = "sha256:4f2d6c43c07925d8cd10dfbd0970ea7cb784f70e79523cca9dbcd72df38e5a46"},
+    {file = "sentry_sdk-1.41.0-py2.py3-none-any.whl", hash = "sha256:be4f8f4b29a80b6a3b71f0f31487beb9e296391da20af8504498a328befed53f"},
 ]
 
 [package.dependencies]
@@ -1150,7 +1150,7 @@ huey = ["huey (>=2)"]
 loguru = ["loguru (>=0.5)"]
 opentelemetry = ["opentelemetry-distro (>=0.35b0)"]
 opentelemetry-experimental = ["opentelemetry-distro (>=0.40b0,<1.0)", "opentelemetry-instrumentation-aiohttp-client (>=0.40b0,<1.0)", "opentelemetry-instrumentation-django (>=0.40b0,<1.0)", "opentelemetry-instrumentation-fastapi (>=0.40b0,<1.0)", "opentelemetry-instrumentation-flask (>=0.40b0,<1.0)", "opentelemetry-instrumentation-requests (>=0.40b0,<1.0)", "opentelemetry-instrumentation-sqlite3 (>=0.40b0,<1.0)", "opentelemetry-instrumentation-urllib (>=0.40b0,<1.0)"]
-pure-eval = ["asttokens", "executing", "pure_eval"]
+pure-eval = ["asttokens", "executing", "pure-eval"]
 pymongo = ["pymongo (>=3.1)"]
 pyspark = ["pyspark (>=2.4.4)"]
 quart = ["blinker (>=1.1)", "quart (>=0.16.1)"]
