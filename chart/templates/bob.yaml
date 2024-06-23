@@ -31,7 +31,7 @@ spec:
           volumeMounts:
             - mountPath: /secrets/sa.json
               name: secrets
-              subPath: SERVICE_ACCOUNT_JSON
+              subPath: GSA_JSON
           envFrom:
             - configMapRef:
                 name: config
