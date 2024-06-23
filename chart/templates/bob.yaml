@@ -27,7 +27,7 @@ spec:
             secretName: secrets
       containers:
         - name: app
-          image: {{ .Values.image.app }}
+          image: {{ .Values.image.app }}:{{ .Values.appVersion }}
           volumeMounts:
             - mountPath: /secrets/sa.json
               name: secrets
