@@ -101,7 +101,7 @@ class PtbTelegramQueue(TelegramQueue):
             update_id: int | None = None
             while True:
                 try:
-                    native_updates: tuple[telegram.Update] = await bot.get_updates(
+                    native_updates = await bot.get_updates(
                         offset=None if update_id is None else update_id + 1,
                         timeout=self._polling_timeout,
                     )
