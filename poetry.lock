@@ -536,13 +536,13 @@ trio = ["trio (>=0.22.0,<0.26.0)"]
 
 [[package]]
 name = "httpx"
-version = "0.26.0"
+version = "0.27.0"
 description = "The next generation HTTP client."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "httpx-0.26.0-py3-none-any.whl", hash = "sha256:8915f5a3627c4d47b73e8202457cb28f1266982d1159bd5779d86a80c0eab1cd"},
-    {file = "httpx-0.26.0.tar.gz", hash = "sha256:451b55c30d5185ea6b23c2c793abf9bb237d2a7dfb901ced6ff69ad37ec1dfaf"},
+    {file = "httpx-0.27.0-py3-none-any.whl", hash = "sha256:71d5465162c13681bff01ad59b2cc68dd838ea1f10e51574bac27103f00c91a5"},
+    {file = "httpx-0.27.0.tar.gz", hash = "sha256:a0cb88a46f32dc874e04ee956e4c2764aba2aa228f650b06788ba6bda2962ab5"},
 ]
 
 [package.dependencies]
@@ -1065,17 +1065,17 @@ cli = ["click (>=5.0)"]
 
 [[package]]
 name = "python-telegram-bot-raw"
-version = "20.8"
+version = "21.3"
 description = "We have made you a wrapper you can't refuse"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "python-telegram-bot-raw-20.8.tar.gz", hash = "sha256:f0fe6ed9bb6747f4231122fdaedbe3f4eef2e2b90744db3a830b3739f306e50f"},
-    {file = "python_telegram_bot_raw-20.8-py3-none-any.whl", hash = "sha256:5b5d4f362a3c2d8a9b0aa127e83d681d5c92343e58b196b587566da0ad4ea4e4"},
+    {file = "python-telegram-bot-raw-21.3.tar.gz", hash = "sha256:000245c101c56a7d7e3b1cd6b0a75a120838979e24c0e75ddfdc28234d09eac6"},
+    {file = "python_telegram_bot_raw-21.3-py3-none-any.whl", hash = "sha256:ff4b3f3992f121ebfec46b52a51c72d38db2942483a7e150c5d8573445a0fefc"},
 ]
 
 [package.dependencies]
-httpx = ">=0.26.0,<0.27.0"
+httpx = ">=0.27,<1.0"
 
 [package.extras]
 all = ["cryptography (>=39.0.1)", "httpx[http2]", "httpx[socks]"]
@@ -1399,4 +1399,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.11"
-content-hash = "8c5c75a699d77756ced8d9d6d304e45caf8bc37a32ab150aba7e421476071ed3"
+content-hash = "288ed84cc644138c2a5671d94c24624f92a6fdf5e872740c8a3d01e8628ee0e8"
