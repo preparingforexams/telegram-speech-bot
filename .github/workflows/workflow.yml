@@ -50,7 +50,7 @@ jobs:
       - uses: WyriHaximus/github-action-helm3@v4
         with:
           exec: helm upgrade bob . --install --namespace=bob --atomic
-          kubeconfig: '${{ secrets.KUBECONFIG_RAW }}'
+          kubeconfig: '${{ secrets.BORN_KUBECONFIG_RAW }}'
 
   clean:
     concurrency: cleanup
