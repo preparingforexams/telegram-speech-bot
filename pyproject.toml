@@ -11,7 +11,7 @@ url = "https://pypi.bjoernpetersen.net"
 priority = "explicit"
 
 [tool.poetry.dependencies]
-aiofiles = "^23.0.0"
+aiofiles = "^24.0.0"
 azure-cognitiveservices-speech = "^1.28.0"
 bs-config = { version = "1.0.2", extras = ["dotenv"], source = "internal" }
 certifi = "2024.6.2"
