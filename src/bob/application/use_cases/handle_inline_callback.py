@@ -22,7 +22,7 @@ class HandleInlineCallback:
     async def __call__(self, callback: InlineCallback) -> None:
         key = f"{callback.chat_id}-{callback.text_message_id}"
         state: InlineMessageState | None = await self.state_repo.get_value(
-            key
+            key,
         )  # type: ignore
 
         if state is None:
