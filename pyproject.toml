@@ -33,7 +33,7 @@ sentry-sdk = "^2.0.0"
 [tool.poetry.group.dev.dependencies]
 mypy = "~1.11"
 pytest = "^8.0.0"
-ruff = "0.6.4"
+ruff = "0.6.5"
 types-aiofiles = "^22.1.0"
 types-cachetools = "^5.2.1"
 types-Deprecated = "^1.2.9"
