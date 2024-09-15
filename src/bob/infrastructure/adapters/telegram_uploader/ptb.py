@@ -1,7 +1,8 @@
 import asyncio
 import logging
+from collections.abc import Awaitable, Callable
 from io import BytesIO
-from typing import Awaitable, Callable, TypeVar
+from typing import TypeVar
 
 import telegram
 from telegram.error import RetryAfter, TelegramError

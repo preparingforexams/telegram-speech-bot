@@ -1,7 +1,7 @@
 import asyncio
 import logging
 import sys
-from typing import AsyncIterable
+from collections.abc import AsyncIterable
 
 import httpx
 import telegram

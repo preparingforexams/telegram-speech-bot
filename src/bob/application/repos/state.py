@@ -1,7 +1,7 @@
 import abc
-from typing import Mapping, Sequence, TypeAlias
+from collections.abc import Mapping, Sequence
 
-Primitive: TypeAlias = (
+type Primitive = (
     str | int | float | bool | None | Sequence["Primitive"] | Mapping[str, "Primitive"]
 )
 

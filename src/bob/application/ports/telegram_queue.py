@@ -1,6 +1,6 @@
 import abc
+from collections.abc import AsyncIterable
 from dataclasses import dataclass
-from typing import AsyncIterable
 
 from bob.domain.model import InlineCallback
 

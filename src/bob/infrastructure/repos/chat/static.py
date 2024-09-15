@@ -1,4 +1,4 @@
-from typing import Iterable
+from collections.abc import Iterable
 
 from bob.application.repos import ChatRepository
 from bob.domain.model import Chat

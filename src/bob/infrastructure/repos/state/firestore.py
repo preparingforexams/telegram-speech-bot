@@ -1,5 +1,6 @@
 from asyncio.locks import Lock
-from typing import Mapping, cast
+from collections.abc import Mapping
+from typing import cast
 
 from google.cloud.firestore import AsyncClient, AsyncCollectionReference
 
