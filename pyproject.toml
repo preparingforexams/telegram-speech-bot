@@ -28,7 +28,7 @@ injector = "^0.22.0"
 langcodes = "^3.3.0"
 language-data = "1.2.0"
 more-itertools = "^10.0.0"
-python = "~3.12"
+python = "~3.13"
 python-telegram-bot = "21.6"
 sentry-sdk = "^2.0.0"
 
