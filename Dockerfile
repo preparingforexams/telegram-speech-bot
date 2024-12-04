@@ -1,4 +1,4 @@
-FROM ghcr.io/blindfoldedsurgery/poetry:2.1.1-pipx-3.13-bullseye
+FROM ghcr.io/blindfoldedsurgery/poetry:2.1.1-pipx-3.13-bookworm
 
 USER root
 RUN apt-get update -qq \
