@@ -1,25 +1,31 @@
-FROM ghcr.io/blindfoldedsurgery/poetry:2.1.1-pipx-3.13-bookworm
+FROM ghcr.io/astral-sh/uv:0.5-python3.13-bookworm-slim
 
-USER root
 RUN apt-get update -qq \
     && apt-get install -y --no-install-recommends \
       libasound2 \
       libssl-dev \
+      tini \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists /var/cache/apt/archives
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
+
+RUN groupadd --system --gid 500 app
+RUN useradd --system --uid 500 --gid app --create-home --home-dir /app app
+
 USER app
+WORKDIR /app
 
-COPY [ "poetry.toml", "poetry.lock", "pyproject.toml", "./" ]
+COPY [ "uv.lock", "pyproject.toml", "./" ]
 
-RUN poetry install --no-interaction --ansi --only=main --no-root
+RUN uv sync --locked --all-extras --no-dev --no-install-workspace
 
 # We don't want the tests
 COPY src/bob ./src/bob
 
-RUN poetry install --no-interaction --ansi --only-root
+RUN uv sync --locked --all-extras --no-dev --no-editable
 
 ARG APP_VERSION
 ENV APP_VERSION=$APP_VERSION
 
-ENTRYPOINT [ "tini", "--", "poetry", "run", "python", "-m", "bob" ]
+ENV UV_NO_SYNC=true
+ENTRYPOINT [ "tini", "--", "uv", "run", "-m", "bob" ]
 CMD [ "handle-updates" ]

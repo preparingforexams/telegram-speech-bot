@@ -11,12 +11,14 @@ jobs:
   lint:
     uses: BlindfoldedSurgery/actions-python/.github/workflows/lint.yml@v2
     with:
+      build-tool: uv
       python-version: '3.13'
       debian-version: bookworm
 
   test:
     uses: BlindfoldedSurgery/actions-python/.github/workflows/test.yml@v2
     with:
+      build-tool: uv
       python-version: '3.13'
       debian-version: bookworm
 
