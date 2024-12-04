@@ -25,15 +25,15 @@ wheels = [
 
 [[package]]
 name = "azure-cognitiveservices-speech"
-version = "1.28.0"
+version = "1.41.1"
 source = { registry = "https://pypi.org/simple" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e0/ac/befc1ff94222db14e12efe6f550b9ed6d15c58357d22e7c6ab7fe1ba4e14/azure_cognitiveservices_speech-1.28.0-py3-none-macosx_10_14_x86_64.whl", hash = "sha256:a6c277ec9c93f586dcc74d3a56a6aa0259f4cf371f5e03afcf169c691e2c4d0c", size = 6690022 },
-    { url = "https://files.pythonhosted.org/packages/f2/0b/ed8bb498be73b337f3850e31140e6721b7e4fdfb62afa0e87193123a3918/azure_cognitiveservices_speech-1.28.0-py3-none-macosx_11_0_arm64.whl", hash = "sha256:a412c6c5bc528548e0ee5fc5fe89fb8351307d0c5ef7ac4d506fab3d58efcb4a", size = 6522820 },
-    { url = "https://files.pythonhosted.org/packages/ac/69/dd9fab5b66875651e43010a1b30624ad051a2b1f842705d022c6416f1194/azure_cognitiveservices_speech-1.28.0-py3-none-manylinux1_x86_64.whl", hash = "sha256:ceb5a8862da4ab861bd06653074a4e5dc2d66a54f03dd4dd9356da7672febbce", size = 3110304 },
-    { url = "https://files.pythonhosted.org/packages/eb/55/27e45fda76517bfa22519b28bd7b3871bb5c9547de76399c0ea33563aa62/azure_cognitiveservices_speech-1.28.0-py3-none-manylinux2014_aarch64.whl", hash = "sha256:d5cba32e9d8eaffc9d8f482c00950bc471f9dc4d7659c741c083e5e9d831b802", size = 3107056 },
-    { url = "https://files.pythonhosted.org/packages/f8/57/fa9df94c8ecc1c17e8c367c713cecd054993f7ef2b5f0491a8e598aaedde/azure_cognitiveservices_speech-1.28.0-py3-none-win32.whl", hash = "sha256:ac52c4549062771db5694346c1547334cf1bb0d08573a193c8dcec8386aa491d", size = 1345198 },
-    { url = "https://files.pythonhosted.org/packages/97/a2/15a2903e3aa23f9e2ff8cde72e197579a09760b6d5dd718f3d79f27f28a4/azure_cognitiveservices_speech-1.28.0-py3-none-win_amd64.whl", hash = "sha256:5ff042d81d7ff4e50be196419fcd2042e41a97cebb229e0940026e1314ff7751", size = 1453921 },
+    { url = "https://files.pythonhosted.org/packages/0a/d7/a543d16a2c8856327564f1d1698888f978e08646716cd6396f304562b2f8/azure_cognitiveservices_speech-1.41.1-py3-none-macosx_10_14_x86_64.whl", hash = "sha256:ea9d466f236598e37ea3dad1db203a2901ef91b407e435b59d9b22669324074d", size = 7419245 },
+    { url = "https://files.pythonhosted.org/packages/6d/78/79ef2ca832d35c090cc3f89bb74e5dcc67215d02a86d98a527a4001c77f6/azure_cognitiveservices_speech-1.41.1-py3-none-macosx_11_0_arm64.whl", hash = "sha256:0f52f7852965bb2f5cf9aed0d3c6ef58238867bb6f0287eba95e42e1a513dd74", size = 7275748 },
+    { url = "https://files.pythonhosted.org/packages/be/a4/3768fd51a1339c758cb1be5e445ec1571147d2f17f62ca4b96ce9e870296/azure_cognitiveservices_speech-1.41.1-py3-none-manylinux1_x86_64.whl", hash = "sha256:70030c6f1c875895eb985de3775f62349aa8687b6616afa9498466e281f178d3", size = 39712952 },
+    { url = "https://files.pythonhosted.org/packages/24/33/160a9f334b64cd255da953a7756bdefe4a55f5295447597de052c1601c25/azure_cognitiveservices_speech-1.41.1-py3-none-manylinux2014_aarch64.whl", hash = "sha256:94ddda0deb3a9fee58a0a781b09ab8ab95401c5daf9bfc9f84ce8134d3a77055", size = 39495162 },
+    { url = "https://files.pythonhosted.org/packages/9f/f4/e0c7311aedbfa2636a63a47dfb0d94ad142e2e72885e2526cb119b14b66d/azure_cognitiveservices_speech-1.41.1-py3-none-win32.whl", hash = "sha256:039eec52c0a549a30658fa24a06d42afc6366c47b03b961c0b6f730fd421293e", size = 2108337 },
+    { url = "https://files.pythonhosted.org/packages/eb/a8/b4ce0c253c43c1ba44d795bc97910b800e8ff9991216666eb79b728b35e4/azure_cognitiveservices_speech-1.41.1-py3-none-win_amd64.whl", hash = "sha256:13679949f52f89c263e8b1c6a2d0f384d663917c58b150772cf42b710a01321c", size = 2376756 },
 ]
 
 [[package]]
@@ -72,7 +72,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "aiofiles", specifier = ">=24.0.0,<25.0.0" },
-    { name = "azure-cognitiveservices-speech", specifier = "==1.28.*" },
+    { name = "azure-cognitiveservices-speech", specifier = "==1.41.*" },
     { name = "bs-config", extras = ["dotenv"], specifier = "==1.1.0", index = "https://pypi.bjoernpetersen.net/" },
     { name = "click", specifier = ">=8.1.3,<9.0.0" },
     { name = "deprecated", specifier = ">=1.2.13,<2.0.0" },
