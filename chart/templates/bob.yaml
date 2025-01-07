@@ -32,6 +32,7 @@ spec:
           volumeMounts:
             - mountPath: /secrets/sa.json
               name: secrets
+              readOnly: true
               subPath: GSA_JSON
           envFrom:
             - configMapRef:
@@ -44,6 +45,6 @@ spec:
           resources:
             requests:
               cpu: 50m
-              memory: 128Mi
+              memory: 256Mi
             limits:
               cpu: 200m
