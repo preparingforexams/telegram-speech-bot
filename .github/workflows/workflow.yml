@@ -23,6 +23,9 @@ jobs:
       debian-version: bookworm
 
   build-container-image:
+    permissions:
+      contents: read
+      packages: write
     needs:
       - lint
       - test
