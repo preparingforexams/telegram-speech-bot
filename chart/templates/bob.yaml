@@ -12,7 +12,7 @@ metadata:
   name: bob
 spec:
   replicas: 1
-  revisionHistoryLimit: 2
+  revisionHistoryLimit: 0
   selector:
     matchLabels:
       app: bob
@@ -22,6 +22,12 @@ spec:
       labels:
         app: bob
     spec:
+      serviceAccountName: bob
+      securityContext:
+        runAsNonRoot: true
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
       volumes:
         - name: secrets
           secret:
@@ -42,6 +48,10 @@ spec:
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /secrets/sa.json
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: [ ALL ]
           resources:
             requests:
               cpu: 50m
