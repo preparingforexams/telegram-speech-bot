@@ -9,14 +9,14 @@ jobs:
     uses: BlindfoldedSurgery/actions-meta/.github/workflows/required.yml@v1
 
   lint:
-    uses: BlindfoldedSurgery/actions-python/.github/workflows/lint.yml@v4
+    uses: BlindfoldedSurgery/actions-python/.github/workflows/lint.yml@v5
     with:
       build-tool: uv
       python-version: '3.13'
       debian-version: bookworm
 
   test:
-    uses: BlindfoldedSurgery/actions-python/.github/workflows/test.yml@v4
+    uses: BlindfoldedSurgery/actions-python/.github/workflows/test.yml@v5
     with:
       build-tool: uv
       python-version: '3.13'
