@@ -36,10 +36,9 @@ spec:
         - name: app
           image: {{ .Values.image.app }}:{{ .Values.appVersion }}
           volumeMounts:
-            - mountPath: /secrets/sa.json
-              name: secrets
+            - mountPath: /secrets
+              name: gsa-json
               readOnly: true
-              subPath: GSA_JSON
           envFrom:
             - configMapRef:
                 name: config
@@ -47,7 +46,7 @@ spec:
                 name: secrets
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
-              value: /secrets/sa.json
+              value: /secrets/gsa.json
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
