@@ -29,9 +29,9 @@ spec:
         seccompProfile:
           type: RuntimeDefault
       volumes:
-        - name: secrets
+        - name: gsa-json
           secret:
-            secretName: secrets
+            secretName: gsa-json
       containers:
         - name: app
           image: {{ .Values.image.app }}:{{ .Values.appVersion }}
