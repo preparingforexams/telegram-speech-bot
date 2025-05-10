@@ -4,6 +4,7 @@ kind: ExternalSecret
 metadata:
   name: gsa-json
 spec:
+  refreshInterval: "24h"
   secretStoreRef:
     name: scaleway-prep-speech-bot
     kind: ClusterSecretStore
