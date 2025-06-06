@@ -1,6 +1,6 @@
-import asyncio
 
 import click
+import uvloop
 
 from bob.application import Application
 from bob.init import initialize
@@ -16,4 +16,4 @@ def main(context: click.Context) -> None:
 @main.command
 @click.pass_obj
 def handle_updates(app: Application) -> None:
-    asyncio.run(TelegramUpdateRouter(app).run())
+    uvloop.run(TelegramUpdateRouter(app).run())
