@@ -2,7 +2,6 @@ import asyncio
 import logging
 from collections.abc import Awaitable, Callable
 from io import BytesIO
-from typing import TypeVar
 
 import telegram
 from telegram.error import RetryAfter, TelegramError
@@ -15,10 +14,8 @@ from bob.domain.model import InlineOption
 _LOG = logging.getLogger(__name__)
 TIMEOUTS = dict(read_timeout=180, write_timeout=180, connect_timeout=180)
 
-T = TypeVar("T")
 
-
-async def _auto_retry(func: Callable[[], Awaitable[T]]) -> T:
+async def _auto_retry[T](func: Callable[[], Awaitable[T]]) -> T:
     try:
         return await func()
     except RetryAfter as e:
