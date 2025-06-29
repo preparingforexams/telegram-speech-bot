@@ -110,6 +110,7 @@ class NatsTelegramQueue(TelegramQueue):
             )
 
     async def subscribe(self) -> AsyncIterable[Update]:
+        await self._register_webhook()
         config = self._config
         async with Client() as client:
             await client.connect(
