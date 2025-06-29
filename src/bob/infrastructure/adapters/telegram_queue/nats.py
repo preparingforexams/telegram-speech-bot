@@ -108,6 +108,7 @@ class NatsTelegramQueue(TelegramQueue):
             await bot.set_webhook(
                 url=config.receiver_url,
                 secret_token=config.receiver_secret,
+                allowed_updates=[],
             )
 
     async def subscribe(self) -> AsyncIterable[Update]:
