@@ -13,10 +13,8 @@ class TelegramUpdateRouter:
     def __init__(self, app: Application) -> None:
         self.app = app
 
-    async def _on_signal(
-        self,
-    ) -> None:
-        _LOG.info("Stopping queue due to signal")
+    async def _on_signal(self, sig: signal.Signals) -> None:
+        _LOG.info("Stopping queue due to signal %s", sig.name)
         await self.app.ports.telegram_queue.stop()
 
     @staticmethod
@@ -33,7 +31,11 @@ class TelegramUpdateRouter:
         loop = asyncio.get_running_loop()
 
         for sig in [signal.SIGTERM, signal.SIGINT]:
-            loop.add_signal_handler(sig, self._on_signal)
+            loop.add_signal_handler(
+                sig,
+                asyncio.create_task,
+                self._on_signal(sig),
+            )
 
     async def run(self) -> None:
         await self._register_signal_handlers()
