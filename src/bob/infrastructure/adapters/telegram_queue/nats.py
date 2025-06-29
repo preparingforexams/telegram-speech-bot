@@ -101,60 +101,66 @@ class NatsTelegramQueue(TelegramQueue):
             callback_query=callback,
         )
 
-    async def _register_webhook(self) -> None:
+    @staticmethod
+    async def _register_webhook(
+        bot: telegram.Bot,
+        config: NatsConfig,
+    ) -> None:
         _LOG.info("Registering webhook")
-        config = self._config
-        async with telegram.Bot(self._telegram_token) as bot:
-            await bot.set_webhook(
-                url=config.receiver_url,
-                secret_token=config.receiver_secret,
-                allowed_updates=[],
-            )
+        await bot.set_webhook(
+            url=config.receiver_url,
+            secret_token=config.receiver_secret,
+        )
 
     async def subscribe(self) -> AsyncIterable[Update]:
-        await self._register_webhook()
         config = self._config
-        async with Client() as client:
-            await client.connect(
-                config.url,
-                allow_reconnect=True,
-            )
-            jetstream = client.jetstream()
-            sub: JetStreamContext.PullSubscription = (
-                await jetstream.pull_subscribe_bind(
-                    consumer=config.consumer_name,
-                    stream=config.stream_name,
+        async with telegram.Bot(self._telegram_token) as bot:
+            await self._register_webhook(bot, config)
+
+            async with Client() as client:
+                await client.connect(
+                    config.url,
+                    allow_reconnect=True,
                 )
-            )
-
-            while not self._is_closed:
-                try:
-                    messages = await sub.fetch(timeout=10)
-                except TimeoutError:
-                    continue
-                except ServiceUnavailableError as e:
-                    _LOG.warning(
-                        "NATS service unavailable. Retrying after a short wait...",
-                        exc_info=e,
+                jetstream = client.jetstream()
+                sub: JetStreamContext.PullSubscription = (
+                    await jetstream.pull_subscribe_bind(
+                        consumer=config.consumer_name,
+                        stream=config.stream_name,
                     )
-                    await asyncio.sleep(5)
-                    continue
-                except Exception:
-                    _LOG.exception("Unknown error while fetching messages")
-                    continue
+                )
 
-                for message in messages:
-                    native_update = telegram.Update.de_json(json.loads(message.data))
-                    update = await self._convert_update(native_update)
-
-                    if update is None:
-                        _LOG.debug("Ignoring update that could not be converted")
-                        await message.ack()
+                while not self._is_closed:
+                    try:
+                        messages = await sub.fetch(timeout=10)
+                    except TimeoutError:
+                        continue
+                    except ServiceUnavailableError as e:
+                        _LOG.warning(
+                            "NATS service unavailable. Retrying after a short wait...",
+                            exc_info=e,
+                        )
+                        await asyncio.sleep(5)
+                        continue
+                    except Exception:
+                        _LOG.exception("Unknown error while fetching messages")
                         continue
 
-                    yield update
+                    for message in messages:
+                        native_update = telegram.Update.de_json(
+                            data=json.loads(message.data),
+                            bot=bot,
+                        )
+                        update = await self._convert_update(native_update)
 
-                    await message.ack()
+                        if update is None:
+                            _LOG.debug("Ignoring update that could not be converted")
+                            await message.ack()
+                            continue
+
+                        yield update
+
+                        await message.ack()
 
     async def stop(self) -> None:
         self._is_closed = True
