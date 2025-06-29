@@ -20,6 +20,7 @@ class PtbTelegramQueue(TelegramQueue):
     def __init__(self, config: TelegramConfig):
         self._token = config.token
         self._polling_timeout = config.polling_timeout
+        self._is_closed = False
 
     @staticmethod
     def _extract_sender_name(user: telegram.User | None) -> str | None:
@@ -99,7 +100,7 @@ class PtbTelegramQueue(TelegramQueue):
             get_updates_request=HTTPXRequest(http_version="1.1"),
         ) as bot:
             update_id: int | None = None
-            while True:
+            while not self._is_closed:
                 try:
                     native_updates = await bot.get_updates(
                         offset=None if update_id is None else update_id + 1,
@@ -127,3 +128,6 @@ class PtbTelegramQueue(TelegramQueue):
                         continue
 
                     yield update
+
+    async def stop(self) -> None:
+        self._is_closed = True

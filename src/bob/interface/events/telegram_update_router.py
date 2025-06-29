@@ -1,6 +1,6 @@
+import asyncio
 import logging
 import signal
-from typing import Any
 
 from bob.application import Application
 from bob.application.ports.telegram_queue import Photo, PhotoSize
@@ -12,11 +12,12 @@ _LOG = logging.getLogger(__name__)
 class TelegramUpdateRouter:
     def __init__(self, app: Application) -> None:
         self.app = app
-        self._should_kill = False
 
-    def _on_signal(self, sig: int, _: Any) -> None:
-        if sig in [signal.SIGTERM, signal.SIGINT]:
-            self._should_kill = True
+    async def _on_signal(
+        self,
+    ) -> None:
+        _LOG.info("Stopping queue due to signal")
+        await self.app.ports.telegram_queue.stop()
 
     @staticmethod
     def _select_largest_size(photo: Photo) -> PhotoSize:
@@ -28,9 +29,14 @@ class TelegramUpdateRouter:
         )
         return max(valid_sizes, key=lambda size: size.file_size or 0)
 
+    async def _register_signal_handlers(self) -> None:
+        loop = asyncio.get_running_loop()
+
+        for sig in [signal.SIGTERM, signal.SIGINT]:
+            loop.add_signal_handler(sig, self._on_signal)
+
     async def run(self) -> None:
-        signal.signal(signal.SIGINT, self._on_signal)
-        signal.signal(signal.SIGTERM, self._on_signal)
+        await self._register_signal_handlers()
 
         async for update in self.app.ports.telegram_queue.subscribe():
             _LOG.info(f"Received update {update.id}")
@@ -60,6 +66,4 @@ class TelegramUpdateRouter:
             if callback := update.callback_query:
                 await self.app.handle_inline_callback(callback)
 
-            if self._should_kill:
-                _LOG.warning("Shutting down because of signal")
-                break
+        _LOG.info("Queue stopped")

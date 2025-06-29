@@ -27,6 +27,7 @@ class NatsTelegramQueue(TelegramQueue):
     ):
         self._telegram_token = telegram_config.token
         self._config = nats_config
+        self._is_closed = False
 
     @staticmethod
     def _extract_sender_name(user: telegram.User | None) -> str | None:
@@ -125,7 +126,7 @@ class NatsTelegramQueue(TelegramQueue):
                 )
             )
 
-            while True:
+            while not self._is_closed:
                 try:
                     messages = await sub.fetch(timeout=10)
                 except TimeoutError:
@@ -153,3 +154,6 @@ class NatsTelegramQueue(TelegramQueue):
                     yield update
 
                     await message.ack()
+
+    async def stop(self) -> None:
+        self._is_closed = True

@@ -38,3 +38,7 @@ class TelegramQueue(abc.ABC):
     @abc.abstractmethod
     def subscribe(self) -> AsyncIterable[Update]:
         pass
+
+    @abc.abstractmethod
+    async def stop(self) -> None:
+        pass
