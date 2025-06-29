@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from typing import Self
 
 from bs_config import Env
+from bs_nats_updater import NatsConfig
 
 
 @dataclass
@@ -59,6 +60,7 @@ class Config:
     use_stub_language_detector: bool
     azure_tts: AzureTtsConfig
     gcp_project: str | None
+    nats: NatsConfig | None
     repo_type: str
     sentry: SentryConfig | None
     telegram: TelegramConfig | None
@@ -80,6 +82,7 @@ class Config:
             ),
             azure_tts=AzureTtsConfig.from_env(env.scoped("AZURE_")),
             gcp_project=env.get_string("GOOGLE_CLOUD_PROJECT"),
+            nats=NatsConfig.from_env(env.scoped("NATS_"), is_optional=True),
             repo_type=env.get_string("REPO_TYPE", default="memory"),
             sentry=SentryConfig.from_env(env),
             telegram=TelegramConfig.from_env(env.scoped("TELEGRAM_")),

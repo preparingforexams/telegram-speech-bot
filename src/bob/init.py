@@ -65,12 +65,19 @@ class PortsModule(Module):
 
     @provider
     def provide_telegram_queue(self) -> ports.TelegramQueue:
-        config = self.config.telegram
+        telegram_config = self.config.telegram
+        nats_config = self.config.nats
 
-        if not config:
+        if not telegram_config:
             raise ValueError("Missing telegram config")
 
-        return telegram_queue.PtbTelegramQueue(config)
+        if nats_config is not None:
+            return telegram_queue.NatsTelegramQueue(
+                telegram_config=telegram_config,
+                nats_config=nats_config,
+            )
+
+        return telegram_queue.PtbTelegramQueue(telegram_config)
 
     @provider
     def provide_telegram_uploader(self) -> ports.TelegramUploader:
