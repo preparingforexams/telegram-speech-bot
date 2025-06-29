@@ -15,7 +15,7 @@ class TelegramUpdateRouter:
         self._should_kill = False
 
     def _on_signal(self, sig: int, _: Any) -> None:
-        if sig == signal.SIGTERM:
+        if sig in [signal.SIGTERM, signal.SIGINT]:
             self._should_kill = True
 
     @staticmethod
@@ -29,6 +29,7 @@ class TelegramUpdateRouter:
         return max(valid_sizes, key=lambda size: size.file_size or 0)
 
     async def run(self) -> None:
+        signal.signal(signal.SIGINT, self._on_signal)
         signal.signal(signal.SIGTERM, self._on_signal)
 
         async for update in self.app.ports.telegram_queue.subscribe():
