@@ -51,16 +51,16 @@ wheels = [
 
 [[package]]
 name = "azure-core"
-version = "1.34.0"
+version = "1.35.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "requests" },
     { name = "six" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/c9/29/ff7a519a315e41c85bab92a7478c6acd1cf0b14353139a08caee4c691f77/azure_core-1.34.0.tar.gz", hash = "sha256:bdb544989f246a0ad1c85d72eeb45f2f835afdcbc5b45e43f0dbde7461c81ece", size = 297999, upload-time = "2025-05-01T23:17:27.59Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ce/89/f53968635b1b2e53e4aad2dd641488929fef4ca9dfb0b97927fa7697ddf3/azure_core-1.35.0.tar.gz", hash = "sha256:c0be528489485e9ede59b6971eb63c1eaacf83ef53001bfe3904e475e972be5c", size = 339689, upload-time = "2025-07-03T00:55:23.496Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/84/9e/5c87b49f65bb16571599bc789857d0ded2f53014d3392bc88a5d1f3ad779/azure_core-1.34.0-py3-none-any.whl", hash = "sha256:0615d3b756beccdb6624d1c0ae97284f38b78fb59a2a9839bf927c66fbbdddd6", size = 207409, upload-time = "2025-05-01T23:17:29.818Z" },
+    { url = "https://files.pythonhosted.org/packages/d4/78/bf94897361fdd650850f0f2e405b2293e2f12808239046232bdedf554301/azure_core-1.35.0-py3-none-any.whl", hash = "sha256:8db78c72868a58f3de8991eb4d22c4d368fae226dac1002998d6c50437e7dad1", size = 210708, upload-time = "2025-07-03T00:55:25.238Z" },
 ]
 
 [[package]]
@@ -296,7 +296,7 @@ wheels = [
 
 [[package]]
 name = "google-cloud-translate"
-version = "3.21.0"
+version = "3.21.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "google-api-core", extra = ["grpc"] },
@@ -306,9 +306,9 @@ dependencies = [
     { name = "proto-plus" },
     { name = "protobuf" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7b/cd/409ddbdc7b0c83f858e033f11e3a9d65231bac4e244071373d39fe53caf3/google_cloud_translate-3.21.0.tar.gz", hash = "sha256:94a91f075d039caad33978fa7fc432a9e71c422ec1678a264cbd265c2fc06dfb", size = 265935, upload-time = "2025-06-25T12:23:26.589Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/67/b6/392db496e84cc21e51cf068e3e35e4bf90ca7e78b0340e3bea24156f1953/google_cloud_translate-3.21.1.tar.gz", hash = "sha256:760f25e1b979fea6a59dca44ffc8a8dc708693c50ae37a39568ff1284c534be2", size = 265893, upload-time = "2025-07-02T15:24:41.353Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ce/de/f7fd71d21209bb5ca194472953d35d2a82618c986038f76d893caa8cb735/google_cloud_translate-3.21.0-py3-none-any.whl", hash = "sha256:6a297cda2ca5ba28a8c9a29087610edfe640896016512760a8ae577b774ac6b2", size = 204141, upload-time = "2025-06-25T12:23:25.449Z" },
+    { url = "https://files.pythonhosted.org/packages/dc/cc/7d867218b8389ff150847931a9b2415a25e642b8072c3fe57b310f1400d4/google_cloud_translate-3.21.1-py3-none-any.whl", hash = "sha256:f7d74592c3be41ce308a2b88eed6b76ff0ebbd9f87ddac4523324a64fce94e61", size = 204113, upload-time = "2025-07-02T15:24:24.77Z" },
 ]
 
 [[package]]
@@ -821,11 +821,11 @@ wheels = [
 
 [[package]]
 name = "typing-extensions"
-version = "4.14.0"
+version = "4.14.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/d1/bc/51647cd02527e87d05cb083ccc402f93e441606ff1f01739a62c8ad09ba5/typing_extensions-4.14.0.tar.gz", hash = "sha256:8676b788e32f02ab42d9e7c61324048ae4c6d844a399eebace3d4979d75ceef4", size = 107423, upload-time = "2025-06-02T14:52:11.399Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/98/5a/da40306b885cc8c09109dc2e1abd358d5684b1425678151cdaed4731c822/typing_extensions-4.14.1.tar.gz", hash = "sha256:38b39f4aeeab64884ce9f74c94263ef78f3c22467c8724005483154c26648d36", size = 107673, upload-time = "2025-07-04T13:28:34.16Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/69/e0/552843e0d356fbb5256d21449fa957fa4eff3bbc135a74a691ee70c7c5da/typing_extensions-4.14.0-py3-none-any.whl", hash = "sha256:a1514509136dd0b477638fc68d6a91497af5076466ad0fa6c338e44e359944af", size = 43839, upload-time = "2025-06-02T14:52:10.026Z" },
+    { url = "https://files.pythonhosted.org/packages/b5/00/d631e67a838026495268c2f6884f3711a15a9a2a96cd244fdaea53b823fb/typing_extensions-4.14.1-py3-none-any.whl", hash = "sha256:d1e1e3b58374dc93031d6eda2420a48ea44a36c2b4766a4fdeb3710755731d76", size = 43906, upload-time = "2025-07-04T13:28:32.743Z" },
 ]
 
 [[package]]
