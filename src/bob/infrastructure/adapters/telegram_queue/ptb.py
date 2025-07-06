@@ -2,6 +2,8 @@ import asyncio
 import logging
 import sys
 from collections.abc import AsyncIterable
+from datetime import timedelta
+from typing import cast
 
 import httpx
 import telegram
@@ -118,7 +120,8 @@ class PtbTelegramQueue(TelegramQueue):
                     continue
                 except telegram.error.RetryAfter as e:
                     _LOG.warning("Am sending too many requests to telegram")
-                    await asyncio.sleep(e.retry_after)
+                    retry_after = cast(timedelta, e.retry_after)
+                    await asyncio.sleep(retry_after.total_seconds())
                     continue
 
                 for native_update in native_updates:
