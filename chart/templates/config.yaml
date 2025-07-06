@@ -7,5 +7,6 @@ data:
   GOOGLE_CLOUD_PROJECT: "prep-telegram-bots"
   LANGUAGE_DETECTOR_USE_STUB: "false"
   OCR_USE_STUB: "false"
+  PTB_TIMEDELTA: "true"
   REPO_TYPE: "firestore"
   TTS_USE_STUB: "false"

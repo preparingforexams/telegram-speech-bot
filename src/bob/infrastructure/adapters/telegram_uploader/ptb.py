@@ -1,7 +1,9 @@
 import asyncio
 import logging
 from collections.abc import Awaitable, Callable
+from datetime import timedelta
 from io import BytesIO
+from typing import cast
 
 import telegram
 from telegram.error import RetryAfter, TelegramError
@@ -19,11 +21,12 @@ async def _auto_retry[T](func: Callable[[], Awaitable[T]]) -> T:
     try:
         return await func()
     except RetryAfter as e:
+        retry_after = cast(timedelta, e.retry_after)
         _LOG.debug(
-            "Received RetryAfter exception, waiting for %d seconds",
-            e.retry_after,
+            "Received RetryAfter exception, waiting for %d",
+            retry_after,
         )
-        await asyncio.sleep(e.retry_after)
+        await asyncio.sleep(retry_after.total_seconds())
 
     return await func()
 
