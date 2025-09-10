@@ -2,11 +2,11 @@ import asyncio
 import json
 import logging
 from collections.abc import AsyncIterable
+from typing import TYPE_CHECKING
 
 import telegram
 from bs_nats_updater import NatsConfig
 from nats.aio.client import Client
-from nats.js import JetStreamContext
 from nats.js.errors import ServiceUnavailableError
 from telegram.error import BadRequest
 
@@ -14,6 +14,9 @@ from bob.application.ports import TelegramQueue
 from bob.application.ports.telegram_queue import Message, Photo, PhotoSize, Update
 from bob.config import TelegramConfig
 from bob.domain.model import InlineCallback, InlineCode
+
+if TYPE_CHECKING:
+    from nats.js import JetStreamContext
 
 _LOG = logging.getLogger(__name__)
 

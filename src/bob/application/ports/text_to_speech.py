@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import abc
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
-from langcodes import Language
+if TYPE_CHECKING:
+    from langcodes import Language
 
 
 class TextToSpeech(abc.ABC):
