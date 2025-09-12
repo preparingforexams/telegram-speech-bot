@@ -11,7 +11,6 @@ kind: StatefulSet
 metadata:
   name: bob
 spec:
-  replicas: 1
   revisionHistoryLimit: 0
   selector:
     matchLabels:
@@ -53,7 +52,26 @@ spec:
               drop: [ ALL ]
           resources:
             requests:
-              cpu: 50m
-              memory: 256Mi
+              cpu: 500m
+              memory: 512Mi
             limits:
-              cpu: 200m
+              cpu: 500m
+              memory: 512Mi
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: bob
+spec:
+  maxReplicaCount: 1
+  minReplicaCount: 0
+  scaleTargetRef:
+    name: bob
+    kind: StatefulSet
+  triggers:
+    - type: nats-jetstream
+      metadata:
+        natsServerMonitoringEndpoint: "nats-headless.nats-system.svc.cluster.local:8222"
+        account: "$G"
+        stream: "telegram-updates"
+        consumer: "speech-bot"
