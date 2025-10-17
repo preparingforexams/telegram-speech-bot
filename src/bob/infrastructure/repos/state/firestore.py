@@ -1,11 +1,13 @@
 from asyncio.locks import Lock
-from collections.abc import Mapping
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
 from google.cloud.firestore import AsyncClient, AsyncCollectionReference
 
 from bob.application.repos import StateRepository
 from bob.application.repos.state import Primitive
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping
 
 
 class FirestoreStateRepository(StateRepository):

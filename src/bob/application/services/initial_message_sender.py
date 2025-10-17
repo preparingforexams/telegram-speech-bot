@@ -2,14 +2,16 @@ import logging
 import random
 from collections.abc import Mapping
 from dataclasses import dataclass
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
 import langcodes
 from injector import inject
 
-from bob.application import ports, repos
-from bob.application.services.inline_options_builder import InlineOptionsBuilder
 from bob.domain.model import Chat, InlineCode, InlineMessageState, Message
+
+if TYPE_CHECKING:
+    from bob.application import ports, repos
+    from bob.application.services.inline_options_builder import InlineOptionsBuilder
 
 _LOG = logging.getLogger(__name__)
 

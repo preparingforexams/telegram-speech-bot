@@ -1,10 +1,13 @@
 import asyncio
 import logging
 import signal
+from typing import TYPE_CHECKING
 
-from bob.application import Application, ports
-from bob.application.ports.telegram_queue import Photo, PhotoSize
 from bob.domain.model import ImageMessage, TextMessage
+
+if TYPE_CHECKING:
+    from bob.application import Application, ports
+    from bob.application.ports.telegram_queue import Photo, PhotoSize
 
 _LOG = logging.getLogger(__name__)
 

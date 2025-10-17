@@ -1,9 +1,12 @@
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
 from injector import inject
 
-from bob.application import ports
 from bob.domain.model import InlineCode, InlineMessageState, InlineOption
+
+if TYPE_CHECKING:
+    from bob.application import ports
 
 
 @inject

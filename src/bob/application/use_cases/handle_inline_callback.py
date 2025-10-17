@@ -1,11 +1,14 @@
 import logging
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
 from injector import inject
 from langcodes import Language
 
-from bob.application import ports, repos, services
 from bob.domain.model import InlineCallback, InlineCode, InlineMessageState
+
+if TYPE_CHECKING:
+    from bob.application import ports, repos, services
 
 _LOG = logging.getLogger(__name__)
 

@@ -1,9 +1,8 @@
 import asyncio
 import logging
 import sys
-from collections.abc import AsyncIterable
 from datetime import timedelta
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
 import httpx
 import telegram
@@ -12,8 +11,12 @@ from telegram.request import HTTPXRequest
 
 from bob.application.ports import TelegramQueue
 from bob.application.ports.telegram_queue import Message, Photo, PhotoSize, Update
-from bob.config import TelegramConfig
 from bob.domain.model import InlineCallback, InlineCode
+
+if TYPE_CHECKING:
+    from collections.abc import AsyncIterable
+
+    from bob.config import TelegramConfig
 
 _LOG = logging.getLogger(__name__)
 

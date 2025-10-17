@@ -1,8 +1,11 @@
 import abc
-from collections.abc import AsyncIterable
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
-from bob.domain.model import InlineCallback
+if TYPE_CHECKING:
+    from collections.abc import AsyncIterable
+
+    from bob.domain.model import InlineCallback
 
 
 @dataclass(frozen=True)

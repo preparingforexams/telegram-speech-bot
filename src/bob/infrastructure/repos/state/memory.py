@@ -1,7 +1,11 @@
-from collections.abc import Mapping
+from typing import TYPE_CHECKING
 
 from bob.application.repos import StateRepository
-from bob.application.repos.state import Primitive
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping
+
+    from bob.application.repos.state import Primitive
 
 
 class MemoryStateRepository(StateRepository):

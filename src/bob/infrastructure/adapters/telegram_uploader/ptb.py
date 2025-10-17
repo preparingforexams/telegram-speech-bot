@@ -1,17 +1,20 @@
 import asyncio
 import logging
-from collections.abc import Awaitable, Callable
 from datetime import timedelta
 from io import BytesIO
-from typing import cast
+from typing import TYPE_CHECKING, cast
 
 import telegram
 from telegram.error import RetryAfter, TelegramError
 
 from bob.application.exceptions.io import IoException
 from bob.application.ports import TelegramUploader
-from bob.config import TelegramConfig
-from bob.domain.model import InlineOption
+
+if TYPE_CHECKING:
+    from collections.abc import Awaitable, Callable
+
+    from bob.config import TelegramConfig
+    from bob.domain.model import InlineOption
 
 _LOG = logging.getLogger(__name__)
 TIMEOUTS = dict(read_timeout=180, write_timeout=180, connect_timeout=180)
