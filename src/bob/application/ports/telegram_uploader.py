@@ -1,6 +1,8 @@
 import abc
+from typing import TYPE_CHECKING
 
-from bob.domain.model import InlineOption
+if TYPE_CHECKING:
+    from bob.domain.model import InlineOption
 
 
 class TelegramUploader(abc.ABC):

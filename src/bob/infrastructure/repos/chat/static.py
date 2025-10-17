@@ -1,7 +1,10 @@
-from collections.abc import Iterable
+from typing import TYPE_CHECKING
 
 from bob.application.repos import ChatRepository
 from bob.domain.model import Chat
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
 
 
 class StaticChatRepository(ChatRepository):

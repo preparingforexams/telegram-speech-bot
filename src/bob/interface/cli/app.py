@@ -1,9 +1,13 @@
+from typing import TYPE_CHECKING
+
 import click
 import uvloop
 
-from bob.application import Application
 from bob.init import initialize
 from bob.interface.events.telegram_update_router import TelegramUpdateRouter
+
+if TYPE_CHECKING:
+    from bob.application import Application
 
 
 @click.group

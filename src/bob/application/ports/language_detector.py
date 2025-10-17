@@ -1,6 +1,8 @@
 import abc
+from typing import TYPE_CHECKING
 
-from langcodes import Language
+if TYPE_CHECKING:
+    from langcodes import Language
 
 
 class LanguageDetector(abc.ABC):

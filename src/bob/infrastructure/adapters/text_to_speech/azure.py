@@ -1,11 +1,14 @@
 import asyncio
 import functools
+from typing import TYPE_CHECKING
 
 import azure.cognitiveservices.speech as speechsdk
 from langcodes import Language
 
 from bob.application.ports import TextToSpeech
-from bob.config import AzureTtsConfig
+
+if TYPE_CHECKING:
+    from bob.config import AzureTtsConfig
 
 
 class AzureTextToSpeech(TextToSpeech):

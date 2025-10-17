@@ -1,10 +1,12 @@
 import logging
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
 from injector import inject
 
-from bob.application import repos, services
-from bob.domain.model import TextMessage
+if TYPE_CHECKING:
+    from bob.application import repos, services
+    from bob.domain.model import TextMessage
 
 _LOG = logging.getLogger(__name__)
 
