@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: config
 data:
-  AZURE_SPEECH_REGION: "westeurope"
+  AZURE__SPEECH_REGION: "westeurope"
   GOOGLE_CLOUD_PROJECT: "prep-telegram-bots"
   LANGUAGE_DETECTOR_USE_STUB: "false"
   OCR_USE_STUB: "false"
