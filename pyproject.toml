@@ -13,7 +13,7 @@ dependencies = [
     "aiofiles ==25.1.0",
     "azure-cognitiveservices-speech ==1.46.*",
     "bs-config [dotenv] ==1.2.0",
-    "bs-nats-updater ==2.1.2",
+    "bs-nats-updater ==3.0.0",
     "click >=8, <9",
     "google-cloud-firestore >=2, <3",
     "google-cloud-texttospeech >=2, <3",
