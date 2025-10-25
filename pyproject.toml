@@ -12,7 +12,7 @@ classifiers = [
 dependencies = [
     "aiofiles ==25.1.0",
     "azure-cognitiveservices-speech ==1.46.*",
-    "bs-config [dotenv] ==3.3.0",
+    "bs-config [dotenv] ==3.4.0",
     "bs-nats-updater ==3.0.0",
     "click >=8, <9",
     "google-cloud-firestore >=2, <3",
